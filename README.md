@@ -6,6 +6,6 @@
 
 ![db-schema]
 
-[db-schema]: ./images/meetup_dbdiagram.png
+[db-schema]: ./images/airbnb_dbdiagram.png
 
 ## API Documentation
