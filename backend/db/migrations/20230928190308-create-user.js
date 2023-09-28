@@ -29,6 +29,14 @@ module.exports = {
           type: Sequelize.STRING.BINARY,
           allowNull: false,
         },
+        firstName: {
+          type: Sequelize.STRING,
+          defaultValue: "N/A",
+        },
+        lastName: {
+          type: Sequelize.STRING,
+          defaultValue: "N/A",
+        },
         createdAt: {
           allowNull: false,
           type: Sequelize.DATE,
