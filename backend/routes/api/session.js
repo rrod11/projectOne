@@ -37,4 +37,9 @@ router.post("/", async (req, res, next) => {
     user: safeUser,
   });
 });
+router.delete("/", (_req, res) => {
+  res.clearCookie("token");
+  res.clearCookie("XSRF-TOKEN");
+  return res.json({ message: "success" });
+});
 module.exports = router;
