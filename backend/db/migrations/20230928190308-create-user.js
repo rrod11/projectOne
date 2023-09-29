@@ -52,18 +52,18 @@ module.exports = {
       },
       options
     );
-    await queryInterface.addIndex(
-      "Users",
-      ["username", "email"],
-      {
-        unique: true,
-      },
-      options
-    );
+    // await queryInterface.addIndex(
+    //   "Users",
+    //   ["username", "email"],
+    //   {
+    //     unique: true,
+    //   },
+    //   options
+    // );
   },
   async down(queryInterface, Sequelize) {
     options.tableName = "Users";
-    await queryInterface.removeIndex(options, ["username", "email"]);
+    // await queryInterface.removeIndex(options, ["username", "email"]);
     await queryInterface.dropTable(options);
   },
 };
