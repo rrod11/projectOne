@@ -31,10 +31,12 @@ module.exports = {
         },
         firstName: {
           type: Sequelize.STRING,
+          allowNull: false,
           defaultValue: "N/A",
         },
         lastName: {
           type: Sequelize.STRING,
+          allowNull: false,
           defaultValue: "N/A",
         },
         createdAt: {
