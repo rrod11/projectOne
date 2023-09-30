@@ -73,6 +73,14 @@ module.exports = {
       },
       options
     );
+    // await queryInterface.addIndex(
+    //   "Spots",
+    //   ["username", "email"],
+    //   {
+    //     unique: true,
+    //   },
+    //   options
+    // );
   },
   async down(queryInterface, Sequelize) {
     options.tableName = "Spots";

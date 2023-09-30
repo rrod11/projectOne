@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "spotId",
       });
       Review.hasMany(models.ReviewImage, {
-        foreignKey: "id",
+        foreignKey: "reviewId",
       });
     }
   }

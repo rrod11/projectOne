@@ -18,10 +18,12 @@ module.exports = {
      * }], {});
      */
     await ReviewImage.bulkCreate(
-      {
-        reviewId: 1,
-        url: "https://media.istockphoto.com/id/1007757070/photo/messy-living-room-with-damage.jpg?s=612x612&w=0&k=20&c=yNFJRqfZFrHypqcbwUoE5N2BO_DB3SvXBASLIk9zqkw=",
-      },
+      [
+        {
+          reviewId: 1,
+          url: "https://media.istockphoto.com/id/1007757070/photo/messy-living-room-with-damage.jpg?s=612x612&w=0&k=20&c=yNFJRqfZFrHypqcbwUoE5N2BO_DB3SvXBASLIk9zqkw=",
+        },
+      ],
       { validate: true }
     );
   },

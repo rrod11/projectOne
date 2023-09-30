@@ -18,13 +18,15 @@ module.exports = {
      * }], {});
      */
     await Review.bulkCreate(
-      {
-        spotId: 1,
-        userId: 2,
-        review:
-          "amazing house and really close to the water but it was dirty when we got there",
-        stars: 4,
-      },
+      [
+        {
+          spotId: 1,
+          userId: 2,
+          review:
+            "amazing house and really close to the water but it was dirty when we got there",
+          stars: 4,
+        },
+      ],
       { validate: true }
     );
   },
