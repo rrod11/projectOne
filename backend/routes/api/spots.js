@@ -11,3 +11,5 @@ router.get("/", async (req, res) => {
   console.log(spots);
   return res.json(spots);
 });
+
+module.exports = router;
