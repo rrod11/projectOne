@@ -8,6 +8,6 @@ const router = express.Router();
 
 router.get("/", async (req, res) => {
   const spots = await Spot.findAll();
-
-  res.json(spots);
+  console.log(spots);
+  return res.json(spots);
 });
