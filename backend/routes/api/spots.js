@@ -12,6 +12,7 @@ router.get("/", async (req, res) => {
     include: {
       model: SpotImage,
       attributes: ["url"],
+      as: "previewImage",
     },
   });
   // console.log(spots);

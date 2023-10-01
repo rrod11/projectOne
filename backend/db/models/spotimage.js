@@ -22,6 +22,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         validate: {
           isUrl: true,
+          // as: "previewImage",
         },
       },
       preview: {
