@@ -56,12 +56,10 @@ module.exports = (sequelize, DataTypes) => {
       firstName: {
         type: DataTypes.STRING,
         allowNull: false,
-        defaultValue: "N/A",
       },
       lastName: {
         type: DataTypes.STRING,
         allowNull: false,
-        defaultValue: "N/A",
       },
     },
     {
