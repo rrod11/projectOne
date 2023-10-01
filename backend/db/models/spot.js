@@ -68,15 +68,15 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.DECIMAL,
         allowNull: false,
       },
+    },
+    {
+      sequelize,
+      modelName: "Spot",
       defaultScope: {
         attributes: {
           exclude: ["createdAt", "updatedAt"],
         },
       },
-    },
-    {
-      sequelize,
-      modelName: "Spot",
     }
   );
   return Spot;

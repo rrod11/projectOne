@@ -21,15 +21,15 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
+    },
+    {
+      sequelize,
+      modelName: "ReviewImage",
       defaultScope: {
         attributes: {
           exclude: ["createdAt", "updatedAt"],
         },
       },
-    },
-    {
-      sequelize,
-      modelName: "ReviewImage",
     }
   );
   return ReviewImage;

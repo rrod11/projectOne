@@ -32,15 +32,15 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
+    },
+    {
+      sequelize,
+      modelName: "Review",
       defaultScope: {
         attributes: {
           exclude: ["createdAt", "updatedAt"],
         },
       },
-    },
-    {
-      sequelize,
-      modelName: "Review",
     }
   );
   return Review;
