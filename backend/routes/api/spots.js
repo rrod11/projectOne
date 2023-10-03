@@ -5,6 +5,7 @@ const { Spot, SpotImage, User } = require("../../db/models");
 // const { SpotImage } = require("../../db/models");
 const { Review } = require("../../db/models");
 const { requireAuth } = require("../../utils/auth.js");
+const spotCreationValidation = require("../../utils/spotCreationValidation");
 
 // const { check } = require("express-validator");
 // const { handleValidationErrors } = require("../../utils/validation");
@@ -129,7 +130,7 @@ router.get("/:spotId", async (req, res) => {
   }
   res.json({ Spots: spotsJSON });
 });
-router.post("/", requireAuth, async (req, res) => {
+router.post("/", [requireAuth, spotCreationValidation], async (req, res) => {
   const { user } = req;
   const currUser = await User.findOne({
     where: {
@@ -140,18 +141,20 @@ router.post("/", requireAuth, async (req, res) => {
   const { address, city, state, country, lat, lng, name, description, price } =
     req.body;
 
+  console.log("PRICING:", price);
+
   const newSpot = await Spot.bulkCreate([
     {
       ownerId: currUser.id,
-      address: address,
-      city: city,
-      state: state,
-      country: country,
-      lat: lat,
-      lng: lng,
-      name: name,
-      description: description,
-      price: price,
+      address,
+      city,
+      state,
+      country,
+      lat,
+      lng,
+      name,
+      description,
+      price,
     },
   ]);
   // const foundSpot = await Spot.scope(["defaultScope"]).findOne({
