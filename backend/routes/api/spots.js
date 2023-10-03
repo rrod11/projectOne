@@ -190,5 +190,48 @@ router.post(
     res.json(target);
   }
 );
+router.put(
+  "/:spotId",
+  [requireAuth, userRightsAuthentication, spotCreationValidation],
+  async (req, res) => {
+    const {
+      address,
+      city,
+      state,
+      country,
+      lat,
+      lng,
+      name,
+      description,
+      price,
+    } = req.body;
+    const spotId = req.params.spotId;
+    const targetSpot = await Spot.findOne({
+      where: {
+        id: spotId,
+      },
+    });
+
+    targetSpot.set({
+      address,
+      city,
+      state,
+      country,
+      lat,
+      lng,
+      name,
+      description,
+      price,
+    });
+
+    await targetSpot.save();
+    const targetedSpot = await Spot.unscoped().findOne({
+      where: {
+        id: spotId,
+      },
+    });
+    res.json(targetedSpot);
+  }
+);
 
 module.exports = router;
