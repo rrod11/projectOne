@@ -1,8 +1,8 @@
 const express = require("express");
 // const bcrypt = require("bcryptjs");
 // const { setTokenCookie, requireAuth } = require("../../utils/auth");
-const { Spot } = require("../../db/models");
-const { SpotImage } = require("../../db/models");
+const { Spot, SpotImage, User } = require("../../db/models");
+// const { SpotImage } = require("../../db/models");
 const { Review } = require("../../db/models");
 const { requireAuth } = require("../../utils/auth.js");
 
@@ -90,11 +90,23 @@ router.get("/:spotId", async (req, res) => {
         model: SpotImage,
         attributes: ["id", "url", "preview"],
       },
+      {
+        model: User,
+        attributes: ["id", "firstName", "lastName"],
+      },
     ],
   });
+  console.log("SPOT VALUE:", spots);
+  if (spots.length === 0) {
+    return res.status(404).json({
+      message: "Spot couldn't be found",
+    });
+  }
   const spotsJSON = spots.map((ele) => ele.toJSON());
 
   for (let i = 0; i < spotsJSON.length; i++) {
+    spotsJSON[i].Owner = spotsJSON[i].User;
+    delete spotsJSON[i].User;
     if (spotsJSON[i].SpotImages.length > 1) {
       for (let j = 1; j < spotsJSON[i].SpotImages.length; j++) {
         spotsJSON[i].SpotImages[j].preview = false;
