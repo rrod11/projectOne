@@ -6,6 +6,7 @@ const { Spot, SpotImage, User } = require("../../db/models");
 const { Review } = require("../../db/models");
 const { requireAuth } = require("../../utils/auth.js");
 const spotCreationValidation = require("../../utils/spotCreationValidation");
+const userRightsAuthentication = require("../../utils/userAuthentification");
 
 // const { check } = require("express-validator");
 // const { handleValidationErrors } = require("../../utils/validation");
@@ -97,7 +98,6 @@ router.get("/:spotId", async (req, res) => {
       },
     ],
   });
-  console.log("SPOT VALUE:", spots);
   if (spots.length === 0) {
     return res.status(404).json({
       message: "Spot couldn't be found",
@@ -157,13 +157,38 @@ router.post("/", [requireAuth, spotCreationValidation], async (req, res) => {
       price,
     },
   ]);
-  // const foundSpot = await Spot.scope(["defaultScope"]).findOne({
-  //   where: {
-  //     lat,
-  //     lng,
-  //   },
-  // });
+
   res.status(201).json(newSpot);
 });
+router.post(
+  "/:spotId/images",
+  [requireAuth, userRightsAuthentication],
+  async (req, res) => {
+    const spotId = req.params.spotId;
+    const targetSpot = await User.findOne({
+      where: {
+        id: spotId,
+      },
+    });
+    const { url, preview } = req.body;
+
+    const newImage = await SpotImage.bulkCreate([
+      {
+        url,
+        preview,
+      },
+    ]);
+    const target = await SpotImage.scope("defaultScope").findOne({
+      where: {
+        url,
+      },
+      attributes: {
+        exclude: ["spotId"],
+      },
+    });
+
+    res.json(target);
+  }
+);
 
 module.exports = router;
