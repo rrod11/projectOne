@@ -81,7 +81,6 @@ router.get("/current", requireAuth, async (req, res) => {
 });
 router.get("/:spotId", async (req, res) => {
   const spotId = req.params.spotId;
-  // console.log("MY CURRENT ID:", spotId);
   const spots = await Spot.unscoped().findAll({
     where: {
       id: spotId,
@@ -89,13 +88,13 @@ router.get("/:spotId", async (req, res) => {
     include: [
       {
         model: SpotImage,
+        attributes: ["id", "url", "preview"],
       },
     ],
   });
   const spotsJSON = spots.map((ele) => ele.toJSON());
 
   for (let i = 0; i < spotsJSON.length; i++) {
-    console.log("MY SPOT IMAGES!!:", spotsJSON[i].SpotImages);
     if (spotsJSON[i].SpotImages.length > 1) {
       for (let j = 1; j < spotsJSON[i].SpotImages.length; j++) {
         spotsJSON[i].SpotImages[j].preview = false;
@@ -105,15 +104,16 @@ router.get("/:spotId", async (req, res) => {
   for (let spot of spotsJSON) {
     const sum = await Review.sum("stars", {
       where: {
-        spotId: spot.id,
+        spotId,
       },
     });
     const total = await Review.count({
       where: {
-        spotId: spot.id,
+        spotId,
       },
     });
     spot.avgRating = sum / total;
+    spot.numReviews = total;
   }
   res.json({ Spots: spotsJSON });
 });
