@@ -41,8 +41,6 @@ router.get("/", async (req, res) => {
   }
   res.json({ Spots: spotsJSON });
 });
-<<<<<<< Updated upstream
-=======
 router.get("/current", requireAuth, async (req, res) => {
   const { user } = req;
   const userId = user.id;
@@ -122,6 +120,5 @@ router.get("/:spotId", async (req, res) => {
   }
   res.json({ Spots: spotsJSON });
 });
->>>>>>> Stashed changes
 
 module.exports = router;
