@@ -129,5 +129,38 @@ router.get("/:spotId", async (req, res) => {
   }
   res.json({ Spots: spotsJSON });
 });
+router.post("/", requireAuth, async (req, res) => {
+  const { user } = req;
+  const currUser = await User.findOne({
+    where: {
+      id: user.id,
+    },
+  });
+  // console.log("CURRENT USE:", currUser);
+  const { address, city, state, country, lat, lng, name, description, price } =
+    req.body;
+
+  const newSpot = await Spot.bulkCreate([
+    {
+      ownerId: currUser.id,
+      address: address,
+      city: city,
+      state: state,
+      country: country,
+      lat: lat,
+      lng: lng,
+      name: name,
+      description: description,
+      price: price,
+    },
+  ]);
+  // const foundSpot = await Spot.scope(["defaultScope"]).findOne({
+  //   where: {
+  //     lat,
+  //     lng,
+  //   },
+  // });
+  res.status(201).json(newSpot);
+});
 
 module.exports = router;
