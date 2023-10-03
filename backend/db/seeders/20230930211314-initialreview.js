@@ -26,6 +26,30 @@ module.exports = {
             "amazing house and really close to the water but it was dirty when we got there",
           stars: 4,
         },
+        {
+          spotId: 1,
+          userId: 3,
+          review: "nice house ig",
+          stars: 4,
+        },
+        {
+          spotId: 1,
+          userId: 4,
+          review: "lady was super rude",
+          stars: 3,
+        },
+        {
+          spotId: 2,
+          userId: 1,
+          review: "beautiful home",
+          stars: 5,
+        },
+        {
+          spotId: 2,
+          userId: 3,
+          review: "quiet neighborhood with a ton of private land",
+          stars: 5,
+        },
       ],
       { validate: true }
     );

@@ -18,12 +18,38 @@ module.exports = {
      * }], {});
      */
     await Booking.bulkCreate(
-      [{
-        spotId: 1,
-        userId: 2,
-        startDate: "2019-12-31",
-        endDate: "2020-1-11",
-      }],
+      [
+        {
+          spotId: 1,
+          userId: 2,
+          startDate: "2019-12-31",
+          endDate: "2020-1-11",
+        },
+        {
+          spotId: 1,
+          userId: 3,
+          startDate: "2019-12-31",
+          endDate: "2020-1-11",
+        },
+        {
+          spotId: 1,
+          userId: 4,
+          startDate: "2019-12-31",
+          endDate: "2020-1-11",
+        },
+        {
+          spotId: 2,
+          userId: 1,
+          startDate: "2019-12-31",
+          endDate: "2020-1-11",
+        },
+        {
+          spotId: 2,
+          userId: 3,
+          startDate: "2019-12-31",
+          endDate: "2020-1-11",
+        },
+      ],
       { validate: true }
     );
   },
