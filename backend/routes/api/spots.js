@@ -41,5 +41,42 @@ router.get("/", async (req, res) => {
   }
   res.json({ Spots: spotsJSON });
 });
+router.get("/current", async (req, res) => {
+  const { user } = req;
+  const userId = user.id;
+  const spots = await Spot.unscoped().findAll({
+    where: {
+      ownerId: userId,
+    },
+    include: [
+      {
+        model: SpotImage,
+        attributes: ["url"],
+      },
+    ],
+  });
+  const spotsJSON = spots.map((ele) => ele.toJSON());
+
+  for (let i = 0; i < spotsJSON.length; i++) {
+    if (spotsJSON[i].SpotImages.length > 0) {
+      spotsJSON[i].previewImage = spotsJSON[i].SpotImages[0].url;
+      delete spotsJSON[i].SpotImages;
+    }
+  }
+  for (let spot of spotsJSON) {
+    const sum = await Review.sum("stars", {
+      where: {
+        spotId: spot.id,
+      },
+    });
+    const total = await Review.count({
+      where: {
+        spotId: spot.id,
+      },
+    });
+    spot.avgRating = sum / total;
+  }
+  res.json({ Spots: spotsJSON });
+});
 
 module.exports = router;
