@@ -17,6 +17,8 @@ const userRightsAuthentication = require("../../utils/userAuthentification");
 const reviewVerification = require("../../utils/reviewVerification");
 const notOwner = require("../../utils/notOwner");
 const checkIfExists = require("../../utils/checkExisting");
+const endDateCheck = require("../../utils/endDateCheck");
+const notOwnerBooking = require("../../utils/notOwner");
 
 // const { check } = require("express-validator");
 // const { handleValidationErrors } = require("../../utils/validation");
@@ -330,7 +332,7 @@ router.get("/:spotId/bookings", [requireAuth], async (req, res) => {
     },
   });
   if (!targetSpot) {
-    res.json({
+    res.status(404).json({
       message: "Spot couldn't be found",
     });
   }
@@ -355,5 +357,32 @@ router.get("/:spotId/bookings", [requireAuth], async (req, res) => {
     res.json({ Bookings: someBookings });
   }
 });
+router.post(
+  "/:spotId/bookings",
+  [requireAuth, notOwnerBooking, endDateCheck],
+  async (req, res) => {
+    const { startDate, endDate } = req.body;
+    const { user } = req;
+    const userId = user.id;
+    const spotId = req.params.spotId;
+    await Booking.bulkCreate([
+      {
+        startDate,
+        endDate,
+        userId,
+        spotId,
+      },
+    ]);
+    const createdBooking = await Booking.findOne({
+      where: {
+        userId,
+        spotId,
+        startDate,
+        endDate,
+      },
+    });
+    res.json(createdBooking);
+  }
+);
 
 module.exports = router;
