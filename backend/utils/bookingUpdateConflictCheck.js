@@ -1,8 +1,8 @@
 const { Spot, User, Review, Booking } = require("../db/models");
 const moment = require("moment");
-const bookingConflict = async (req, _res, next) => {
+const bookingUpdateConflict = async (req, res, next) => {
   const { startDate, endDate } = req.body;
-  const spotId = req.params.spotId;
+  const bookingId = req.params.bookingId;
   const err = {};
   let tripped = false;
   err.message = "Sorry, this spot is already booked for the specified dates";
@@ -13,13 +13,21 @@ const bookingConflict = async (req, _res, next) => {
 
   const allBookings = await Booking.findAll({
     where: {
+      id: bookingId,
+    },
+  });
+  // console.log("CURRENT BOOKING:", allBookings);
+  // return res.json(allBookings);
+  const spotId = allBookings[0].spotId;
+  // console.log("CURRENT SPOT ID VALUE:", spotId);
+  const bookings = await Booking.findAll({
+    where: {
       spotId,
     },
   });
-
-  if (allBookings.length > 0) {
-    for (let i = 0; i < allBookings.length; i++) {
-      const booking = allBookings[i];
+  if (bookings.length > 0) {
+    for (let i = 0; i < bookings.length; i++) {
+      const booking = bookings[i];
       const startDate = new Date(booking.startDate);
       const endDate = new Date(booking.endDate);
       if (
@@ -48,4 +56,4 @@ const bookingConflict = async (req, _res, next) => {
   next();
 };
 
-module.exports = bookingConflict;
+module.exports = bookingUpdateConflict;

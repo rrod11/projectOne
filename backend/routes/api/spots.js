@@ -1,6 +1,5 @@
 const express = require("express");
-// const bcrypt = require("bcryptjs");
-// const { setTokenCookie, requireAuth } = require("../../utils/auth");
+
 const {
   Spot,
   SpotImage,
@@ -9,8 +8,7 @@ const {
   ReviewImage,
   Booking,
 } = require("../../db/models");
-// const { SpotImage } = require("../../db/models");
-// const { Review } = require("../../db/models");
+
 const { requireAuth } = require("../../utils/auth.js");
 const spotCreationValidation = require("../../utils/spotCreationValidation");
 const userRightsAuthentication = require("../../utils/userAuthentification");
@@ -21,8 +19,6 @@ const endDateCheck = require("../../utils/endDateCheck");
 const notOwnerBooking = require("../../utils/notOwner");
 const bookingConflict = require("../../utils/bookingConflict");
 
-// const { check } = require("express-validator");
-// const { handleValidationErrors } = require("../../utils/validation");
 const router = express.Router();
 
 router.get("/", async (req, res) => {
@@ -383,15 +379,7 @@ router.post(
       spotId,
     });
     console.log("NEW BOOKING:", newBooking);
-    // const createdBooking = await Booking.findOne({
-    //   where: {
-    //     userId,
-    //     spotId,
-    //     startDate,
-    //     endDate,
-    //   },
-    // });
-    // console.log("MY BOOKING DATES:", createdBooking);
+
     res.json(newBooking);
   }
 );

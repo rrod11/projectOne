@@ -9,9 +9,14 @@ const {
   Booking,
 } = require("../../db/models");
 // const userHasRightsAuthentication = require("../../utils/userAuthentification");
-// const reviewLengthVerification = require("../../utils/reviewLengthVerification");
 // const userReviewRightsAuthentication = require("../../utils/userAuthentification");
-// const reviewVerification = require("../../utils/reviewVerification");
+const checkIfExists = require("../../utils/checkExisting");
+const endDateCheck = require("../../utils/endDateCheck");
+const notOwnerBooking = require("../../utils/notOwner");
+const bookingConflict = require("../../utils/bookingConflict");
+const notPastDue = require("../../utils/notPastDue");
+const bookingUpdateConflict = require("../../utils/bookingUpdateConflictCheck");
+const ownsBooking = require("../../utils/ownsBooking");
 const router = express.Router();
 
 router.get("/current", requireAuth, async (req, res) => {
@@ -43,4 +48,25 @@ router.get("/current", requireAuth, async (req, res) => {
   }
   res.json({ Bookings: bookingsJSON });
 });
+router.put(
+  "/:bookingId",
+  [requireAuth, ownsBooking, endDateCheck, bookingUpdateConflict, notPastDue],
+  async (req, res) => {
+    const { startDate, endDate } = req.body;
+    const bookingId = req.params.bookingId;
+    const targetBooking = await Booking.unscoped().findOne({
+      where: {
+        id: bookingId,
+      },
+    });
+    // if(!targetBooking){
+
+    // }
+    await targetBooking.update({
+      startDate,
+      endDate,
+    });
+    res.json(targetBooking);
+  }
+);
 module.exports = router;

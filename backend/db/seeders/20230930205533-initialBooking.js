@@ -22,14 +22,14 @@ module.exports = {
         {
           spotId: 1,
           userId: 2,
-          startDate: "2019-12-31",
-          endDate: "2020-1-11",
+          startDate: "2010-12-31",
+          endDate: "2011-1-11",
         },
         {
           spotId: 1,
           userId: 3,
-          startDate: "2019-12-31",
-          endDate: "2020-1-11",
+          startDate: "2021-12-31",
+          endDate: "2022-1-11",
         },
         {
           spotId: 1,
@@ -40,14 +40,14 @@ module.exports = {
         {
           spotId: 2,
           userId: 1,
-          startDate: "2019-12-31",
-          endDate: "2020-1-11",
+          startDate: "2023-12-31",
+          endDate: "2024-1-11",
         },
         {
           spotId: 2,
           userId: 3,
-          startDate: "2019-12-31",
-          endDate: "2020-1-11",
+          startDate: "2018-12-31",
+          endDate: "2019-1-11",
         },
       ],
       { validate: true }
