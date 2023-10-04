@@ -316,7 +316,7 @@ router.post(
         review,
       },
     });
-    res.json(newReview);
+    res.status(201).json(newReview);
   }
 );
 
