@@ -95,5 +95,21 @@ router.put(
     res.json(editedReview);
   }
 );
+router.delete(
+  "/:reviewId",
+  [requireAuth, userReviewRightsAuthentication],
+  async (req, res) => {
+    const reviewId = req.params.reviewId;
+    const targetReview = await Review.findOne({
+      where: {
+        id: reviewId,
+      },
+    });
+    await targetReview.destroy();
+    res.json({
+      message: "Successfully deleted",
+    });
+  }
+);
 
 module.exports = router;
