@@ -12,7 +12,7 @@ const setTokenCookie = (res, user) => {
   const token = jwt.sign({ data: safeUser }, secret, {
     expiresIn: parseInt(expiresIn),
   });
-  const isProduction = process.env.NODE_ENV === 'production'
+  const isProduction = process.env.NODE_ENV === "production";
   res.cookie("token", token, {
     maxAge: expiresIn * 1000,
     httpOnly: true,

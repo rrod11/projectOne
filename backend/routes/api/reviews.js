@@ -7,9 +7,9 @@ const {
   ReviewImage,
   SpotImage,
 } = require("../../db/models");
-const userHasRightsAuthentication = require("../../utils/userAuthentification");
+const userHasRightsAuthentication = require("../../utils/userHasRights");
 const reviewLengthVerification = require("../../utils/reviewLengthVerification");
-const userReviewRightsAuthentication = require("../../utils/userAuthentification");
+const userReviewRightsAuthentication = require("../../utils/userReviewRights");
 const reviewVerification = require("../../utils/reviewVerification");
 const router = express.Router();
 
