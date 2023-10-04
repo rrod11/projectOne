@@ -1,7 +1,6 @@
 const { Review, User, ReviewImage } = require("../db/models");
 const reviewVerification = (req, _res, next) => {
   const { review, stars } = req.body;
-  console.log("MY CURRENT  REVIEW VERIFICATION:", stars);
   const err = {};
   err.errors = {};
   err.message = "Bad Request";

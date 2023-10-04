@@ -7,6 +7,7 @@ const {
   User,
   Review,
   ReviewImage,
+  Booking,
 } = require("../../db/models");
 // const { SpotImage } = require("../../db/models");
 // const { Review } = require("../../db/models");
@@ -319,5 +320,40 @@ router.post(
     res.status(201).json(newReview);
   }
 );
+router.get("/:spotId/bookings", [requireAuth], async (req, res) => {
+  const spotId = req.params.spotId;
+  const { user } = req;
+  const userId = user.id;
+  const targetSpot = await Spot.findOne({
+    where: {
+      id: spotId,
+    },
+  });
+  if (!targetSpot) {
+    res.json({
+      message: "Spot couldn't be found",
+    });
+  }
+  if (targetSpot.ownerId == userId) {
+    const allBookings = await Booking.unscoped().findAll({
+      where: {
+        spotId,
+      },
+      include: {
+        model: User,
+        attributes: ["id", "firstName", "lastName"],
+      },
+    });
+    res.json({ Bookings: allBookings });
+  } else {
+    const someBookings = await Booking.findAll({
+      where: {
+        spotId,
+      },
+      attributes: ["spotId", "startDate", "endDate"],
+    });
+    res.json({ Bookings: someBookings });
+  }
+});
 
 module.exports = router;
