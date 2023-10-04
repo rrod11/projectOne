@@ -13,6 +13,9 @@ const {
 const { requireAuth } = require("../../utils/auth.js");
 const spotCreationValidation = require("../../utils/spotCreationValidation");
 const userRightsAuthentication = require("../../utils/userAuthentification");
+const reviewVerification = require("../../utils/reviewVerification");
+const notOwner = require("../../utils/notOwner");
+const checkIfExists = require("../../utils/checkExisting");
 
 // const { check } = require("express-validator");
 // const { handleValidationErrors } = require("../../utils/validation");
@@ -281,5 +284,40 @@ router.get("/:spotId/reviews", async (req, res) => {
   const allReviewsJSON = allReviews.map((ele) => ele.toJSON());
   res.json({ Reviews: allReviewsJSON });
 });
+router.post(
+  "/:spotId/reviews",
+  [
+    requireAuth,
+    // userRightsAuthentication,
+    reviewVerification,
+    notOwner,
+    checkIfExists,
+  ],
+  async (req, res) => {
+    const { review, stars } = req.body;
+    const { user } = req;
+    const userId = user.id;
+    const spotId = req.params.spotId;
+    const targetSpot = await Spot.findOne({
+      where: {
+        id: spotId,
+      },
+    });
+    const creatingReview = await Review.bulkCreate([
+      {
+        userId,
+        spotId,
+        review,
+        stars,
+      },
+    ]);
+    const newReview = await Review.unscoped().findOne({
+      where: {
+        review,
+      },
+    });
+    res.json(newReview);
+  }
+);
 
 module.exports = router;
