@@ -7,6 +7,8 @@ const {
   ReviewImage,
   SpotImage,
 } = require("../../db/models");
+const userHasRightsAuthentication = require("../../utils/userAuthentification");
+const reviewLengthVerification = require("../../utils/reviewVerification");
 const router = express.Router();
 
 router.get("/current", requireAuth, async (req, res) => {
@@ -48,5 +50,29 @@ router.get("/current", requireAuth, async (req, res) => {
   }
   res.json({ Reviews: allReviewsJSON });
 });
+router.post(
+  "/:reviewId/images",
+  [requireAuth, userHasRightsAuthentication, reviewLengthVerification],
+  async (req, res) => {
+    const reviewId = req.params.reviewId;
+    console.log("MY REVIEW ID:", reviewId);
+    const { url } = req.body;
+    console.log("MY URL:", url);
+    await ReviewImage.bulkCreate([
+      {
+        url,
+        reviewId,
+      },
+    ]);
+    const foundImage = await ReviewImage.findOne({
+      where: {
+        url,
+        reviewId,
+      },
+      attributes: ["id", "url"],
+    });
+    res.json(foundImage);
+  }
+);
 
 module.exports = router;
