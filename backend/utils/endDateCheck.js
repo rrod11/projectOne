@@ -5,13 +5,11 @@ const endDateCheck = async (req, _res, next) => {
   const err = {};
   err.message = "Bad Request";
   err.errors = {};
-  function checkingDate(startDate, endDate) {
-    if (endDate <= startDate) {
-      return true;
-    }
-    return false;
-  }
-  if (checkingDate) {
+
+  const lastDay = new Date(endDate);
+  const firstDay = new Date(startDate);
+
+  if (lastDay <= firstDay) {
     err.status = 400;
     err.errors.endDate = "endDate cannot be on or before startDate";
     next(err);

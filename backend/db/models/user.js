@@ -9,11 +9,9 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      // User.belongsToMany(models.Spot, {
-      //   through: models.Booking,
-      //   foreignKey: "userId",
-      //   otherKey: "spotId",
-      // });
+      User.hasMany(models.Booking, {
+        foreignKey: "userId",
+      });
       User.hasMany(models.Spot, {
         foreignKey: "ownerId",
       });
