@@ -1,6 +1,7 @@
 const { Review, User, ReviewImage } = require("../db/models");
-const reviewVerification = (req, res, next) => {
+const reviewVerification = (req, _res, next) => {
   const { review, stars } = req.body;
+  console.log("MY CURRENT  REVIEW VERIFICATION:", stars);
   const err = {};
   err.errors = {};
   err.message = "Bad Request";
@@ -9,7 +10,19 @@ const reviewVerification = (req, res, next) => {
     err.errors.review = "Review text is required";
     tripped = true;
   }
-  if (!stars || isNaN(stars) || stars <= 0 || stars > 5) {
+  if (!stars) {
+    err.errors.stars = "Stars must be an integer from 1 to 5";
+    tripped = true;
+  }
+  if (isNaN(stars)) {
+    err.errors.stars = "Stars must be an integer from 1 to 5";
+    tripped = true;
+  }
+  if (stars <= 0) {
+    err.errors.stars = "Stars must be an integer from 1 to 5";
+    tripped = true;
+  }
+  if (stars >= 6) {
     err.errors.stars = "Stars must be an integer from 1 to 5";
     tripped = true;
   }
@@ -20,23 +33,5 @@ const reviewVerification = (req, res, next) => {
     next();
   }
 };
-const reviewLengthVerification = async (req, res, next) => {
-  const reviewId = req.params.reviewId;
-  const { user } = req;
-  const err = {};
-  err.message = "Maximum number of images for this resource was reached";
-  const target = await ReviewImage.count({
-    where: {
-      reviewId: reviewId,
-    },
-  });
-  console.log("HERES THE REVIEWS HERE:", target);
-  if (target >= 10) {
-    err.title = "Can't Have More than 10 Reviews";
-    err.status = 403;
-    next(err);
-  } else next();
-};
 
 module.exports = reviewVerification;
-module.exports = reviewLengthVerification;

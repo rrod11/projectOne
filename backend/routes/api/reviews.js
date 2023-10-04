@@ -8,7 +8,9 @@ const {
   SpotImage,
 } = require("../../db/models");
 const userHasRightsAuthentication = require("../../utils/userAuthentification");
-const reviewLengthVerification = require("../../utils/reviewVerification");
+const reviewLengthVerification = require("../../utils/reviewLengthVerification");
+const userReviewRightsAuthentication = require("../../utils/userAuthentification");
+const reviewVerification = require("../../utils/reviewVerification");
 const router = express.Router();
 
 router.get("/current", requireAuth, async (req, res) => {
@@ -72,6 +74,25 @@ router.post(
       attributes: ["id", "url"],
     });
     res.json(foundImage);
+  }
+);
+router.put(
+  "/:reviewId",
+  [requireAuth, userReviewRightsAuthentication, reviewVerification],
+  async (req, res) => {
+    const { review, stars } = req.body;
+    const reviewId = req.params.reviewId;
+    const editedReview = await Review.unscoped().findOne({
+      where: {
+        id: reviewId,
+      },
+    });
+    await editedReview.update({
+      review,
+      stars,
+    });
+
+    res.json(editedReview);
   }
 );
 
