@@ -17,6 +17,7 @@ const bookingConflict = require("../../utils/bookingConflict");
 const notPastDue = require("../../utils/notPastDue");
 const bookingUpdateConflict = require("../../utils/bookingUpdateConflictCheck");
 const ownsBooking = require("../../utils/ownsBooking");
+const inProgress = require("../../utils/inProgress");
 const router = express.Router();
 
 router.get("/current", requireAuth, async (req, res) => {
@@ -67,6 +68,21 @@ router.put(
       endDate,
     });
     res.json(targetBooking);
+  }
+);
+router.delete(
+  "/:bookingId",
+  [requireAuth, ownsBooking, inProgress],
+  async (req, res) => {
+    const bookingId = req.params.bookingId;
+    await Booking.destroy({
+      where: {
+        id: bookingId,
+      },
+    });
+    res.json({
+      message: "Successfully deleted",
+    });
   }
 );
 module.exports = router;
