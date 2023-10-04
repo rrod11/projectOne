@@ -1,9 +1,15 @@
 const express = require("express");
 // const bcrypt = require("bcryptjs");
 // const { setTokenCookie, requireAuth } = require("../../utils/auth");
-const { Spot, SpotImage, User } = require("../../db/models");
+const {
+  Spot,
+  SpotImage,
+  User,
+  Review,
+  ReviewImage,
+} = require("../../db/models");
 // const { SpotImage } = require("../../db/models");
-const { Review } = require("../../db/models");
+// const { Review } = require("../../db/models");
 const { requireAuth } = require("../../utils/auth.js");
 const spotCreationValidation = require("../../utils/spotCreationValidation");
 const userRightsAuthentication = require("../../utils/userAuthentification");
@@ -249,5 +255,31 @@ router.delete(
     res.json({ message: "Successfully deleted" });
   }
 );
+router.get("/:spotId/reviews", async (req, res) => {
+  const spotsId = req.params.spotId;
+  const allReviews = await Review.unscoped().findAll({
+    where: {
+      spotId: spotsId,
+    },
+    include: [
+      {
+        model: User,
+        attributes: ["id", "firstName", "lastName"],
+      },
+      {
+        model: ReviewImage,
+        attributes: ["id", "url"],
+      },
+    ],
+  });
+  if (allReviews.length <= 0) {
+    res.status = 404;
+    res.json({
+      message: "Spot couldn't be found",
+    });
+  }
+  const allReviewsJSON = allReviews.map((ele) => ele.toJSON());
+  res.json({ Reviews: allReviewsJSON });
+});
 
 module.exports = router;
