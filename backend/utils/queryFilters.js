@@ -2,14 +2,24 @@ const { Op } = require("sequelize");
 const queryFilters = async (req, res, next) => {
   let { page, size, minLat, maxLat, minLng, maxLng, minPrice, maxPrice } =
     req.query;
-  const where = {};
+  let where = {
+    lat: {
+      [Op.between]: [minLat || -180.1, maxLat || 180.1],
+    },
+    lng: {
+      [Op.between]: [minLng || -180.1, maxLng || 180.1],
+    },
+    price: {
+      [Op.between]: [minPrice || 0.01, maxPrice || 1000000.01],
+    },
+  };
   let tripped = false;
   const err = {};
   err.message = "Bad Request";
   err.errors = {};
-  function isNumber(value) {
-    return typeof value === "number";
-  }
+  //   function isNumber(value) {
+  //     return typeof value === "number";
+  //   }
   if (page && page < 1) {
     err.errors.page = "Page must be greater than or equal to 1";
     tripped = true;
@@ -18,19 +28,19 @@ const queryFilters = async (req, res, next) => {
     err.errors.size = "Size must be greater than or equal to 1";
     tripped = true;
   }
-  if (maxLat && isNaN(maxLat)) {
+  if (maxLat && maxLat % 1 == 0) {
     err.errors.maxLat = "Maximum latitude is invalid";
     tripped = true;
   }
-  if (minLat && isNaN(minLat)) {
+  if (minLat && minLat % 1 == 0) {
     err.errors.minLat = "Minimum latitude is invalid";
     tripped = true;
   }
-  if (maxLng && isNaN(maxLng)) {
+  if (maxLng && maxLng % 1 == 0) {
     err.errors.maxLng = "Maximum longitude is invalid";
     tripped = true;
   }
-  if (minLng && isNaN(minLng)) {
+  if (minLng && minLng % 1 == 0) {
     err.errors.maxLng = "Minimum longitude is invalid";
     tripped = true;
   }
@@ -44,7 +54,6 @@ const queryFilters = async (req, res, next) => {
   }
   if ((page && isNaN(page)) || (page && page > 10) || !page) page = 1;
   if ((size && isNaN(size)) || (size && size > 20) || !size) size = 20;
-
   page = parseInt(page);
   size = parseInt(size);
   let limit = size;
