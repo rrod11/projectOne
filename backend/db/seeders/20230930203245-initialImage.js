@@ -50,8 +50,13 @@ module.exports = {
           preview: true,
         },
         {
-          spotId: 1,
+          spotId: 3,
           url: "https://thumbor.forbes.com/thumbor/fit-in/x/https://www.forbes.com/home-improvement/wp-content/uploads/2022/08/kiawah_island-realtor.jpg",
+          preview: true,
+        },
+        {
+          spotId: 3,
+          url: "https://miro.medium.com/v2/resize:fit:633/1*SLwl_DPs2kFvV_VvMtODUQ.jpeg",
           preview: true,
         },
       ],

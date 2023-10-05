@@ -50,6 +50,18 @@ module.exports = {
           review: "quiet neighborhood with a ton of private land",
           stars: 5,
         },
+        {
+          spotId: 3,
+          userId: 1,
+          review: "beautiful home very very big",
+          stars: 5,
+        },
+        {
+          spotId: 3,
+          userId: 2,
+          review: "quiet neighborhood with a ton of private land couldnt even see the neighbors house",
+          stars: 5,
+        },
       ],
       { validate: true }
     );
