@@ -18,7 +18,7 @@ const checkIfExists = require("../../utils/checkExisting");
 const endDateCheck = require("../../utils/endDateCheck");
 const notOwnerBooking = require("../../utils/notOwner");
 const bookingConflict = require("../../utils/bookingConflict");
-const queryFilters = require("../../utils/queryfilters");
+const queryFilters = require("../../utils/queryFilters");
 
 const router = express.Router();
 
