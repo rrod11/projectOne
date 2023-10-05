@@ -48,7 +48,7 @@ const spotCreationValidation = (req, _res, next) => {
       err.errors.description = "Description is required";
       tripped = true;
     }
-    if (!price) {
+    if (!price || isNaN(price)) {
       err.errors.price = "Price per day is required";
       tripped = true;
     }
