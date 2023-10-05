@@ -18,10 +18,13 @@ const checkIfExists = require("../../utils/checkExisting");
 const endDateCheck = require("../../utils/endDateCheck");
 const notOwnerBooking = require("../../utils/notOwner");
 const bookingConflict = require("../../utils/bookingConflict");
+const queryFilters = require("../../utils/queryfilters");
 
 const router = express.Router();
 
-router.get("/", async (req, res) => {
+router.get("/", queryFilters, async (req, res) => {
+  // let { page, size, minLat, maxLat, minLng, maxLng, minPrice, maxPrice } =
+  //   req.query;
   const spots = await Spot.unscoped().findAll({
     include: [
       {
@@ -29,6 +32,8 @@ router.get("/", async (req, res) => {
         attributes: ["url"],
       },
     ],
+    // limit: size,
+    // offset: size * (page - 1),
   });
   const spotsJSON = spots.map((ele) => ele.toJSON());
 
