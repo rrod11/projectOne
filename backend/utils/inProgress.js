@@ -16,8 +16,10 @@ const inProgress = async (req, _res, next) => {
   const currStartDate = new Date(start);
   const currEndDate = new Date(end);
   if (
-    moment(currEndDate).isAfter(moment()) &&
-    moment(currStartDate).isBefore(moment())
+    (moment(currEndDate).isAfter(moment()) &&
+      moment(currStartDate).isBefore(moment())) ||
+    (moment(currEndDate).isBefore(moment()) &&
+      moment(currStartDate).isBefore(moment()))
   ) {
     err.status = 403;
     tripped = true;
