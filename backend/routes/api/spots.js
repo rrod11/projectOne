@@ -23,8 +23,7 @@ const queryFilters = require("../../utils/queryfilters");
 const router = express.Router();
 
 router.get("/", queryFilters, async (req, res) => {
-  // let { page, size, minLat, maxLat, minLng, maxLng, minPrice, maxPrice } =
-  //   req.query;
+  const { limit, offset, size, page } = req.pagination;
   const spots = await Spot.unscoped().findAll({
     include: [
       {
@@ -32,8 +31,8 @@ router.get("/", queryFilters, async (req, res) => {
         attributes: ["url"],
       },
     ],
-    // limit: size,
-    // offset: size * (page - 1),
+    limit,
+    offset,
   });
   const spotsJSON = spots.map((ele) => ele.toJSON());
 
@@ -56,7 +55,7 @@ router.get("/", queryFilters, async (req, res) => {
     });
     spot.avgRating = sum / total;
   }
-  res.json({ Spots: spotsJSON });
+  res.json({ Spots: spotsJSON, page: page, size: size });
 });
 router.get("/current", requireAuth, async (req, res) => {
   const { user } = req;

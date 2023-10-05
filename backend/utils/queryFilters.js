@@ -7,6 +7,14 @@ const queryFilters = async (req, res, next) => {
   console.log("SIZING ME UP:", size);
   page = parseInt(page);
   size = parseInt(size);
+  let limit = size;
+  let offset = size * (page - 1);
+  req.pagination = {
+    limit,
+    offset,
+    size,
+    page,
+  };
   console.log("SIZING ME UP:", size);
   next();
 };
