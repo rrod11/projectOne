@@ -15,6 +15,15 @@ const queryFilters = async (req, res, next) => {
     size,
     page,
   };
+  req.pagination.where = {
+    minLat,
+    maxLat,
+    minLng,
+    maxLng,
+    minPrice,
+    maxPrice,
+  };
+
   console.log("SIZING ME UP:", size);
   next();
 };
