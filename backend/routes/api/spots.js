@@ -23,8 +23,10 @@ const queryFilters = require("../../utils/queryfilters");
 const router = express.Router();
 
 router.get("/", queryFilters, async (req, res) => {
-  const { limit, offset, size, page } = req.pagination;
+  const { limit, offset, size, page, where } = req.pagination;
+  console.log("EVERYTHING CONTAINED IN THE WHERE:", where);
   const spots = await Spot.unscoped().findAll({
+    where,
     include: [
       {
         model: SpotImage,
