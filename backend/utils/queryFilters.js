@@ -28,20 +28,20 @@ const queryFilters = async (req, res, next) => {
     err.errors.size = "Size must be greater than or equal to 1";
     tripped = true;
   }
-  if (maxLat && maxLat > 90) {
+  if (maxLat && maxLat > 90 || maxLat && maxLat < -90) {
     err.errors.maxLat = "Maximum latitude is invalid";
     tripped = true;
   }
-  if (minLat && minLat < -90) {
+  if (minLat && minLat < -90 || minLat && minLat > 90) {
     err.errors.minLat = "Minimum latitude is invalid";
     tripped = true;
   }
-  if (maxLng && maxLng > 180) {
+  if (maxLng && maxLng > 180 || maxLng && maxLng < -180) {
     err.errors.maxLng = "Maximum longitude is invalid";
     tripped = true;
   }
-  if (minLng && minLng < -180) {
-    err.errors.maxLng = "Minimum longitude is invalid";
+  if (minLng && minLng < -180 || minLng && minLng > 180) {
+    err.errors.minLng = "Minimum longitude is invalid";
     tripped = true;
   }
   if (minPrice && minPrice < 0) {
