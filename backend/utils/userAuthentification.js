@@ -4,6 +4,8 @@ const userRightsAuthentication = async (req, _res, next) => {
   const { user } = req;
   const err = {};
   err.errors = {}
+
+
   err.errors.message = "Spot couldn't be found";
   const target = await Spot.findOne({
     where: {
