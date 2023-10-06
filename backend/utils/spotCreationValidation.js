@@ -40,7 +40,7 @@ const spotCreationValidation = (req, _res, next) => {
       err.errors.lng = "Longitude is not valid";
       tripped = true;
     }
-    if (!name) {
+    if (!name || name.length > 50) {
       err.errors.name = "Name must be less than 50 characters";
       tripped = true;
     }
