@@ -4,8 +4,6 @@ const userRightsAuthentication = async (req, _res, next) => {
   const { user } = req;
   const err = {};
   err.errors = {}
-
-
   err.errors.message = "Spot couldn't be found";
   const target = await Spot.findOne({
     where: {
@@ -13,7 +11,7 @@ const userRightsAuthentication = async (req, _res, next) => {
     },
   });
 
-  if ( target == null || user.id != target.id) {
+  if ( target == null || user.id != target.ownerId) {
     err.title = "Couldn't find a Spot with the specified id";
     err.status = 404;
     next(err);

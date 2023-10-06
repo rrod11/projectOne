@@ -27,8 +27,7 @@ if(target == null){
       id: spotId,
     },
   });
-  const imageOwner = targetSpot.ownerId;
-  if (targetSpot == null || imageOwner != userId) {
+  if (targetSpot == null || targetSpot.ownerId != userId) {
     res.status(404).json({
       message: "Spot Image couldn't be found",
     });

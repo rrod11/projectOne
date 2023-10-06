@@ -202,9 +202,11 @@ router.post(
 
     const newImage = await SpotImage.bulkCreate([
       {
+        spotId,
         url,
         preview,
       },
+
     ]);
     const target = await SpotImage.scope("defaultScope").findOne({
       where: {
