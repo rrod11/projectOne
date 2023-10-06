@@ -3,7 +3,7 @@ const userHasRightsAuthentication = async (req, _res, next) => {
   const reviewId = req.params.reviewId;
   const { user } = req;
   const err = {};
-  err.message = "Review couldn't be found";
+  err.message = "Forbidden";
   const target = await Review.findOne({
     where: {
       id: reviewId,
@@ -11,7 +11,7 @@ const userHasRightsAuthentication = async (req, _res, next) => {
   });
 
   if ( target == null || user.id != target.userId) {
-    err.title = "Couldn't find a Review with the specified id";
+    err.title = "Unauthorized Permissions";
     err.status = 404;
     next(err);
   } else next();
