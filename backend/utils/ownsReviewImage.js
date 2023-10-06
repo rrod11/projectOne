@@ -8,11 +8,7 @@ const ownsReviewImage = async (req, res, next) => {
       id: imageId,
     },
   });
-  if(target == null){
-     res.status(404).json({
-      message: "Review Image couldn't be found",
-    });
-  }
+
   const reviewId = target.reviewId;
   const targetReview = await Review.findOne({
     where: {
@@ -22,7 +18,7 @@ const ownsReviewImage = async (req, res, next) => {
   const reviewOwner = targetReview.userId;
   if (reviewOwner != userId) {
     res.status(404).json({
-      message: "Review Image couldn't be found",
+      message: "Forbidden",
     });
   }
   next();

@@ -9,6 +9,7 @@ const {
 const ownSpotImage = async (req, res, next) => {
   const { user } = req;
   const userId = user.id;
+  const err = {}
   const imageId = req.params.imageId;
   const target = await SpotImage.findOne({
     where: {
@@ -16,22 +17,18 @@ const ownSpotImage = async (req, res, next) => {
     },
   });
 
-if(target == null){
-     res.status(404).json({
-      message: "Spot Image couldn't be found",
-    });
-  }
   const spotId = target.spotId;
   const targetSpot = await Spot.findOne({
     where: {
       id: spotId,
     },
   });
-  if (targetSpot == null || targetSpot.ownerId != userId) {
-    res.status(404).json({
-      message: "Spot Image couldn't be found",
-    });
-  }
+  if (targetSpot.ownerId != userId) {
+    err.status= 403
+      err.message = "Forbidden",
+      next(err)
+    };
+
   next();
 };
 

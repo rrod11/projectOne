@@ -11,6 +11,7 @@ const userHasRightsAuthentication = require("../../utils/userHasRights");
 const reviewLengthVerification = require("../../utils/reviewLengthVerification");
 const userReviewRightsAuthentication = require("../../utils/userReviewRights");
 const reviewVerification = require("../../utils/reviewVerification");
+const doesReviewExist=require("../../utils/doesReviewExist");
 const router = express.Router();
 
 router.get("/current", requireAuth, async (req, res) => {
@@ -54,7 +55,7 @@ router.get("/current", requireAuth, async (req, res) => {
 });
 router.post(
   "/:reviewId/images",
-  [requireAuth, userHasRightsAuthentication, reviewLengthVerification],
+  [requireAuth,doesReviewExist, userHasRightsAuthentication, reviewLengthVerification],
   async (req, res) => {
     const reviewId = req.params.reviewId;
     console.log("MY REVIEW ID:", reviewId);
@@ -78,7 +79,7 @@ router.post(
 );
 router.put(
   "/:reviewId",
-  [requireAuth, userReviewRightsAuthentication, reviewVerification],
+  [requireAuth,doesReviewExist, userReviewRightsAuthentication, reviewVerification],
   async (req, res) => {
     const { review, stars } = req.body;
     const reviewId = req.params.reviewId;
@@ -97,7 +98,7 @@ router.put(
 );
 router.delete(
   "/:reviewId",
-  [requireAuth, userReviewRightsAuthentication],
+  [requireAuth,doesReviewExist,userReviewRightsAuthentication],
   async (req, res) => {
     const reviewId = req.params.reviewId;
     const targetReview = await Review.findOne({

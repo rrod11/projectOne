@@ -10,14 +10,14 @@ const {
 } = require("../../db/models");
 // const userHasRightsAuthentication = require("../../utils/userAuthentification");
 // const userReviewRightsAuthentication = require("../../utils/userAuthentification");
-const checkIfExists = require("../../utils/checkExisting");
+
 const endDateCheck = require("../../utils/endDateCheck");
-const notOwnerBooking = require("../../utils/notOwner");
-const bookingConflict = require("../../utils/bookingConflict");
+
 const notPastDue = require("../../utils/notPastDue");
 const bookingUpdateConflict = require("../../utils/bookingUpdateConflictCheck");
 const ownsBooking = require("../../utils/ownsBooking");
 const inProgress = require("../../utils/inProgress");
+const doesBookingExist=require("../../utils/doesBookingExist");
 const router = express.Router();
 
 router.get("/current", requireAuth, async (req, res) => {
@@ -51,7 +51,7 @@ router.get("/current", requireAuth, async (req, res) => {
 });
 router.put(
   "/:bookingId",
-  [requireAuth, ownsBooking, endDateCheck, bookingUpdateConflict, notPastDue],
+  [requireAuth,doesBookingExist, ownsBooking, endDateCheck, bookingUpdateConflict, notPastDue],
   async (req, res) => {
     const { startDate, endDate } = req.body;
     const bookingId = req.params.bookingId;
@@ -72,7 +72,7 @@ router.put(
 );
 router.delete(
   "/:bookingId",
-  [requireAuth, ownsBooking, inProgress],
+  [requireAuth,doesBookingExist, ownsBooking, inProgress],
   async (req, res) => {
     const bookingId = req.params.bookingId;
     await Booking.destroy({

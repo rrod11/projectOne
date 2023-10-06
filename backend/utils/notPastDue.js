@@ -14,7 +14,6 @@ const notPastDue = async (req, _res, next) => {
   });
   const endDate = booking.endDate;
   const newEndDate = new Date(endDate);
-  console.log("NEED TO SEE WHAT TODAY IS:", moment());
   if (moment(newEndDate).isBefore(moment())) {
     err.status = 403;
     tripped = true;

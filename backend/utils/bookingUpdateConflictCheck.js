@@ -16,10 +16,9 @@ const bookingUpdateConflict = async (req, res, next) => {
       id: bookingId,
     },
   });
-  // console.log("CURRENT BOOKING:", allBookings);
-  // return res.json(allBookings);
+
   const spotId = allBookings[0].spotId;
-  // console.log("CURRENT SPOT ID VALUE:", spotId);
+
   const bookings = await Booking.findAll({
     where: {
       spotId,

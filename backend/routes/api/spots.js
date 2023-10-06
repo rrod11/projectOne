@@ -19,6 +19,7 @@ const endDateCheck = require("../../utils/endDateCheck");
 const notOwnerBooking = require("../../utils/notOwner");
 const bookingConflict = require("../../utils/bookingConflict");
 const queryFilters = require("../../utils/queryFilters");
+const doesSpotExist=require("../../utils/doesSpotExist");
 
 const router = express.Router();
 
@@ -184,12 +185,17 @@ router.post("/", [requireAuth, spotCreationValidation], async (req, res) => {
       price,
     },
   ]);
+  const target = await Spot.findOne({
+    where: {
+      name
+    }
+  })
 
-  res.status(201).json(newSpot);
+  res.status(201).json(target);
 });
 router.post(
   "/:spotId/images",
-  [requireAuth, userRightsAuthentication],
+  [requireAuth,doesSpotExist, userRightsAuthentication],
   async (req, res) => {
     const spotId = req.params.spotId;
     const targetSpot = await User.findOne({
@@ -222,7 +228,7 @@ router.post(
 );
 router.put(
   "/:spotId",
-  [requireAuth, userRightsAuthentication, spotCreationValidation],
+  [requireAuth,doesSpotExist, userRightsAuthentication, spotCreationValidation],
   async (req, res) => {
     const {
       address,
@@ -265,7 +271,7 @@ router.put(
 );
 router.delete(
   "/:spotId",
-  [requireAuth, userRightsAuthentication],
+  [requireAuth,doesSpotExist, userRightsAuthentication],
   async (req, res) => {
     const spotId = req.params.spotId;
     const targetSpot = await Spot.findOne({
@@ -279,7 +285,7 @@ router.delete(
     res.json({ message: "Successfully deleted" });
   }
 );
-router.get("/:spotId/reviews", async (req, res) => {
+router.get("/:spotId/reviews",doesSpotExist, async (req, res) => {
   const spotsId = req.params.spotId;
   const allReviews = await Review.unscoped().findAll({
     where: {
@@ -296,11 +302,7 @@ router.get("/:spotId/reviews", async (req, res) => {
       },
     ],
   });
-  if (allReviews.length <= 0) {
-    res.status(404).json({
-      message: "Spot couldn't be found",
-    });
-  }
+
   const allReviewsJSON = allReviews.map((ele) => ele.toJSON());
   res.json({ Reviews: allReviewsJSON });
 });
@@ -308,9 +310,9 @@ router.post(
   "/:spotId/reviews",
   [
     requireAuth,
-    // userRightsAuthentication,
-    reviewVerification,
+    doesSpotExist,
     notOwner,
+    reviewVerification,
     checkIfExists,
   ],
   async (req, res) => {
@@ -339,7 +341,7 @@ router.post(
     res.status(201).json(newReview);
   }
 );
-router.get("/:spotId/bookings", [requireAuth], async (req, res) => {
+router.get("/:spotId/bookings", [requireAuth, doesSpotExist], async (req, res) => {
   const spotId = req.params.spotId;
   const { user } = req;
   const userId = user.id;
@@ -376,7 +378,7 @@ router.get("/:spotId/bookings", [requireAuth], async (req, res) => {
 });
 router.post(
   "/:spotId/bookings",
-  [requireAuth, notOwnerBooking, endDateCheck, bookingConflict],
+  [requireAuth,doesSpotExist, notOwnerBooking, endDateCheck, bookingConflict],
   async (req, res) => {
     const { startDate, endDate } = req.body;
     const { user } = req;
