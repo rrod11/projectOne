@@ -197,7 +197,7 @@ router.post(
         id: spotId,
       },
     });
-    }
+
     const { url, preview } = req.body;
 
     const newImage = await SpotImage.bulkCreate([
