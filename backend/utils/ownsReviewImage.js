@@ -17,9 +17,9 @@ const ownsReviewImage = async (req, res, next) => {
   });
   const reviewOwner = targetReview.userId;
   if (reviewOwner != userId) {
-    res.status(404).json({
-      message: "Forbidden",
-    });
+    err.status = 404
+      err.message = "Forbidden",
+      next(err)
   }
   next();
 };
