@@ -197,11 +197,6 @@ router.post(
         id: spotId,
       },
     });
-    console.log('LOOOK HERE!!', targetSpot.length)
-    if(!targetSpot.length){
-      res.json({
-  "message": "Spot couldn't be found"
-})
     }
     const { url, preview } = req.body;
 
