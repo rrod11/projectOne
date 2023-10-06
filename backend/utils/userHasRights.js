@@ -12,7 +12,7 @@ const userHasRightsAuthentication = async (req, _res, next) => {
 
   if ( target == null || user.id != target.userId) {
     err.title = "Unauthorized Permissions";
-    err.status = 404;
+    err.status = 403;
     next(err);
   } else next();
 };
