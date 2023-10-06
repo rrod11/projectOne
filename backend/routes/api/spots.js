@@ -109,7 +109,7 @@ router.get("/current", requireAuth, async (req, res) => {
   }
   res.json({ Spots: spotsJSON });
 });
-router.get("/:spotId", async (req, res) => {
+router.get("/:spotId",doesSpotExist, async (req, res) => {
   const spotId = req.params.spotId;
   const spots = await Spot.unscoped().findAll({
     where: {
