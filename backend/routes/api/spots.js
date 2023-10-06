@@ -197,6 +197,11 @@ router.post(
         id: spotId,
       },
     });
+    if(!targetSpot.length){
+      res.json({
+  "message": "Spot couldn't be found"
+})
+    }
     const { url, preview } = req.body;
 
     const newImage = await SpotImage.bulkCreate([
