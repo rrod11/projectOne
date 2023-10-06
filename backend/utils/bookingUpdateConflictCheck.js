@@ -48,6 +48,20 @@ const bookingUpdateConflict = async (req, res, next) => {
         tripped = true;
         err.errors.endDate = "End date conflicts with an existing booking";
       }
+        if (
+        moment(endDate).isBetween(newStartDate, newEndDate)
+      ) {
+        err.status = 403;
+        tripped = true;
+        err.errors.endDate = "Dates conflicts with an existing booking endDate";
+      }
+      if (
+        moment(startDate).isBetween(newStartDate, newEndDate)
+      ) {
+        err.status = 403;
+        tripped = true;
+        err.errors.startDate = "Dates conflicts with an existing booking startDate";
+      }
       if (tripped) {
         next(err);
       }
