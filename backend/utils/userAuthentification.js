@@ -9,7 +9,7 @@ const userRightsAuthentication = async (req, _res, next) => {
       id: spotId,
     },
   });
-  if (user.id != target.id) {
+  if (user.id != target.id || target.id == null) {
     err.title = "Couldn't find a Spot with the specified id";
     err.status = 404;
     next(err);
