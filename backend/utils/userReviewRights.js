@@ -11,7 +11,7 @@ const userReviewRightsAuthentication = async (req, _res, next) => {
     },
   });
 
-    if ( target == null) {
+  if ( target == null) {
     err.title = "Couldn't find a Review with the specified id";
     err.status = 404;
     next(err);

@@ -9,7 +9,8 @@ const userHasRightsAuthentication = async (req, _res, next) => {
       id: reviewId,
     },
   });
-  if ( target == null || user.id != target.id) {
+
+  if ( target == null || user.id != target.userId) {
     err.title = "Couldn't find a Review with the specified id";
     err.status = 404;
     next(err);
