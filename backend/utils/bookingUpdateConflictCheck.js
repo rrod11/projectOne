@@ -1,5 +1,6 @@
 const { Spot, User, Review, Booking } = require("../db/models");
 const moment = require("moment");
+const {all}=require("../routes/api/spots");
 const bookingUpdateConflict = async (req, res, next) => {
   const { startDate, endDate } = req.body;
   const bookingId = req.params.bookingId;
@@ -42,29 +43,32 @@ const bookingUpdateConflict = async (req, res, next) => {
         moment(newEndDate).isBetween(startDate, endDate) ||
         moment(newEndDate).isSame(startDate) ||
         moment(newEndDate).isSame(endDate)
-      ) {
-        err.status = 403;
-        tripped = true;
-        err.errors.endDate = "End date conflicts with an existing booking";
-      }
+        ) {
+          err.status = 403;
+          tripped = true;
+          err.errors.endDate = "End date conflicts with an existing booking";
+        }
         if (
-        moment(endDate).isBetween(newStartDate, newEndDate)
-      ) {
-        err.status = 403;
-        tripped = true;
-        err.errors.endDate = "Dates conflicts with an existing booking endDate";
-      }
-      if (
-        moment(startDate).isBetween(newStartDate, newEndDate)
-      ) {
-        err.status = 403;
-        tripped = true;
-        err.errors.startDate = "Dates conflicts with an existing booking startDate";
-      }
-      if (tripped) {
-        next(err);
-      }
-    }
+          moment(endDate).isBetween(newStartDate, newEndDate)
+          ) {
+            err.status = 403;
+            tripped = true;
+            err.errors.endDate = "Dates conflicts with an existing booking endDate";
+          }
+          if (
+            moment(startDate).isBetween(newStartDate, newEndDate)
+            ) {
+              err.status = 403;
+              tripped = true;
+              err.errors.startDate = "Dates conflicts with an existing booking startDate";
+            }
+            if(bookings[i].id == allBookings[0].id) {
+              tripped = false
+            }
+            if (tripped) {
+              next(err);
+            }
+          }
   }
   next();
 };
