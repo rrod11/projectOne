@@ -126,37 +126,37 @@ router.get("/:spotId", async (req, res) => {
       },
     ],
   });
-  if (spots.length === 0) {
-    return res.status(404).json({
-      message: "Spot couldn't be found",
-    });
-  }
-  const spotsJSON = spots.map((ele) => ele.toJSON());
+    const spotsJSON = spots.map((ele) => ele.toJSON());
 
-  for (let i = 0; i < spotsJSON.length; i++) {
-    spotsJSON[i].Owner = spotsJSON[i].User;
-    delete spotsJSON[i].User;
-    if (spotsJSON[i].SpotImages.length > 1) {
-      for (let j = 1; j < spotsJSON[i].SpotImages.length; j++) {
-        spotsJSON[i].SpotImages[j].preview = false;
-      }
+if(spotsJSON){
+
+  spotsJSON[0].Owner = spotsJSON[0].User
+  delete spotsJSON[0].User;
+  if (spotsJSON[0].SpotImages.length > 1) {
+    for (let j = 1; j < spotsJSON[0].SpotImages.length; j++) {
+      spotsJSON[0].SpotImages[j].preview = false;
     }
   }
-  for (let spot of spotsJSON) {
-    const sum = await Review.sum("stars", {
-      where: {
-        spotId,
-      },
-    });
-    const total = await Review.count({
-      where: {
-        spotId,
-      },
-    });
-    spot.avgRating = sum / total;
-    spot.numReviews = total;
-  }
-  res.json({ Spots: spotsJSON });
+}
+
+for(let spot of spotsJSON){
+
+  const sum = await Review.sum("stars", {
+    where: {
+      spotId,
+    },
+  });
+  const total = await Review.count({
+    where: {
+      spotId,
+    },
+  });
+  spot.avgRating = sum / total;
+  spot.numReviews = total;
+}
+const spot = spotsJSON[0]
+
+  res.json( spot );
 });
 router.post("/", [requireAuth, spotCreationValidation], async (req, res) => {
   const { user } = req;
