@@ -11,10 +11,11 @@ const {
 
 const { requireAuth } = require("../../utils/auth.js");
 const ownsReviewImage = require("../../utils/ownsReviewImage");
+const doesReviewImageExist=require("../../utils/doesReviewImageExist");
 
 const router = express.Router();
 
-router.delete("/:imageId", [requireAuth, ownsReviewImage], async (req, res) => {
+router.delete("/:imageId", [requireAuth,doesReviewImageExist, ownsReviewImage], async (req, res) => {
   const imageId = req.params.imageId;
   await ReviewImage.destroy({
     where: {

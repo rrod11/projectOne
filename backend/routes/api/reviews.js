@@ -1,5 +1,4 @@
 const express = require("express");
-const { requireAuth } = require("../../utils/auth");
 const {
   Review,
   User,
@@ -7,6 +6,7 @@ const {
   ReviewImage,
   SpotImage,
 } = require("../../db/models");
+const { requireAuth } = require("../../utils/auth");
 const userHasRightsAuthentication = require("../../utils/userHasRights");
 const reviewLengthVerification = require("../../utils/reviewLengthVerification");
 const userReviewRightsAuthentication = require("../../utils/userReviewRights");

@@ -2,6 +2,7 @@ const { Spot, User, Review, Booking } = require("../db/models");
 const ownsBooking = async (req, res, next) => {
   const { user } = req;
   const userId = user.id;
+  const err = {}
   const bookingId = req.params.bookingId;
   const target = await Booking.findOne({
     where: {
@@ -12,11 +13,12 @@ const ownsBooking = async (req, res, next) => {
       attributes: ["ownerId"],
     },
   });
-  if ( target == null || target.userId != userId && ownerId !== userId) {
-    return res.status(404).json({
-      message: "Booking couldn't be found",
-    });
-  }
+  if ( target.userId != userId ) {
+    err.status = 403
+      err.message = "Forbidden",
+      next(err)
+    };
+
 
   next();
 };

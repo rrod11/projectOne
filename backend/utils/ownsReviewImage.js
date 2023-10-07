@@ -2,6 +2,7 @@ const { Spot, User, Review, Booking, ReviewImage } = require("../db/models");
 const ownsReviewImage = async (req, res, next) => {
   const { user } = req;
   const userId = user.id;
+  const err = {}
   const imageId = req.params.imageId;
   const target = await ReviewImage.findOne({
     where: {
