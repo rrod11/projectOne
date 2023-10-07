@@ -15,7 +15,7 @@ const ownsBooking = async (req, res, next) => {
   });
   if ( target.userId != userId ) {
     err.status = 403
-    err.title = "Owner cannot book their own spot"
+    err.title = "Unauthorized Permissions"
       err.message = "Forbidden",
       next(err)
     };
