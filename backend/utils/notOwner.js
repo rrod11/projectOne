@@ -11,7 +11,8 @@ const notOwner = async (req, res, next) => {
   });
   if (!theSpot) {
     err.status = 404;
-    (err.message = "Spot couldn't be found"), next(err);
+    (err.message = "Spot couldn't be found");
+     next(err);
   }
 
   if (theSpot.ownerId == userId) {
@@ -32,14 +33,12 @@ const notOwnerBooking = async (req, res, next) => {
       id: spotId,
     },
   });
-  if (!theSpot) {
-    err.status = 404;
-    (err.message = "Spot couldn't be found"), next(err);
-  }
+
 
   if (theSpot.ownerId == userId) {
-    err.status = 400;
-    err.message = "You cannot create a booking for yourself";
+    err.status = 403;
+    err.title = "You cannot create a booking for yourself";
+    err.message = "Forbidden";
     next(err);
   } else {
     next();
