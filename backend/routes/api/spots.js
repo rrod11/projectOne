@@ -37,7 +37,6 @@ router.get("/", queryFilters, async (req, res) => {
     maxPrice,
     where,
   } = req.pagination;
-  console.log("EVERYTHING CONTAINED IN THE WHERE:", where);
   const spots = await Spot.unscoped().findAll({
     where,
     include: [
@@ -52,9 +51,13 @@ router.get("/", queryFilters, async (req, res) => {
   const spotsJSON = spots.map((ele) => ele.toJSON());
 
   for (let i = 0; i < spotsJSON.length; i++) {
-    if (spotsJSON[i].SpotImages.length > 0) {
+    if (spotsJSON[i].SpotImages[0]) {
       spotsJSON[i].previewImage = spotsJSON[i].SpotImages[0].url;
       delete spotsJSON[i].SpotImages;
+    }
+    if(!spotsJSON[i].previewImage){
+      spotsJSON[i].previewImage = null
+         delete spotsJSON[i].SpotImages;
     }
   }
   for (let spot of spotsJSON) {
@@ -92,6 +95,10 @@ router.get("/current", requireAuth, async (req, res) => {
     if (spotsJSON[i].SpotImages.length > 0) {
       spotsJSON[i].previewImage = spotsJSON[i].SpotImages[0].url;
       delete spotsJSON[i].SpotImages;
+    }
+      if(!spotsJSON[i].previewImage){
+      spotsJSON[i].previewImage = null
+         delete spotsJSON[i].SpotImages;
     }
   }
   for (let spot of spotsJSON) {
