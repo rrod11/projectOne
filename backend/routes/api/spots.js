@@ -144,6 +144,10 @@ if(spotsJSON){
       spotsJSON[0].SpotImages[j].preview = false;
     }
   }
+       if(spotsJSON[0].SpotImages.length == 0){
+      spotsJSON[0].SpotImages = null
+
+    }
 }
 
 for(let spot of spotsJSON){
