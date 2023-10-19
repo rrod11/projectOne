@@ -9,7 +9,6 @@ const reviewLengthVerification = async (req, res, next) => {
       reviewId: reviewId,
     },
   });
-  console.log("MY CURRENT REVIEW LENGTH", target);
   if (target >= 10) {
     err.title = "Can't Have More than 10 Reviews";
     err.status = 403;
