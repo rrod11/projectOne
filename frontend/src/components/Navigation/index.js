@@ -50,16 +50,22 @@ import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import ProfileButton from "./ProfileButton";
 import "./Navigation.css";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 function Navigation({ isLoaded }) {
+  const history = useHistory();
   const sessionUser = useSelector((state) => state.session.user);
 
+  function redirection() {
+    history.push("/");
+  }
   return (
-    <div>
+    <div className="navBar">
       <img
         className="iconImg"
         src="
       https://png.pngtree.com/png-clipart/20230425/original/pngtree-3d-location-icon-clipart-in-transparent-background-png-image_9095284.png"
+        onClick={redirection}
       />
       <ul>
         <li>

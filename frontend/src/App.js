@@ -13,7 +13,7 @@ function App() {
 
   return (
     <>
-      <Navigation isLoaded={isLoaded} />
+      <Navigation isLoaded={isLoaded} className="nav" />
       {isLoaded && <Switch></Switch>}
     </>
   );
