@@ -55,18 +55,25 @@ function Navigation({ isLoaded }) {
   const sessionUser = useSelector((state) => state.session.user);
 
   return (
-    <ul>
-      <li>
-        <NavLink exact to="/">
-          Home
-        </NavLink>
-      </li>
-      {isLoaded && (
+    <div>
+      <img
+        className="iconImg"
+        src="
+      https://png.pngtree.com/png-clipart/20230425/original/pngtree-3d-location-icon-clipart-in-transparent-background-png-image_9095284.png"
+      />
+      <ul>
         <li>
-          <ProfileButton user={sessionUser} />
+          <NavLink exact to="/">
+            Home
+          </NavLink>
         </li>
-      )}
-    </ul>
+        {isLoaded && (
+          <li>
+            <ProfileButton user={sessionUser} />
+          </li>
+        )}
+      </ul>
+    </div>
   );
 }
 
