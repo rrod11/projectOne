@@ -36,7 +36,7 @@ router.use("/review-images", reviewImagesRouter);
 // router.get("/require-auth", requireAuth, (req, res) => {
 //   return res.json(req.user);
 // });
-router.post("/test", function (req, res) {
-  res.json({ requestBody: req.body });
-});
+// router.post("/test", function (req, res) {
+//   res.json({ requestBody: req.body });
+// });
 module.exports = router;
