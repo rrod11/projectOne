@@ -17,7 +17,7 @@ const validateLogin = [
   handleValidationErrors,
 ];
 router.post("/", validateLogin, async (req, res, next) => {
-  const { credential, password } = req.body;
+  const { credential, password, addDates } = req.body;
 
   const user = await User.unscoped().findOne({
     where: {
@@ -42,6 +42,10 @@ router.post("/", validateLogin, async (req, res, next) => {
     email: user.email,
     username: user.username,
   };
+  if (addDates) {
+    safeUser.createdAt = user.createdAt;
+    safeUser.updatedAt = user.updatedAt;
+  }
 
   await setTokenCookie(res, safeUser);
 
