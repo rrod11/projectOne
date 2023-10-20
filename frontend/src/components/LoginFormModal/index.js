@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import * as sessionActions from "../../store/session";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
@@ -23,6 +23,13 @@ function LoginFormModal() {
         }
       });
   };
+  useEffect(() => {
+    const errorsObj = {};
+    if (credential.length < 4)
+      errorsObj.username = "Username/Email must be at least 4 characters";
+    if (password.length < 6)
+      errorsObj.username = "Password must be at least 6 characters";
+  }, [credential, password]);
 
   return (
     <>
