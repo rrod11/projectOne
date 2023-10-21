@@ -1,7 +1,10 @@
-/* * {
-  background-color: aquamarine;
-  /* height: 10px; */
-/* } */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 .hidden {
   display: none;
 }
@@ -9,12 +12,35 @@
 .iconImg {
   height: 100%;
   width: auto;
+  cursor: pointer;
 }
 .navBar {
   display: flex;
   flex-direction: row;
-  height: 50px;
+  height: 75px;
   align-items: center;
   justify-content: space-between;
   background-color: aquamarine;
+  margin-left: 0;
+  padding: 10px;
+}
+ul {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.navBar > ul {
+  border: 2.5px solid red;
+  border-radius: 50%;
+  padding: 18px 18px;
+  width: auto;
+  height: auto;
+  right: 0;
+}
+ul > li {
+  list-style-type: none;
+}
+.profileButton {
+  cursor: pointer;
 }
