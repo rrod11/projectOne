@@ -8,6 +8,8 @@ function LoginFormModal() {
   const dispatch = useDispatch();
   const [credential, setCredential] = useState("");
   const [password, setPassword] = useState("");
+  const [credentialCheck, setCredentialCheck] = useState("");
+  const [passwordCheck, setPasswordCheck] = useState("");
   const [errors, setErrors] = useState({});
   const { closeModal } = useModal();
 
@@ -18,18 +20,11 @@ function LoginFormModal() {
       .then(closeModal)
       .catch(async (res) => {
         const data = await res.json();
-        if (data && data.errors) {
-          setErrors(data.errors);
+        if (data && data.message) {
+          setErrors(data.message);
         }
       });
   };
-  useEffect(() => {
-    const errorsObj = {};
-    if (credential.length < 4)
-      errorsObj.username = "Username/Email must be at least 4 characters";
-    if (password.length < 6)
-      errorsObj.username = "Password must be at least 6 characters";
-  }, [credential, password]);
 
   return (
     <>
@@ -44,6 +39,7 @@ function LoginFormModal() {
             required
           />
         </label>
+
         <label>
           Password
           <input
@@ -53,8 +49,14 @@ function LoginFormModal() {
             required
           />
         </label>
-        {errors.credential && <p>{errors.credential}</p>}
-        <button type="submit">Log In</button>
+
+        {errors.message && <p className="errors">{errors.message}</p>}
+        <button
+          type="submit"
+          disabled={credential.length < 4 || password.length < 6}
+        >
+          Log In
+        </button>
       </form>
     </>
   );
