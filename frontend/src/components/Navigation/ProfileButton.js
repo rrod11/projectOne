@@ -60,8 +60,10 @@ import OpenModalButton from "../OpenModalButton";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
 import "./Navigation.css";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 function ProfileButton({ user }) {
+  const history = useHistory();
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef();
@@ -91,6 +93,7 @@ function ProfileButton({ user }) {
     e.preventDefault();
     dispatch(sessionActions.logout());
     closeMenu();
+    history.push("/");
   };
 
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
@@ -98,16 +101,15 @@ function ProfileButton({ user }) {
   return (
     <>
       <button onClick={openMenu}>
-        <i className="fas fa-user-circle" />
-        {/* <i class="fa-solid fa-face-icicles"></i> */}
+        <i className="fa-regular fa-bars" style={{ fontSize: "20px" }}></i>
+        <i className="fas fa-user-circle" style={{ fontSize: "20px" }}></i>
       </button>
+
       <ul className={ulClassName} ref={ulRef}>
         {user ? (
           <>
             <li>{user.username}</li>
-            <li>
-              {user.firstName} {user.lastName}
-            </li>
+            <li>Hello, {user.firstName}</li>
             <li>{user.email}</li>
             <li>
               <button onClick={logout}>Log Out</button>

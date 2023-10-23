@@ -61,18 +61,26 @@ function Navigation({ isLoaded }) {
   }
   return (
     <div className="navBar">
-      <img
+      <NavLink
+        to="/"
         className="iconImg"
-        src="
+        style={{
+          fontSize: "20px",
+          display: "flex",
+          flexDirection: "row",
+          textAlign: "center",
+          alignItems: "center",
+        }}
+      >
+        <img
+          className="iconImg"
+          src="
       https://png.pngtree.com/png-clipart/20230425/original/pngtree-3d-location-icon-clipart-in-transparent-background-png-image_9095284.png"
-        onClick={redirection}
-      />
+          onClick={redirection}
+        />
+        <span style={{ fontSize: "30px" }}>Renter Depot</span>
+      </NavLink>
       <ul>
-        <li>
-          <NavLink exact to="/">
-            Home
-          </NavLink>
-        </li>
         {isLoaded && (
           <li className="profileButton">
             <ProfileButton user={sessionUser} />
