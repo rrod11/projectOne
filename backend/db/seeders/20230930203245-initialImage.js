@@ -59,6 +59,36 @@ module.exports = {
           url: "https://miro.medium.com/v2/resize:fit:633/1*SLwl_DPs2kFvV_VvMtODUQ.jpeg",
           preview: true,
         },
+        {
+          spotId: 4,
+          url: "https://pm1.aminoapps.com/7008/476bf1fbcc4a4e1b24049ffc39b816fe08c505aar1-1080-786v2_00.jpg",
+          preview: true,
+        },
+        {
+          spotId: 5,
+          url: "https://images-s.kinorium.com/movie/shot/1700728/h280_46944554.jpg?21611946679",
+          preview: true,
+        },
+        {
+          spotId: 6,
+          url: "https://img.wattpad.com/a9f823e547ca2eb0fc62a761783df09fdf0a8c53/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f776174747061642d6d656469612d736572766963652f53746f7279496d6167652f516571303071664f7972445a41773d3d2d313230333737383138322e313664636134663663623161336233613137303135343130343635332e706e67",
+          preview: true,
+        },
+        {
+          spotId: 7,
+          url: "https://randomc.net/image/Tensei%20shitara%20Slime%20Datta%20Ken/Tensei%20shitara%20Slime%20Datta%20Ken%20-%2013%20-%2034.jpg",
+          preview: true,
+        },
+        {
+          spotId: 8,
+          url: "https://pm1.narvii.com/8294/b6d9316dd92e54fc59943b9c0f21ee669781406cr4-750-375_00.jpg",
+          preview: true,
+        },
+        {
+          spotId: 9,
+          url: "https://img.wattpad.com/story_parts/1138224965/images/16ab2b269f43d002946472787808.jpg",
+          preview: true,
+        },
       ],
       { validate: true }
     );
