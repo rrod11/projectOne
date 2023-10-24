@@ -18,24 +18,30 @@ const LandingPage = () => {
   }
   return !spots ? null : (
     <div className="LPImages" onMouseMove={myFunction}>
-      {spots?.map((ele) => (
-        <div key={ele.id} className="imageDiv">
-          <div className="tooltip">
-            <img src={ele.previewImage} className="actualImages" />
-            <p className="tooltiptext">{ele.name}</p>
+      {spots?.map(
+        ({ id, name, city, state, previewImage, avgRating, price }) => (
+          <div key={id} className="imageDiv">
+            <div className="tooltip" title={name}>
+              <img src={previewImage} className="actualImages" />
+              <p className="tooltiptext">{name}</p>
+            </div>
+            <div className="houseInfo">
+              <p>
+                {city}, {state}
+              </p>
+              <div className="ratingInfo">
+                <i className="fa-solid fa-star"></i>
+                {avgRating ? (
+                  <p>{parseFloat(`${avgRating}`).toFixed(2)}</p>
+                ) : (
+                  <p>New</p>
+                )}
+              </div>
+            </div>
+            <p>${price} /night</p>
           </div>
-          <div className="houseInfo">
-            <p>
-              {ele.city}, {ele.state}
-            </p>
-            <di className="ratingInfo">
-              <i class="fa-solid fa-moon"></i>
-              <p>{parseFloat(`${ele.avgRating}`).toFixed(2)}</p>
-            </di>
-          </div>
-          <p>${ele.price} /night</p>
-        </div>
-      ))}
+        )
+      )}
     </div>
   );
 };

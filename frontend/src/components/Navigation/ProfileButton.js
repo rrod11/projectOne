@@ -101,8 +101,8 @@ function ProfileButton({ user }) {
   return (
     <>
       <button onClick={openMenu}>
-        <i className="fa-regular fa-bars" style={{ fontSize: "20px" }}></i>
-        <i className="fas fa-user-circle" style={{ fontSize: "20px" }}></i>
+        <i class="fa-solid fa-bars" style={{ fontSize: "15px" }}></i>
+        <i className="fas fa-user-circle" style={{ fontSize: "15px" }}></i>
       </button>
 
       <ul className={ulClassName} ref={ulRef}>
