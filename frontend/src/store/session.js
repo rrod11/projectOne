@@ -50,7 +50,6 @@ export const signup = (user) => async (dispatch) => {
     }),
   });
   const data = await response.json();
-  console.log("🚀 ~ file: session.js:53 ~ signup ~ data:", data);
   dispatch(setUser(data.user));
   return response;
 };
