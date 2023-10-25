@@ -8,23 +8,44 @@ const ReviewDetail = ({ spotId, spot }) => {
   const dispatch = useDispatch();
   const reviews = useSelector((state) => state.reviews);
   const reviewArr = Object.values(reviews);
-  let orderedReviews;
-  const setDate = (date) => {
+  const dateSetter = (date) => {
     const dateParts = Date(date).split(" ");
     return `${dateParts[1]} ${dateParts[2]} ${dateParts[3]} ${dateParts[4]}`;
   };
-  const compareByDate = (a, b) => {
+  const dateComparison = (a, b) => {
     return new Date(b.createdAt) - new Date(a.createdAt);
   };
-  const sortedReviews = Object.values(reviews).sort(compareByDate);
-  // const newArray = reviewArr?.map((ele) => setDate(ele.createdAt));
+  const sortedReviews = Object.values(reviews).sort(dateComparison);
+  console.log(
+    "🚀 ~ file: index.js:19 ~ ReviewDetail ~ sortedReviews:",
+    sortedReviews
+  );
+
   let reviewGrid;
-  if (spot.numReviews > 1) {
+  if (spot?.numReviews > 1) {
     reviewGrid = <span>{`${spot.numReviews} Reviews`}</span>;
-  } else if (spot.numReviews == 1) {
+  } else if (spot?.numReviews == 1) {
     reviewGrid = <span>{`${spot.numReviews} Review`}</span>;
   } else {
     reviewGrid = null;
+  }
+  let reviewsGuide;
+  if (sortedReviews?.length > 0) {
+    reviewsGuide = sortedReviews.map((review) => (
+      <div>
+        <h4>
+          {review.User.firstName} {review.User.lastName}
+        </h4>
+        <h5>{dateSetter(review.createdAt)}</h5>
+        <p>{review.review}</p>
+      </div>
+    ));
+  } else {
+    reviewsGuide = (
+      <div>
+        <h4>Be the first to post a Review</h4>
+      </div>
+    );
   }
   useEffect(() => {
     dispatch(allTheReviews(spotId));
@@ -32,7 +53,6 @@ const ReviewDetail = ({ spotId, spot }) => {
 
   return (
     <>
-      <div>GO CRAZY</div>
       <span>
         <i className="fa-solid fa-star"></i>
         {spot.avgRating ? (
@@ -41,10 +61,8 @@ const ReviewDetail = ({ spotId, spot }) => {
           <span>New</span>
         )}
       </span>
-      {/* {spot.numReviews > 0 ? (
-        <i class="fa-solid fa-circle  fa-2xs" style={{ zoom: ".25" }}></i>
-      ) : null} */}
       {reviewGrid}
+      {reviewsGuide}
     </>
   );
 };
