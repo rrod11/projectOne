@@ -35,33 +35,42 @@ export const oneSpot = (spotId) => async (dispatch) => {
   dispatch(getSpot(spot));
   return spot;
 };
-export const createASpot = (payload) => async (dispatch) => {
-  const {
-    country,
-    address,
-    city,
-    state,
-    description,
-    name,
-    price,
-    previewImage,
-  } = payload;
-  const response = await csrfFetch("/api/spots/new", {
+export const createASpot = (payload, images) => async (dispatch) => {
+  // const {
+  //   country,
+  //   address,
+  //   city,
+  //   state,
+  //   description,
+  //   name,
+  //   price,
+  //   previewImage,
+  //   lat,
+
+  // } = payload;
+  const response = await csrfFetch("/api/spots", {
     method: "POST",
-    body: JSON.stringify({
-      country,
-      address,
-      city,
-      state,
-      description,
-      name,
-      price,
-      previewImage,
-    }),
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ ...payload }),
   });
-  const spot = await response.json();
-  dispatch(createASpot(spot));
-  return spot;
+  if (response.ok) {
+    const data = await response.json();
+    console.log("🚀 ~ file: spots.js:58 ~ createASpot ~ data:", data);
+    dispatch(createSpot(data));
+    for (let i = 0; i < images.length; i++) {
+      await csrfFetch(`/api/spots/${data.id}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: images,
+      });
+    }
+    console.log("🚀 ~ file: spots.js:67 ~ createASpot ~ spot:", data);
+    return data;
+  } else {
+    const errors = await response.json();
+    console.log("🚀 ~ file: spots.js:70 ~ createASpot ~ errors:", errors);
+    return errors;
+  }
 };
 const initialState = { spots: null };
 const spotReducer = (state = initialState, action) => {
@@ -74,7 +83,7 @@ const spotReducer = (state = initialState, action) => {
       newState = { ...action.spotId };
       return newState;
     case CREATE_SPOT:
-      newState = { ...action.payload };
+      newState = { ...state, [action.payload.id]: action.payload };
       return newState;
     default:
       return state;

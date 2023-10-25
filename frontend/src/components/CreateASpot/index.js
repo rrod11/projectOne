@@ -1,18 +1,19 @@
 import React, { useEffect, useState } from "react";
 import * as sessionActions from "../../store/session";
-import { useDispatch } from "react-redux";
-import { useModal } from "../../context/Modal";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { createASpot } from "../../store/spots";
 
-function CreateASpot() {
+function CreateASpot({ formType = "Create A Spot" }) {
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.session.user);
   const history = useHistory();
   const [country, setCountry] = useState("");
   const [address, setAddress] = useState("");
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
-  const [latitude, setLatitude] = useState("");
-  const [longitude, setLongitude] = useState("");
+  const [latitude, setLatitude] = useState(80.76);
+  const [longitude, setLongitude] = useState(50.34);
   const [description, setDescription] = useState("");
   const [title, setTitle] = useState("");
   const [price, setPrice] = useState("");
@@ -22,27 +23,52 @@ function CreateASpot() {
   const [image4, setImage4] = useState("");
   const [image5, setImage5] = useState("");
   const [errors, setErrors] = useState({});
-  const { closeModal } = useModal();
+  console.log("🚀 ~ file: index.js:10 ~ CreateASpot ~ user:", user);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setErrors({});
-    // if (errors != {}) {
-    //   return dispatch(sessionActions.login({ credential, password }))
-    //     .then(closeModal)
-    //     .catch(async (res) => {
-    //       const data = await res.json();
-    //       if (data && data.message) {
-    //         // data.message = "The provided credentials were invalid";
-    //         setErrors(data);
-    //       }
-    //     });
-    // }
-    // else {
-    history.push(`/spots/`);
-    // }
+  const spotObj = {
+    ownerId: user.id,
+    country,
+    address,
+    city,
+    state,
+    lat: latitude,
+    lng: longitude,
+    description,
+    name: title,
+    price,
+    previewImage: image1,
   };
+  console.log("🚀 ~ file: index.js:38 ~ CreateASpot ~ spotObj:", spotObj);
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (errors && !Object.values(errors).length) {
+      setLatitude(80.75);
+      setLongitude(50.85);
+      const res = await dispatch(createASpot(spotObj, image1));
+      console.log("🚀 ~ file: index.js:48 ~ handleSubmit ~ res:", res);
+      history.push(`/spots/${res.payload.id}`);
+    } else {
+      console.log("ERRORS PRESENT");
+    }
+  };
+  //   useEffect(() => {
+  //     dispatch(createASpot());
+  //   }, [dispatch]);
+  function checkCredentials() {
+    const errObj = {};
+    if (!country) errObj.country = "Country is required";
+    if (!address) errObj.address = "Address is required";
+    if (!city) errObj.city = "City is required";
+    if (!state) errObj.state = "State is required";
+    if (description.length < 30)
+      errObj.description = "Description needs 30 or more characters";
+    if (!title) errObj.name = "Name is required";
+    if (isNaN(price) || price < 1) errObj.price = "Price per night is required";
+    if (!image1.endsWith(".jpg" || ".jpeg" || ".png"))
+      errObj.image1 = "Preview Image must end with .jpg, .jpeg, or .png";
+    setErrors(errObj);
+  }
   return (
     <>
       <h1>Create a New Spot</h1>
@@ -61,7 +87,7 @@ function CreateASpot() {
             required
           />
         </label>
-        {errors.country && <p className="errors">Country is required </p>}
+        {errors.country && <p className="errors">{errors.country}</p>}
 
         <label>
           Street Address
@@ -73,6 +99,7 @@ function CreateASpot() {
             required
           />
         </label>
+        {errors.address && <p className="errors">{errors.address}</p>}
 
         <label>
           City
@@ -84,7 +111,7 @@ function CreateASpot() {
             required
           />
         </label>
-
+        {errors.city && <p className="errors">{errors.city}</p>}
         <label>
           State
           <input
@@ -95,6 +122,7 @@ function CreateASpot() {
             required
           />
         </label>
+        {errors.state && <p className="errors">{errors.state}</p>}
 
         <label>
           Latitude
@@ -131,6 +159,7 @@ function CreateASpot() {
             required
           />
         </label>
+        {errors.description && <p className="errors">{errors.description}</p>}
         <h2>Create a title for your spot</h2>
         <p>
           Catch guests' attention with a spot title that highlights what makes
@@ -145,6 +174,7 @@ function CreateASpot() {
             required
           />
         </label>
+        {errors.name && <p className="errors">{errors.name}</p>}
         <h2>Set a base price for your spot</h2>
         <p>
           Competitive pricing can help your listing stand out and rank higher in
@@ -160,6 +190,7 @@ function CreateASpot() {
             required
           />
         </label>
+        {errors.price && <p className="errors">{errors.price}</p>}
         <h2>Liven up your spot with photos</h2>
         <p>Submit a link to at least one photo to publish your spot</p>
         <label>
@@ -171,6 +202,7 @@ function CreateASpot() {
             required
           />
         </label>
+        {errors.image1 && <p className="errors">{errors.image1}</p>}
         <label>
           <input
             type="text"
@@ -206,7 +238,17 @@ function CreateASpot() {
 
         <button
           type="submit"
-          //   disabled={credential.length < 4 || password.length < 6}
+          //   disabled={
+          //     errors.country ||
+          //     errors.address ||
+          //     errors.city ||
+          //     errors.state ||
+          //     errors.description ||
+          //     errors.title ||
+          //     errors.price ||
+          //     errors.image1
+          //   }
+          onClick={checkCredentials}
           className="loginButton"
         >
           Create Spot
