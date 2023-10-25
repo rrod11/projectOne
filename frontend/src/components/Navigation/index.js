@@ -87,7 +87,7 @@ function Navigation({ isLoaded }) {
       <div className="header-right">
         {sessionUser ? (
           <div>
-            <NavLink to="api/spots/new">Create A New Spot</NavLink>
+            <NavLink to="/spots/new">Create A New Spot</NavLink>
           </div>
         ) : null}
         {isLoaded && (
