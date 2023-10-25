@@ -55,6 +55,10 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 function Navigation({ isLoaded }) {
   const history = useHistory();
   const sessionUser = useSelector((state) => state.session.user);
+  console.log(
+    "🚀 ~ file: index.js:58 ~ Navigation ~ sessionUser:",
+    sessionUser
+  );
 
   function redirection() {
     history.push("/");
@@ -80,13 +84,18 @@ function Navigation({ isLoaded }) {
         />
         <span style={{ fontSize: "30px" }}>Renter Depot</span>
       </NavLink>
-      <ul>
+      <div className="header-right">
+        {sessionUser ? (
+          <div>
+            <NavLink to="api/spots/new">Create A New Spot</NavLink>
+          </div>
+        ) : null}
         {isLoaded && (
           <li className="profileButton">
             <ProfileButton user={sessionUser} />
           </li>
         )}
-      </ul>
+      </div>
     </div>
   );
 }

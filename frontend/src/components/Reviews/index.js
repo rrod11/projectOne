@@ -7,7 +7,6 @@ import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 const ReviewDetail = ({ spotId, spot }) => {
   const dispatch = useDispatch();
   const reviews = useSelector((state) => state.reviews);
-  const reviewArr = Object.values(reviews);
   const dateSetter = (date) => {
     const dateParts = Date(date).split(" ");
     return `${dateParts[1]} ${dateParts[2]} ${dateParts[3]} ${dateParts[4]}`;
@@ -16,10 +15,9 @@ const ReviewDetail = ({ spotId, spot }) => {
     return new Date(b.createdAt) - new Date(a.createdAt);
   };
   const sortedReviews = Object.values(reviews).sort(dateComparison);
-  console.log(
-    "🚀 ~ file: index.js:19 ~ ReviewDetail ~ sortedReviews:",
-    sortedReviews
-  );
+  useEffect(() => {
+    dispatch(allTheReviews(spotId));
+  }, [dispatch, spotId]);
 
   let reviewGrid;
   if (spot?.numReviews > 1) {
@@ -30,8 +28,18 @@ const ReviewDetail = ({ spotId, spot }) => {
     reviewGrid = null;
   }
   let reviewsGuide;
-  if (sortedReviews?.length > 0) {
-    reviewsGuide = sortedReviews.map((review) => (
+
+  if (!reviews || !sortedReviews[0]) {
+    console.log("DID WE MAKE IT");
+    reviewsGuide = (
+      <div>
+        <h4>Be the first to post a Review</h4>
+      </div>
+    );
+  } else {
+    // if (sortedReviews[0] !== null && sortedReviews.length > 0) {
+
+    reviewsGuide = sortedReviews?.map((review) => (
       <div>
         <h4>
           {review.User.firstName} {review.User.lastName}
@@ -40,16 +48,19 @@ const ReviewDetail = ({ spotId, spot }) => {
         <p>{review.review}</p>
       </div>
     ));
-  } else {
-    reviewsGuide = (
-      <div>
-        <h4>Be the first to post a Review</h4>
-      </div>
-    );
+    // }
+    // else {
+    //   reviewsGuide = (
+    //     <div>
+    //       <h4>Be the first to post a Review</h4>
+    //     </div>
+    //   );
+    // }
   }
-  useEffect(() => {
-    dispatch(allTheReviews(spotId));
-  }, [dispatch, spotId]);
+  console.log(
+    "🚀 ~ file: index.js:31 ~ ReviewDetail ~ reviewsGuide:",
+    reviewsGuide
+  );
 
   return (
     <>
