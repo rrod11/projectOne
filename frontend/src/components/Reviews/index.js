@@ -37,8 +37,6 @@ const ReviewDetail = ({ spotId, spot }) => {
       </div>
     );
   } else {
-    // if (sortedReviews[0] !== null && sortedReviews.length > 0) {
-
     reviewsGuide = sortedReviews?.map((review) => (
       <div>
         <h4>
@@ -48,14 +46,6 @@ const ReviewDetail = ({ spotId, spot }) => {
         <p>{review.review}</p>
       </div>
     ));
-    // }
-    // else {
-    //   reviewsGuide = (
-    //     <div>
-    //       <h4>Be the first to post a Review</h4>
-    //     </div>
-    //   );
-    // }
   }
   console.log(
     "🚀 ~ file: index.js:31 ~ ReviewDetail ~ reviewsGuide:",
