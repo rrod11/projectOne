@@ -18,6 +18,7 @@ const getSpot = (spotId) => {
 export const allTheSpots = () => async (dispatch) => {
   const response = await csrfFetch("/api/spots");
   const spots = await response.json();
+  console.log("🚀 ~ file: spots.js:21 ~ allTheSpots ~ spots:", spots);
   dispatch(allSpots(spots));
   return spots;
 };

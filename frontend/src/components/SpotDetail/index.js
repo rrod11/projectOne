@@ -2,22 +2,17 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import { oneSpot } from "../../store/spots";
+import ReviewDetail from "../Reviews";
 
 const SpotDetail = () => {
   const { spotId } = useParams();
   const spot = useSelector((state) => state.spots);
 
   const dispatch = useDispatch();
-  console.log("🚀 ~ file: index.js:7 ~ SpotDetail ~ spotId:", spotId);
-  console.log("🚀 ~ file: index.js:8 ~ SpotDetail ~ spot:", spot);
-  console.log(
-    "🚀 ~ file: index.js:8 ~ SpotDetail ~ spotIMAGES:",
-    spot.SpotImages
-  );
 
   useEffect(() => {
     dispatch(oneSpot(spotId));
-  }, [dispatch]);
+  }, [dispatch, spotId]);
   if (!spot.Owner) return null;
 
   if (spot.SpotImages.length < 5) {
@@ -28,6 +23,14 @@ const SpotDetail = () => {
       };
       spot.SpotImages.push(img);
     }
+  }
+  let reviews;
+  if (spot.numReviews > 1) {
+    reviews = <span>{`${spot.numReviews} Reviews`}</span>;
+  } else if (spot.numReviews == 1) {
+    reviews = <span>{`${spot.numReviews} Review`}</span>;
+  } else {
+    reviews = null;
   }
   function comingSoon() {
     alert("Feature coming soon");
@@ -42,7 +45,7 @@ const SpotDetail = () => {
 
       {spot?.SpotImages?.map(({ id, url }) => (
         <div className="spot-detail-images">
-          <img src={url} key={id}></img>
+          <img src={url} key={id} alt={`${id} visual`}></img>
         </div>
       ))}
       <h4>
@@ -53,7 +56,7 @@ const SpotDetail = () => {
         className="callout"
         style={{
           border: "2px solid black",
-          maxWidth: "300px",
+          maxWidth: "400px",
           width: "fit-content",
           padding: "30px",
           display: "flex",
@@ -61,14 +64,42 @@ const SpotDetail = () => {
           flexDirection: "column",
         }}
       >
-        <span>${spot.price}/night</span>
+        <div
+          className="detail-review"
+          style={{
+            width: "100%",
+
+            display: "flex",
+            justifyContent: "space-between",
+          }}
+        >
+          <span>${spot.price}/night</span>
+          <span>
+            <i className="fa-solid fa-star"></i>
+            {spot.avgRating ? (
+              <span>{parseFloat(`${spot.avgRating}`).toFixed(2)}</span>
+            ) : (
+              <span>New</span>
+            )}
+          </span>
+          {spot.numReviews > 0 ? (
+            <i class="fa-solid fa-circle  fa-2xs" style={{ zoom: ".25" }}></i>
+          ) : null}
+          {/* {spot.numReviews > 1 ? (
+            <span>{spot.numReviews} Reviews</span>
+          ) : (
+            <span>{spot.numReviews} Review</span>
+          )} */}
+          {reviews}
+        </div>
         <button
-          style={{ backgroundColor: "red", maxWidth: "100%", width: "200px" }}
+          style={{ backgroundColor: "red", maxWidth: "100%", width: "300px" }}
           onClick={comingSoon}
         >
           Reserve
         </button>
       </div>
+      <ReviewDetail spotId={spotId} spot={spot} />
     </>
   );
 };

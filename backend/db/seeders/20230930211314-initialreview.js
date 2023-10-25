@@ -59,8 +59,16 @@ module.exports = {
         {
           spotId: 3,
           userId: 2,
-          review: "quiet neighborhood with a ton of private land couldnt even see the neighbors house",
+          review:
+            "quiet neighborhood with a ton of private land couldnt even see the neighbors house",
           stars: 5,
+        },
+        {
+          spotId: 4,
+          userId: 2,
+          review:
+            "Mad snooty doesnt make sense how everyone was looking down they nose at me. I will say the crib was nice af tho",
+          stars: 4,
         },
       ],
       { validate: true }
