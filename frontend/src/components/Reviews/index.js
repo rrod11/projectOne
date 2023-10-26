@@ -30,7 +30,6 @@ const ReviewDetail = ({ spotId, spot }) => {
   let reviewsGuide;
 
   if (!reviews || !sortedReviews[0]) {
-    console.log("DID WE MAKE IT");
     reviewsGuide = (
       <div>
         <h4>Be the first to post a Review</h4>
@@ -47,10 +46,6 @@ const ReviewDetail = ({ spotId, spot }) => {
       </div>
     ));
   }
-  console.log(
-    "🚀 ~ file: index.js:31 ~ ReviewDetail ~ reviewsGuide:",
-    reviewsGuide
-  );
 
   return (
     <>

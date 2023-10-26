@@ -1,16 +1,35 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom/cjs/react-router-dom.min";
+import { NavLink, useParams } from "react-router-dom/cjs/react-router-dom.min";
 import { oneSpot } from "../../store/spots";
 import ReviewDetail from "../Reviews";
 
 const SpotDetail = () => {
   const { spotId } = useParams();
   const spot = useSelector((state) => state.spots);
-  console.log("🚀 ~ file: index.js:10 ~ SpotDetail ~ spot:", spot);
-
   const dispatch = useDispatch();
+  const sessionUser = useSelector((state) => state.session.user);
+  const reviewsObj = useSelector((state) => state.reviews);
+  const reviewsArr = Object.values(reviewsObj);
+  console.log(
+    "🚀 ~ file: index.js:13 ~ SpotDetail ~ reviewsArray:",
+    reviewsArr
+  );
+  // console.log("🚀 ~ file: index.js:10 ~ SpotDetail ~ spot:", spot);
+  // console.log(
+  //   "🚀 ~ file: index.js:11 ~ SpotDetail ~ sessionUser:",
+  //   sessionUser
+  // );
+  // let reviewBoolean;
 
+  // reviewBoolean = reviewsArr?.every(
+  //   (review) => review.userId == sessionUser.id
+  // );
+
+  // console.log(
+  //   "🚀 ~ file: index.js:20 ~ SpotDetail ~ reviewBoolean:",
+  //   reviewBoolean
+  // );
   useEffect(() => {
     dispatch(oneSpot(spotId));
   }, [dispatch, spotId]);
@@ -36,7 +55,8 @@ const SpotDetail = () => {
   function comingSoon() {
     alert("Feature coming soon");
   }
-
+  let showReviewButton = false;
+  if (sessionUser.id !== spot.ownerId) showReviewButton = true;
   return !spot?.Owner ? null : (
     <>
       <h1>{spot.name}</h1>
@@ -86,11 +106,6 @@ const SpotDetail = () => {
           {spot.numReviews > 0 ? (
             <i class="fa-solid fa-circle  fa-2xs" style={{ zoom: ".25" }}></i>
           ) : null}
-          {/* {spot.numReviews > 1 ? (
-            <span>{spot.numReviews} Reviews</span>
-          ) : (
-            <span>{spot.numReviews} Review</span>
-          )} */}
           {reviews}
         </div>
         <button
@@ -100,6 +115,15 @@ const SpotDetail = () => {
           Reserve
         </button>
       </div>
+      {showReviewButton ? (
+        <NavLink to="/reviews/new">
+          <button
+            style={{ backgroundColor: "red", maxWidth: "100%", width: "300px" }}
+          >
+            Post A Review
+          </button>
+        </NavLink>
+      ) : null}
       <ReviewDetail spotId={spotId} spot={spot} />
     </>
   );

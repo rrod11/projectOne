@@ -55,10 +55,6 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 function Navigation({ isLoaded }) {
   const history = useHistory();
   const sessionUser = useSelector((state) => state.session.user);
-  console.log(
-    "🚀 ~ file: index.js:58 ~ Navigation ~ sessionUser:",
-    sessionUser
-  );
 
   function redirection() {
     history.push("/");

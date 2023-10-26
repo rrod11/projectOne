@@ -12,7 +12,6 @@ const allReviews = (payload) => {
 export const allTheReviews = (spotId) => async (dispatch) => {
   const response = await csrfFetch(`/api/spots/${spotId}/reviews/`);
   const reviews = await response.json();
-  // console.log("🚀 ~ file: reviews.js:15 ~ allTheReviews ~ reviews:", reviews);
   dispatch(allReviews(reviews.Reviews));
   return reviews.Reviews;
 };

@@ -25,7 +25,6 @@ const createSpot = (payload) => {
 export const allTheSpots = () => async (dispatch) => {
   const response = await csrfFetch("/api/spots");
   const spots = await response.json();
-  console.log("🚀 ~ file: spots.js:21 ~ allTheSpots ~ spots:", spots);
   dispatch(allSpots(spots));
   return spots;
 };
@@ -36,7 +35,6 @@ export const oneSpot = (spotId) => async (dispatch) => {
   return spot;
 };
 export const createASpot = (payload, images) => async (dispatch) => {
-  console.log("🚀 ~ file: spots.js:39 ~ createASpot ~ images:", images);
   const response = await csrfFetch("/api/spots", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -44,7 +42,6 @@ export const createASpot = (payload, images) => async (dispatch) => {
   });
   if (response.ok) {
     const data = await response.json();
-    console.log("🚀 ~ file: spots.js:58 ~ createASpot ~ data:", data);
     dispatch(createSpot(data));
     if (images.length === 1) {
       await csrfFetch(`/api/spots/${data.id}/images`, {
