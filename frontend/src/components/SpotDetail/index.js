@@ -14,7 +14,7 @@ const SpotDetail = () => {
 
   useEffect(() => {
     dispatch(oneSpot(spotId));
-  }, [dispatch, spotId]);
+  }, [dispatch, spotId, reviewsArr.length]);
   if (!spot.Owner) return null;
 
   if (spot?.SpotImages.length < 5) {
@@ -27,10 +27,10 @@ const SpotDetail = () => {
     }
   }
   let reviews;
-  if (spot.numReviews > 1) {
-    reviews = <span>{`${spot.numReviews} Reviews`}</span>;
-  } else if (spot.numReviews == 1) {
-    reviews = <span>{`${spot.numReviews} Review`}</span>;
+  if (reviewsArr.length > 1) {
+    reviews = <span>{`${reviewsArr.length} Reviews`}</span>;
+  } else if (reviewsArr.length == 1) {
+    reviews = <span>{`${reviewsArr.length} Review`}</span>;
   } else {
     reviews = null;
   }
@@ -84,7 +84,7 @@ const SpotDetail = () => {
               <span>New</span>
             )}
           </span>
-          {spot.numReviews > 0 ? (
+          {reviewsArr.length > 0 ? (
             <i class="fa-solid fa-circle  fa-2xs" style={{ zoom: ".25" }}></i>
           ) : null}
           {reviews}

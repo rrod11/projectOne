@@ -19,28 +19,38 @@ const createReview = (payload) => {
 export const allTheReviews = (spotId) => async (dispatch) => {
   const response = await csrfFetch(`/api/spots/${spotId}/reviews/`);
   const reviews = await response.json();
-  dispatch(allReviews(reviews.Reviews));
-  return reviews.Reviews;
+  console.log("🚀 ~ file: reviews.js:22 ~ allTheReviews ~ reviews:", reviews);
+  dispatch(allReviews(reviews));
+  return reviews;
 };
-export const createAReview = (spotId, payload) => async (dispatch) => {
+export const createAReview = (spotId, payload, user) => async (dispatch) => {
   const response = await csrfFetch(`/api/spots/${spotId}/reviews`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ ...payload }),
   });
   const review = await response.json();
+  review.User = user;
+
   dispatch(createReview(review));
   return review;
 };
-const initialState = { spots: null };
+const initialState = {};
 const reviewReducer = (state = initialState, action) => {
   let newState;
   switch (action.type) {
-    case ALL_REVIEWS:
-      newState = { ...action.payload };
-      return newState;
+    case ALL_REVIEWS: {
+      const returnData = {};
+      // newState = { ...action.payload };
+      action.payload.Reviews.forEach((review) => {
+        returnData[review.id] = review;
+      });
+      return returnData;
+    }
+
     case CREATE_REVIEW:
-      newState = { ...state, ...action.payload };
+      newState = { ...state };
+      newState[action.payload.id] = action.payload;
       return newState;
     default:
       return state;

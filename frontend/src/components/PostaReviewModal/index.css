@@ -1,30 +1,15 @@
-/* #rating {
+/* .rating {
   font-size: 0;
 }
-#rating span {
+.rating span {
   font-size: 40px;
 }
-#rating span::before {
+.rating span::before {
   content: "☆";
 }
-#rating span.active::before {
-  content: "★";
+.rating span.active::before {
+  className: "fa-solid fa-star";
 }
-#rating span:hover {
+.rating span:hover {
   cursor: pointer;
-} */
-/* .rating {
-  unicode-bidi: bidi-override;
-  direction: rtl;
-  float: left;
-}
-.rating > span {
-  display: inline-block;
-  position: relative;
-  width: 1.1em;
-}
-.rating > span:hover:before,
-.rating > span:hover ~ span:before {
-  content: "\2605";
-  position: absolute;
 } */

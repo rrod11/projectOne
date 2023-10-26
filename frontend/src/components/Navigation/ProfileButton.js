@@ -60,7 +60,7 @@ import OpenModalButton from "../OpenModalButton";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
 import "./Navigation.css";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { NavLink, useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 function ProfileButton({ user }) {
   const history = useHistory();
@@ -111,6 +111,11 @@ function ProfileButton({ user }) {
             <li>{user.username}</li>
             <li>Hello, {user.firstName}</li>
             <li>{user.email}</li>
+            <li>
+              <NavLink to="/current">
+                <button>Manage Spots</button>
+              </NavLink>
+            </li>
             <li>
               <button onClick={logout}>Log Out</button>
             </li>

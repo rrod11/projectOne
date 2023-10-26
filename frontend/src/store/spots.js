@@ -3,9 +3,17 @@ import { csrfFetch } from "./csrf";
 const ALL_SPOTS = "spots/allSpots";
 const GET_SPOT = "spots/getSpot";
 const CREATE_SPOT = "spots/createSpot";
+const CURRENT_USER_SPOTS = "spots/currentUserSpots";
+const UPDATE_SPOT = "spots/updateSpot";
 const allSpots = (payload) => {
   return {
     type: ALL_SPOTS,
+    payload,
+  };
+};
+const currentUserSpots = (payload) => {
+  return {
+    type: CURRENT_USER_SPOTS,
     payload,
   };
 };
@@ -21,11 +29,24 @@ const createSpot = (payload) => {
     payload,
   };
 };
+const updateSpot = (payload) => {
+  return {
+    type: CREATE_SPOT,
+    payload,
+  };
+};
 
 export const allTheSpots = () => async (dispatch) => {
   const response = await csrfFetch("/api/spots");
   const spots = await response.json();
   dispatch(allSpots(spots));
+  return spots;
+};
+export const getCurrentUserSpots = (user) => async (dispatch) => {
+  const response = await csrfFetch("/api/current");
+  const spots = await response.json(user);
+  dispatch(currentUserSpots(spots));
+  console.log("🚀 ~ file: spots.js:43 ~ getCurrentUserSpots ~ spots:", spots);
   return spots;
 };
 export const oneSpot = (spotId) => async (dispatch) => {
@@ -72,6 +93,44 @@ export const createASpot = (payload, images) => async (dispatch) => {
     return errors;
   }
 };
+export const updateASpot = (payload, images) => async (dispatch) => {
+  const response = await csrfFetch("/api/spots", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ ...payload }),
+  });
+  if (response.ok) {
+    const data = await response.json();
+    dispatch(updateSpot(data));
+    if (images.length === 1) {
+      await csrfFetch(`/api/spots/${data.id}/images`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          url: images[0],
+          preview: false,
+        }),
+      });
+      return data;
+    }
+    if (images.length > 1) {
+      images.map(async (img) => {
+        await csrfFetch(`/api/spots/${data.id}/images`, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            url: img,
+            preview: false,
+          }),
+        });
+      });
+      return data;
+    }
+  } else {
+    const errors = await response.json();
+    return errors;
+  }
+};
 const initialState = { spots: null };
 const spotReducer = (state = initialState, action) => {
   let newState;
@@ -84,6 +143,9 @@ const spotReducer = (state = initialState, action) => {
       return newState;
     case CREATE_SPOT:
       newState = { ...state, [action.payload.id]: action.payload };
+      return newState;
+    case CURRENT_USER_SPOTS:
+      newState = { ...action.payload };
       return newState;
     default:
       return state;

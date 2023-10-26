@@ -6,6 +6,7 @@ import "./landingPage.css";
 const LandingPage = () => {
   const dispatch = useDispatch();
   const spots = useSelector((state) => state.spots.Spots);
+  console.log("🚀 ~ file: index.js:9 ~ LandingPage ~ spots:", spots);
   useEffect(() => {
     dispatch(allTheSpots());
   }, [dispatch]);

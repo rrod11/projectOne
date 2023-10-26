@@ -8,6 +8,7 @@ import PostAReviewFormModal from "../PostaReviewModal";
 const ReviewDetail = ({ spotId, spot, user }) => {
   const dispatch = useDispatch();
   const reviews = useSelector((state) => state.reviews);
+  console.log("🚀 ~ file: index.js:11 ~ ReviewDetail ~ reviews:", reviews);
   const sessionUser = useSelector((state) => state.session.user);
   const dateSetter = (date) => {
     const dateParts = Date(date).split(" ");
@@ -17,6 +18,10 @@ const ReviewDetail = ({ spotId, spot, user }) => {
     return new Date(b.createdAt) - new Date(a.createdAt);
   };
   const sortedReviews = Object.values(reviews).sort(dateComparison);
+  console.log(
+    "🚀 ~ file: index.js:20 ~ ReviewDetail ~ sortedReviews:",
+    sortedReviews
+  );
   useEffect(() => {
     dispatch(allTheReviews(spotId));
   }, [dispatch, spotId]);
@@ -41,7 +46,7 @@ const ReviewDetail = ({ spotId, spot, user }) => {
     reviewsGuide = sortedReviews?.map((review) => (
       <div>
         <h4>
-          {review.User.firstName} {review.User.lastName}
+          {review?.User.firstName} {review?.User.lastName}
         </h4>
         <h5>{dateSetter(review.createdAt)}</h5>
         <p>{review.review}</p>
