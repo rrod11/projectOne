@@ -1,12 +1,14 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
+import OpenModalButton from "../OpenModalButton";
 import { allTheReviews } from "../../store/reviews";
-import { useParams } from "react-router-dom/cjs/react-router-dom.min";
+import { NavLink, useParams } from "react-router-dom/cjs/react-router-dom.min";
+import PostAReviewFormModal from "../PostaReviewModal";
 
-const ReviewDetail = ({ spotId, spot }) => {
+const ReviewDetail = ({ spotId, spot, user }) => {
   const dispatch = useDispatch();
   const reviews = useSelector((state) => state.reviews);
+  const sessionUser = useSelector((state) => state.session.user);
   const dateSetter = (date) => {
     const dateParts = Date(date).split(" ");
     return `${dateParts[1]} ${dateParts[2]} ${dateParts[3]} ${dateParts[4]}`;
@@ -46,6 +48,27 @@ const ReviewDetail = ({ spotId, spot }) => {
       </div>
     ));
   }
+  const showReviewButton = () => {
+    const userReview = sortedReviews?.find(
+      (review) => review?.userId === user.id
+    );
+    if (
+      (userReview && userReview !== undefined) ||
+      user?.id === spot?.ownerId
+    ) {
+      return null;
+    } else {
+      return (
+        <OpenModalButton
+          buttonText="Post a Review"
+          style={{ backgroundColor: "red", maxWidth: "100%", width: "300px" }}
+          modalComponent={
+            <PostAReviewFormModal spotId={spotId} itemText="Post A Review" />
+          }
+        />
+      );
+    }
+  };
 
   return (
     <>
@@ -57,6 +80,8 @@ const ReviewDetail = ({ spotId, spot }) => {
           <span>New</span>
         )}
       </span>
+      {user && showReviewButton()}
+
       {reviewGrid}
       {reviewsGuide}
     </>

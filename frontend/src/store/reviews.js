@@ -1,10 +1,17 @@
 import { csrfFetch } from "./csrf";
 
 const ALL_REVIEWS = "reviews/allReviews";
+const CREATE_REVIEW = "reviews/createAReview";
 
 const allReviews = (payload) => {
   return {
     type: ALL_REVIEWS,
+    payload,
+  };
+};
+const createReview = (payload) => {
+  return {
+    type: CREATE_REVIEW,
     payload,
   };
 };
@@ -15,12 +22,16 @@ export const allTheReviews = (spotId) => async (dispatch) => {
   dispatch(allReviews(reviews.Reviews));
   return reviews.Reviews;
 };
-// export const oneSpot = (spotId) => async (dispatch) => {
-//   const response = await csrfFetch(`/api/spots/${spotId}`);
-//   const spot = await response.json();
-//   dispatch(getSpot(spot));
-//   return spot;
-// };
+export const createAReview = (spotId, payload) => async (dispatch) => {
+  const response = await csrfFetch(`/api/spots/${spotId}/reviews`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ ...payload }),
+  });
+  const review = await response.json();
+  dispatch(createReview(review));
+  return review;
+};
 const initialState = { spots: null };
 const reviewReducer = (state = initialState, action) => {
   let newState;
@@ -28,9 +39,9 @@ const reviewReducer = (state = initialState, action) => {
     case ALL_REVIEWS:
       newState = { ...action.payload };
       return newState;
-    // case GET_SPOT:
-    //   newState = { ...action.spotId };
-    //   return newState;
+    case CREATE_REVIEW:
+      newState = { ...state, ...action.payload };
+      return newState;
     default:
       return state;
   }

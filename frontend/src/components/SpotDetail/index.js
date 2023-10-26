@@ -11,25 +11,7 @@ const SpotDetail = () => {
   const sessionUser = useSelector((state) => state.session.user);
   const reviewsObj = useSelector((state) => state.reviews);
   const reviewsArr = Object.values(reviewsObj);
-  console.log(
-    "🚀 ~ file: index.js:13 ~ SpotDetail ~ reviewsArray:",
-    reviewsArr
-  );
-  // console.log("🚀 ~ file: index.js:10 ~ SpotDetail ~ spot:", spot);
-  // console.log(
-  //   "🚀 ~ file: index.js:11 ~ SpotDetail ~ sessionUser:",
-  //   sessionUser
-  // );
-  // let reviewBoolean;
 
-  // reviewBoolean = reviewsArr?.every(
-  //   (review) => review.userId == sessionUser.id
-  // );
-
-  // console.log(
-  //   "🚀 ~ file: index.js:20 ~ SpotDetail ~ reviewBoolean:",
-  //   reviewBoolean
-  // );
   useEffect(() => {
     dispatch(oneSpot(spotId));
   }, [dispatch, spotId]);
@@ -55,8 +37,7 @@ const SpotDetail = () => {
   function comingSoon() {
     alert("Feature coming soon");
   }
-  let showReviewButton = false;
-  if (sessionUser.id !== spot.ownerId) showReviewButton = true;
+
   return !spot?.Owner ? null : (
     <>
       <h1>{spot.name}</h1>
@@ -115,16 +96,8 @@ const SpotDetail = () => {
           Reserve
         </button>
       </div>
-      {showReviewButton ? (
-        <NavLink to="/reviews/new">
-          <button
-            style={{ backgroundColor: "red", maxWidth: "100%", width: "300px" }}
-          >
-            Post A Review
-          </button>
-        </NavLink>
-      ) : null}
-      <ReviewDetail spotId={spotId} spot={spot} />
+
+      <ReviewDetail spotId={spotId} spot={spot} user={sessionUser} />
     </>
   );
 };
