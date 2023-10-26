@@ -24,7 +24,14 @@ function CreateASpot({ formType = "Create A Spot" }) {
   const [image5, setImage5] = useState("");
   const [errors, setErrors] = useState({});
   console.log("🚀 ~ file: index.js:10 ~ CreateASpot ~ user:", user);
-
+  const imgs = [];
+  if (image1) {
+    imgs.push(image1);
+    if (image2) imgs.push(image2);
+    if (image3) imgs.push(image3);
+    if (image4) imgs.push(image4);
+    if (image5) imgs.push(image5);
+  }
   const spotObj = {
     ownerId: user.id,
     country,
@@ -38,16 +45,15 @@ function CreateASpot({ formType = "Create A Spot" }) {
     price,
     previewImage: image1,
   };
-  console.log("🚀 ~ file: index.js:38 ~ CreateASpot ~ spotObj:", spotObj);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (errors && !Object.values(errors).length) {
       setLatitude(80.75);
       setLongitude(50.85);
-      const res = await dispatch(createASpot(spotObj, image1));
+      const res = await dispatch(createASpot(spotObj, imgs));
       console.log("🚀 ~ file: index.js:48 ~ handleSubmit ~ res:", res);
-      history.push(`/spots/${res.payload.id}`);
+      history.push(`/spots/${res.id}`);
     } else {
       console.log("ERRORS PRESENT");
     }
@@ -238,16 +244,6 @@ function CreateASpot({ formType = "Create A Spot" }) {
 
         <button
           type="submit"
-          //   disabled={
-          //     errors.country ||
-          //     errors.address ||
-          //     errors.city ||
-          //     errors.state ||
-          //     errors.description ||
-          //     errors.title ||
-          //     errors.price ||
-          //     errors.image1
-          //   }
           onClick={checkCredentials}
           className="loginButton"
         >
@@ -257,5 +253,5 @@ function CreateASpot({ formType = "Create A Spot" }) {
     </>
   );
 }
-
+// "proxy": "http://localhost:8000",
 export default CreateASpot;

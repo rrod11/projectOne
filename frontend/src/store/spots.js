@@ -36,18 +36,7 @@ export const oneSpot = (spotId) => async (dispatch) => {
   return spot;
 };
 export const createASpot = (payload, images) => async (dispatch) => {
-  // const {
-  //   country,
-  //   address,
-  //   city,
-  //   state,
-  //   description,
-  //   name,
-  //   price,
-  //   previewImage,
-  //   lat,
-
-  // } = payload;
+  console.log("🚀 ~ file: spots.js:39 ~ createASpot ~ images:", images);
   const response = await csrfFetch("/api/spots", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -57,18 +46,32 @@ export const createASpot = (payload, images) => async (dispatch) => {
     const data = await response.json();
     console.log("🚀 ~ file: spots.js:58 ~ createASpot ~ data:", data);
     dispatch(createSpot(data));
-    for (let i = 0; i < images.length; i++) {
-      await csrfFetch(`/api/spots/${data.id}`, {
+    if (images.length === 1) {
+      await csrfFetch(`/api/spots/${data.id}/images`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: images,
+        body: JSON.stringify({
+          url: images[0],
+          preview: false,
+        }),
       });
+      return data;
     }
-    console.log("🚀 ~ file: spots.js:67 ~ createASpot ~ spot:", data);
-    return data;
+    if (images.length > 1) {
+      images.map(async (img) => {
+        await csrfFetch(`/api/spots/${data.id}/images`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            url: img,
+            preview: false,
+          }),
+        });
+      });
+      return data;
+    }
   } else {
     const errors = await response.json();
-    console.log("🚀 ~ file: spots.js:70 ~ createASpot ~ errors:", errors);
     return errors;
   }
 };

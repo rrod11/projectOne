@@ -7,6 +7,7 @@ import ReviewDetail from "../Reviews";
 const SpotDetail = () => {
   const { spotId } = useParams();
   const spot = useSelector((state) => state.spots);
+  console.log("🚀 ~ file: index.js:10 ~ SpotDetail ~ spot:", spot);
 
   const dispatch = useDispatch();
 
@@ -15,7 +16,7 @@ const SpotDetail = () => {
   }, [dispatch, spotId]);
   if (!spot.Owner) return null;
 
-  if (spot.SpotImages.length < 5) {
+  if (spot?.SpotImages.length < 5) {
     for (let i = spot.SpotImages.length; i < 5; i++) {
       const img = {
         id: i,
