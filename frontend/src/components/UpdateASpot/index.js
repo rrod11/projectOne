@@ -11,19 +11,24 @@ function UpdateASpot({ formType = "Update A Spot" }) {
   const dispatch = useDispatch();
   const { spotId } = useParams();
   const user = useSelector((state) => state.session.user);
-  const spots = useSelector((state) => state.spots.Spots);
-  const spot = spots.find((spot) => spot.id == spotId);
+  const spots = useSelector((state) => state.spots);
+  const targets = Object.values(spots);
+  console.log("🚀 ~ file: index.js:16 ~ UpdateASpot ~ targets:", targets);
+  const spot = targets.find((target) => target?.id == spotId);
+  const userTruth = user?.id == spot?.ownerId;
+  console.log("🚀 ~ file: index.js:17 ~ UpdateASpot ~ userTruth:", userTruth);
+  console.log("🚀 ~ file: index.js:16 ~ UpdateASpot ~ spot:", spot);
   const stock = {
-    city: spot.city,
-    address: spot.address,
-    country: spot.country,
-    description: spot.description,
-    name: spot.name,
-    previewImage: spot.previewImage,
-    price: spot.price,
-    state: spot.state,
-    lat: spot.lat,
-    lng: spot.lng,
+    city: spot?.city,
+    address: spot?.address,
+    country: spot?.country,
+    description: spot?.description,
+    name: spot?.name,
+    previewImage: spot?.previewImage,
+    price: spot?.price,
+    state: spot?.state,
+    lat: spot?.lat,
+    lng: spot?.lng,
   };
 
   const history = useHistory();
@@ -64,6 +69,7 @@ function UpdateASpot({ formType = "Update A Spot" }) {
     price,
     previewImage: image1,
   };
+  // const authorized = spot?.id == user.id
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -85,7 +91,7 @@ function UpdateASpot({ formType = "Update A Spot" }) {
 
     setErrors(errObj);
   }
-  return (
+  return !userTruth ? null : (
     <>
       <h1>Update Your Spot</h1>
       <form onSubmit={handleSubmit}>

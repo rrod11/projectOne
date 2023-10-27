@@ -5,26 +5,26 @@ import { useEffect } from "react";
 import "./landingPage.css";
 const LandingPage = () => {
   const dispatch = useDispatch();
-  const spots = useSelector((state) => state.spots.Spots);
+  const spots = useSelector((state) => state.spots);
+  const spotArr = Object.values(spots);
+  console.log("🚀 ~ file: index.js:10 ~ LandingPage ~ SpotArr:", spotArr);
   console.log("🚀 ~ file: index.js:9 ~ LandingPage ~ spots:", spots);
   useEffect(() => {
     dispatch(allTheSpots());
   }, [dispatch]);
 
-  // function myFunction(e) {
-  //   let x = e.clientX;
-  //   let y = e.clientY;
-  //   // document.getElementByClassName("tooltiptext").style.left = `${x} + "px"`;
-  //   // document.getElementByClassName("tooltiptext").style.top = `${y} + "px"`;
-  // }
-  return !spots ? null : (
+  return spotArr[0] == null ? null : (
     <div className="LPImages">
-      {spots?.map(
+      {spotArr?.map(
         ({ id, name, city, state, previewImage, avgRating, price }) => (
           <NavLink to={`/spots/${id}`} key={id}>
             <div key={id} className="imageDiv">
               <div className="tooltip" title={name}>
-                <img src={previewImage} className="actualImages" />
+                <img
+                  src={previewImage}
+                  className="actualImages"
+                  alt="id in case"
+                />
                 <p className="tooltiptext">{name}</p>
               </div>
               <div className="houseInfo">

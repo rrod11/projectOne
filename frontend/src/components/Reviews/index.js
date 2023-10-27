@@ -4,12 +4,17 @@ import OpenModalButton from "../OpenModalButton";
 import { allTheReviews } from "../../store/reviews";
 import { NavLink, useParams } from "react-router-dom/cjs/react-router-dom.min";
 import PostAReviewFormModal from "../PostaReviewModal";
+import DeleteAReviewModal from "../DeleteReview";
 
 const ReviewDetail = ({ spotId, spot, user }) => {
   const dispatch = useDispatch();
   const reviews = useSelector((state) => state.reviews);
   console.log("🚀 ~ file: index.js:11 ~ ReviewDetail ~ reviews:", reviews);
   const sessionUser = useSelector((state) => state.session.user);
+  console.log(
+    "🚀 ~ file: index.js:14 ~ ReviewDetail ~ sessionUser:",
+    sessionUser
+  );
   const dateSetter = (date) => {
     const dateParts = Date(date).split(" ");
     return `${dateParts[1]} ${dateParts[2]} ${dateParts[3]} ${dateParts[4]}`;
@@ -18,14 +23,10 @@ const ReviewDetail = ({ spotId, spot, user }) => {
     return new Date(b.createdAt) - new Date(a.createdAt);
   };
   const sortedReviews = Object.values(reviews).sort(dateComparison);
-  console.log(
-    "🚀 ~ file: index.js:20 ~ ReviewDetail ~ sortedReviews:",
-    sortedReviews
-  );
+
   useEffect(() => {
     dispatch(allTheReviews(spotId));
   }, [dispatch, spotId]);
-
   let reviewGrid;
   if (spot?.numReviews > 1) {
     reviewGrid = <span>{`${spot.numReviews} Reviews`}</span>;
@@ -43,15 +44,30 @@ const ReviewDetail = ({ spotId, spot, user }) => {
       </div>
     );
   } else {
-    reviewsGuide = sortedReviews?.map((review) => (
-      <div>
-        <h4>
-          {review?.User.firstName} {review?.User.lastName}
-        </h4>
-        <h5>{dateSetter(review.createdAt)}</h5>
-        <p>{review.review}</p>
-      </div>
-    ));
+    reviewsGuide = sortedReviews?.map((review) => {
+      const user = sessionUser.id == review.userId;
+      return (
+        <div>
+          <h4>
+            {review?.User.firstName} {review?.User.lastName}
+          </h4>
+          <h5>{dateSetter(review.createdAt)}</h5>
+          <p>{review.review}</p>
+          {user ? deleteReviewButton(review.id) : null}
+        </div>
+      );
+    });
+  }
+  function deleteReviewButton(reviewId) {
+    return (
+      <OpenModalButton
+        buttonText="Delete"
+        style={{ backgroundColor: "red", maxWidth: "100%", width: "300px" }}
+        modalComponent={
+          <DeleteAReviewModal reviewId={reviewId} itemText="Delete" />
+        }
+      />
+    );
   }
   const showReviewButton = () => {
     const userReview = sortedReviews?.find(

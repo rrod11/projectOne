@@ -58,9 +58,14 @@ function CreateASpot({ formType = "Create A Spot" }) {
       console.log("ERRORS PRESENT");
     }
   };
-  //   useEffect(() => {
-  //     dispatch(createASpot());
-  //   }, [dispatch]);
+  function validImage(url) {
+    return /\.(jpg|jpeg|png|webp|avif|gif)$/.test(url);
+  }
+  const returnedResult = validImage(image1);
+  console.log(
+    "🚀 ~ file: index.js:65 ~ CreateASpot ~ returnedResult:",
+    returnedResult
+  );
   function checkCredentials() {
     const errObj = {};
     if (!country) errObj.country = "Country is required";
@@ -71,21 +76,10 @@ function CreateASpot({ formType = "Create A Spot" }) {
       errObj.description = "Description needs 30 or more characters";
     if (!title) errObj.name = "Name is required";
     if (isNaN(price) || price < 1) errObj.price = "Price per night is required";
-    // if (image1.endsWith(".jpg" || ".jpeg" || ".png"))
-    // errObj.image1 = "Preview Image must end with .jpg, .jpeg, or .png";
-    if (!image1 || image1) {
-      if (image1.endsWith(".jpg")) {
-        setErrors(errObj);
-      } else if (image1.endsWith(".jpeg")) {
-        setErrors(errObj);
-      } else if (image1.endsWith(".png")) {
-        setErrors(errObj);
-      } else {
-        errObj.image1 = "Preview Image must end with .jpg, .jpeg, or .png";
-      }
-    }
+    if (!validImage(image1))
+      errObj.image1 = "Preview Image must end with .jpg, .jpeg, or .png";
 
-    // setErrors(errObj);
+    setErrors(errObj);
   }
   return (
     <>

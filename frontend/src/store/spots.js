@@ -5,6 +5,7 @@ const GET_SPOT = "spots/getSpot";
 const CREATE_SPOT = "spots/createSpot";
 const CURRENT_USER_SPOTS = "spots/currentUserSpots";
 const UPDATE_SPOT = "spots/updateSpot";
+const DELETE_SPOT = "spots/deleteSpot";
 const allSpots = (payload) => {
   return {
     type: ALL_SPOTS,
@@ -35,6 +36,12 @@ const updateSpot = (payload) => {
     payload,
   };
 };
+const deleteSpot = (payload, spotId) => {
+  return {
+    type: DELETE_SPOT,
+    payload: spotId,
+  };
+};
 
 export const allTheSpots = () => async (dispatch) => {
   const response = await csrfFetch("/api/spots");
@@ -46,7 +53,6 @@ export const getCurrentUserSpots = (user) => async (dispatch) => {
   const response = await csrfFetch("/api/current");
   const spots = await response.json(user);
   dispatch(currentUserSpots(spots));
-  console.log("🚀 ~ file: spots.js:43 ~ getCurrentUserSpots ~ spots:", spots);
   return spots;
 };
 export const oneSpot = (spotId) => async (dispatch) => {
@@ -131,12 +137,34 @@ export const updateASpot = (payload, images, spotId) => async (dispatch) => {
     return errors;
   }
 };
+export const deleteASpot = (spotId) => async (dispatch) => {
+  const response = await csrfFetch(`/api/spots/${spotId}`, {
+    method: "DELETE",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(),
+  });
+  if (response.ok) {
+    const data = await response.json();
+    dispatch(deleteSpot(data, spotId));
+  } else {
+    const errors = await response.json();
+    return errors;
+  }
+};
 const initialState = { spots: null };
 const spotReducer = (state = initialState, action) => {
   let newState;
   switch (action.type) {
     case ALL_SPOTS:
-      newState = { ...action.payload };
+      {
+        const spotData = {};
+        action.payload.Spots.forEach((spot) => {
+          spotData[spot.id] = spot;
+        });
+        return spotData;
+      }
+
+      // newState = { ...action.payload };
       return newState;
     case GET_SPOT:
       newState = { ...action.spotId };
@@ -147,6 +175,15 @@ const spotReducer = (state = initialState, action) => {
     case CURRENT_USER_SPOTS:
       newState = { ...action.payload };
       return newState;
+    case DELETE_SPOT:
+      let deleteState;
+      console.log(
+        "🚀 ~ file: spots.js:174 ~ spotReducer ~ action.payload:",
+        action.payload
+      );
+      deleteState = { ...state };
+      delete deleteState[action.payload];
+      return deleteState;
     default:
       return state;
   }

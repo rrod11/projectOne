@@ -150,15 +150,7 @@ function PostAReviewFormModal({ spotId }) {
                 }
               ></i>
             </div>
-            {/* <span>
-              <input
-                type="text"
-                value={stars}
-                onChange={(e) => setStars(e.target.value)}
-              />
-            </span> */}
             <span>stars</span>
-            {/* "fa-solid fa-star" */}
           </div>
         </label>
         {errors.stars && <p className="errors">{errors.stars}</p>}
