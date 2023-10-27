@@ -27,7 +27,10 @@ const LandingPage = () => {
                 />
                 <p className="tooltiptext">{name}</p>
               </div>
-              <div className="houseInfo">
+              <div
+                className="houseInfo"
+                // style={{display: "flex", }}
+              >
                 <p>
                   {city}, {state}
                 </p>
