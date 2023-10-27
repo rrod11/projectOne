@@ -81,7 +81,7 @@ function CreateASpot({ formType = "Create A Spot" }) {
       (longitude && longitude < -180)
     )
       errObj.longitude = "Longitude must be a number between -180 and 180";
-    if (isNaN(price) || price < 1) errObj.price = "Price per night is required";
+    if (!price || price < 1) errObj.price = "Price per night is required";
     if (!validImage(image1))
       errObj.image1 = "Preview Image must end with .jpg, .jpeg, or .png";
 

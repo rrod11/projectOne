@@ -88,7 +88,20 @@ function UpdateASpot({ formType = "Update A Spot" }) {
     if (description.length < 30)
       errObj.description = "Description needs 30 or more characters";
     if (!title) errObj.name = "Name is required";
-    if (isNaN(price) || price < 1) errObj.price = "Price per night is required";
+    if (
+      (latitude && isNaN(latitude)) ||
+      (latitude && latitude > 90) ||
+      (latitude && latitude < -90)
+    )
+      errObj.latitude = "Latitude must be a number between -90 and 90";
+    if (
+      (longitude && isNaN(longitude)) ||
+      (longitude && longitude > 180) ||
+      (longitude && longitude < -180)
+    )
+      errObj.longitude = "Longitude must be a number between -180 and 180";
+    if (!price) errObj.price = "Price per night is required";
+    if (price < 1) errObj.price = "Price cannot be less than $1";
 
     setErrors(errObj);
   }
@@ -202,6 +215,7 @@ function UpdateASpot({ formType = "Update A Spot" }) {
             onChange={(e) => setLatitude(e.target.value)}
           />
         </label>
+        {errors.latitude && <p className="errors">{errors.latitude}</p>}
 
         <label>
           Longitude
@@ -212,6 +226,7 @@ function UpdateASpot({ formType = "Update A Spot" }) {
             onChange={(e) => setLongitude(e.target.value)}
           />
         </label>
+        {errors.longitude && <p className="errors">{errors.longitude}</p>}
         <h2>Describe your place to guests</h2>
         <p>
           Mention the best features of your space, any special amenities like
