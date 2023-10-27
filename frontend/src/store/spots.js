@@ -31,7 +31,7 @@ const createSpot = (payload) => {
 };
 const updateSpot = (payload) => {
   return {
-    type: CREATE_SPOT,
+    type: UPDATE_SPOT,
     payload,
   };
 };
@@ -93,9 +93,9 @@ export const createASpot = (payload, images) => async (dispatch) => {
     return errors;
   }
 };
-export const updateASpot = (payload, images) => async (dispatch) => {
-  const response = await csrfFetch("/api/spots", {
-    method: "POST",
+export const updateASpot = (payload, images, spotId) => async (dispatch) => {
+  const response = await csrfFetch(`/api/spots/${spotId}`, {
+    method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ ...payload }),
   });
@@ -104,7 +104,7 @@ export const updateASpot = (payload, images) => async (dispatch) => {
     dispatch(updateSpot(data));
     if (images.length === 1) {
       await csrfFetch(`/api/spots/${data.id}/images`, {
-        method: "PUT",
+        method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           url: images[0],
@@ -116,7 +116,7 @@ export const updateASpot = (payload, images) => async (dispatch) => {
     if (images.length > 1) {
       images.map(async (img) => {
         await csrfFetch(`/api/spots/${data.id}/images`, {
-          method: "PUT",
+          method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             url: img,

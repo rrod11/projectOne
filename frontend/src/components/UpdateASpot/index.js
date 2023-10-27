@@ -1,29 +1,48 @@
 import React, { useEffect, useState } from "react";
 import * as sessionActions from "../../store/session";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-import { createASpot } from "../../store/spots";
+import {
+  useHistory,
+  useParams,
+} from "react-router-dom/cjs/react-router-dom.min";
+import { updateASpot } from "../../store/spots";
 
 function UpdateASpot({ formType = "Update A Spot" }) {
   const dispatch = useDispatch();
+  const { spotId } = useParams();
   const user = useSelector((state) => state.session.user);
+  const spots = useSelector((state) => state.spots.Spots);
+  const spot = spots.find((spot) => spot.id == spotId);
+  const stock = {
+    city: spot.city,
+    address: spot.address,
+    country: spot.country,
+    description: spot.description,
+    name: spot.name,
+    previewImage: spot.previewImage,
+    price: spot.price,
+    state: spot.state,
+    lat: spot.lat,
+    lng: spot.lng,
+  };
+
   const history = useHistory();
-  const [country, setCountry] = useState("");
-  const [address, setAddress] = useState("");
-  const [city, setCity] = useState("");
-  const [state, setState] = useState("");
-  const [latitude, setLatitude] = useState(80.76);
-  const [longitude, setLongitude] = useState(50.34);
-  const [description, setDescription] = useState("");
-  const [title, setTitle] = useState("");
-  const [price, setPrice] = useState("");
-  const [image1, setImage1] = useState("");
+
+  const [country, setCountry] = useState(stock.country);
+  const [address, setAddress] = useState(stock.address);
+  const [city, setCity] = useState(stock.city);
+  const [state, setState] = useState(stock.state);
+  const [latitude, setLatitude] = useState(stock.lat);
+  const [longitude, setLongitude] = useState(stock.lng);
+  const [description, setDescription] = useState(stock.description);
+  const [title, setTitle] = useState(stock.name);
+  const [price, setPrice] = useState(stock.price);
+  const [image1, setImage1] = useState(stock.previewImage);
   const [image2, setImage2] = useState("");
   const [image3, setImage3] = useState("");
   const [image4, setImage4] = useState("");
   const [image5, setImage5] = useState("");
   const [errors, setErrors] = useState({});
-  console.log("🚀 ~ file: index.js:10 ~ CreateASpot ~ user:", user);
   const imgs = [];
   if (image1) {
     imgs.push(image1);
@@ -49,18 +68,10 @@ function UpdateASpot({ formType = "Update A Spot" }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (errors && !Object.values(errors).length) {
-      setLatitude(80.75);
-      setLongitude(50.85);
-      const res = await dispatch(createASpot(spotObj, imgs));
-      console.log("🚀 ~ file: index.js:48 ~ handleSubmit ~ res:", res);
-      history.push(`/spots/${res.id}`);
-    } else {
-      console.log("ERRORS PRESENT");
+      const res = await dispatch(updateASpot(spotObj, imgs, spotId));
+      history.push(`/spots/${spotId}`);
     }
   };
-  //   useEffect(() => {
-  //     dispatch(createASpot());
-  //   }, [dispatch]);
   function checkCredentials() {
     const errObj = {};
     if (!country) errObj.country = "Country is required";
@@ -71,13 +82,19 @@ function UpdateASpot({ formType = "Update A Spot" }) {
       errObj.description = "Description needs 30 or more characters";
     if (!title) errObj.name = "Name is required";
     if (isNaN(price) || price < 1) errObj.price = "Price per night is required";
-    if (!image1.endsWith(".jpg" || ".jpeg" || ".png"))
-      errObj.image1 = "Preview Image must end with .jpg, .jpeg, or .png";
-    setErrors(errObj);
+    if (image1.endsWith(".jpg")) {
+      setErrors(errObj);
+    } else if (image1.endsWith(".jpeg")) {
+      setErrors(errObj);
+    } else if (image1.endsWith(".png")) {
+      setErrors(errObj);
+    } else {
+      setErrors(errObj);
+    }
   }
   return (
     <>
-      <h1>Create a New Spot</h1>
+      <h1>Update Your Spot</h1>
       <form onSubmit={handleSubmit}>
         <h2>Where's your place located</h2>
         <p>
@@ -247,7 +264,7 @@ function UpdateASpot({ formType = "Update A Spot" }) {
           onClick={checkCredentials}
           className="loginButton"
         >
-          Create Spot
+          Update Spot
         </button>
       </form>
     </>

@@ -6,16 +6,12 @@ const CurrentUserSpots = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.session.user);
   const spots = useSelector((state) => state.spots.Spots);
-  console.log("🚀 ~ file: index.js:9 ~ CurrentUserSpots ~ spots:", spots);
   useEffect(() => {
     dispatch(allTheSpots());
   }, [dispatch]);
 
   const userSpots = spots?.filter((spot) => spot.ownerId === user.id);
-  console.log(
-    "🚀 ~ file: index.js:14 ~ CurrentUserSpots ~ userSpots:",
-    userSpots
-  );
+
   return !spots ? null : (
     <>
       <h1>MANAGE SPOTS</h1>
@@ -46,7 +42,9 @@ const CurrentUserSpots = () => {
                 </div>
                 <div style={{ display: "flex", flexDirection: "row" }}>
                   <span>
-                    <button>Update</button>
+                    <NavLink to={`/spots/${id}/edit`}>
+                      <button>Update</button>
+                    </NavLink>
                   </span>
                   <span>
                     <button>Delete</button>
