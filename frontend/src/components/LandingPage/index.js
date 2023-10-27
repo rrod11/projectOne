@@ -11,7 +11,7 @@ const LandingPage = () => {
   console.log("🚀 ~ file: index.js:9 ~ LandingPage ~ spots:", spots);
   useEffect(() => {
     dispatch(allTheSpots());
-  }, [dispatch]);
+  }, [dispatch, spots, spotArr.length]);
 
   return spotArr[0] == null ? null : (
     <div className="LPImages">

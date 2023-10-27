@@ -82,7 +82,7 @@ const ReviewDetail = ({ spotId, spot, user }) => {
       return (
         <OpenModalButton
           buttonText="Post a Review"
-          style={{ backgroundColor: "red", maxWidth: "100%", width: "300px" }}
+         className='green'
           modalComponent={
             <PostAReviewFormModal spotId={spotId} itemText="Post A Review" />
           }

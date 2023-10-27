@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import OpenModalButton from "../OpenModalButton";
 import DeleteASpotModal from "../DeleteSpotModal";
+import "./index.css";
 const CurrentUserSpots = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.session.user);
@@ -22,7 +23,7 @@ const CurrentUserSpots = () => {
     return (
       <OpenModalButton
         buttonText="Delete"
-        style={{ backgroundColor: "red", maxWidth: "100%", width: "300px" }}
+        // style={{ backgroundColor: "red", maxWidth: "100%", width: "300px" }}
         modalComponent={<DeleteASpotModal spotId={spotId} itemText="Delete" />}
       />
     );
@@ -37,33 +38,49 @@ const CurrentUserSpots = () => {
             ({ id, name, city, state, previewImage, avgRating, price }) => (
               <>
                 <div key={id} className="imageDiv">
-                  <NavLink
-                    // style={{ border: "2px solid green" }}
-                    to={`/spots/${id}`}
-                    key={id}
-                  >
+                  <NavLink to={`/spots/${id}`} key={id}>
                     <div className="tooltip" title={name}>
-                      <img src={previewImage} className="actualImages" />
+                      <img
+                        src={previewImage}
+                        className="actualImages"
+                        alt="id in case"
+                      />
                       <p className="tooltiptext">{name}</p>
                     </div>
-                    <div className="houseInfo">
+                  </NavLink>
+                  <div className="houseInfo">
+                    <div>
                       <p>
                         {city}, {state}
                       </p>
-                      <div className="ratingInfo">
-                        <i className="fa-solid fa-star"></i>
-                        {avgRating ? (
-                          <p>{parseFloat(`${avgRating}`).toFixed(2)}</p>
-                        ) : (
-                          <p>New</p>
-                        )}
-                      </div>
+                      <p>
+                        <span style={{ fontWeight: "bold" }}>${price}</span>
+                        /night
+                      </p>
                     </div>
-                    <p>${price}/night</p>
-                  </NavLink>
-                  <div style={{ display: "flex", flexDirection: "row" }}>
+                    <div className="ratingInfo">
+                      <i className="fa-solid fa-star"></i>
+                      {avgRating ? (
+                        <p>{parseFloat(`${avgRating}`).toFixed(2)}</p>
+                      ) : (
+                        <p>New</p>
+                      )}
+                    </div>
+                  </div>
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "row",
+                      justifyContent: "flex-start",
+                      width: "100%",
+                    }}
+                  >
                     <NavLink to={`/spots/${id}/edit`}>
-                      <button>Update</button>
+                      <button
+                        style={{ marginRight: "10px", backgroundColor: "grey" }}
+                      >
+                        Update
+                      </button>
                     </NavLink>
                     {deleteSpotButton(id)}
                   </div>

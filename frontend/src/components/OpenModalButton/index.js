@@ -15,7 +15,11 @@ function OpenModalButton({
     setModalContent(modalComponent);
   };
 
-  return <button onClick={onClick}>{buttonText}</button>;
+  return (
+    <button style={{ backgroundColor: "red" }} onClick={onClick}>
+      {buttonText}
+    </button>
+  );
 }
 
 export default OpenModalButton;
