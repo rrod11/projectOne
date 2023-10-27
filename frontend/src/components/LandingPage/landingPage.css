@@ -58,3 +58,6 @@
   /* left: `${x}`; */
   /* opacity: 1; */
 }
+NavLink {
+  text-decoration: none;
+}

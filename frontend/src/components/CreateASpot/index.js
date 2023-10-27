@@ -61,11 +61,6 @@ function CreateASpot({ formType = "Create A Spot" }) {
   function validImage(url) {
     return /\.(jpg|jpeg|png|webp|avif|gif)$/.test(url);
   }
-  const returnedResult = validImage(image1);
-  console.log(
-    "🚀 ~ file: index.js:65 ~ CreateASpot ~ returnedResult:",
-    returnedResult
-  );
   function checkCredentials() {
     const errObj = {};
     if (!country) errObj.country = "Country is required";

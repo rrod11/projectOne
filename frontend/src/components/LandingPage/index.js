@@ -17,23 +17,28 @@ const LandingPage = () => {
     <div className="LPImages">
       {spotArr?.map(
         ({ id, name, city, state, previewImage, avgRating, price }) => (
-          <NavLink to={`/spots/${id}`} key={id}>
+          <>
             <div key={id} className="imageDiv">
-              <div className="tooltip" title={name}>
-                <img
-                  src={previewImage}
-                  className="actualImages"
-                  alt="id in case"
-                />
-                <p className="tooltiptext">{name}</p>
-              </div>
-              <div
-                className="houseInfo"
-                // style={{display: "flex", }}
-              >
-                <p>
-                  {city}, {state}
-                </p>
+              <NavLink to={`/spots/${id}`} key={id}>
+                <div className="tooltip" title={name}>
+                  <img
+                    src={previewImage}
+                    className="actualImages"
+                    alt="id in case"
+                  />
+                  <p className="tooltiptext">{name}</p>
+                </div>
+              </NavLink>
+              <div className="houseInfo">
+                <div>
+                  <p>
+                    {city}, {state}
+                  </p>
+                  <p>
+                    <span style={{ fontWeight: "bold" }}>${price}</span>
+                    /night
+                  </p>
+                </div>
                 <div className="ratingInfo">
                   <i className="fa-solid fa-star"></i>
                   {avgRating ? (
@@ -43,9 +48,8 @@ const LandingPage = () => {
                   )}
                 </div>
               </div>
-              <p>${price}/night</p>
             </div>
-          </NavLink>
+          </>
         )
       )}
     </div>

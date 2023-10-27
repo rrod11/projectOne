@@ -5,7 +5,7 @@ import {
   useHistory,
   useParams,
 } from "react-router-dom/cjs/react-router-dom.min";
-import { updateASpot } from "../../store/spots";
+import { allTheSpots, updateASpot } from "../../store/spots";
 
 function UpdateASpot({ formType = "Update A Spot" }) {
   const dispatch = useDispatch();
@@ -92,6 +92,9 @@ function UpdateASpot({ formType = "Update A Spot" }) {
 
     setErrors(errObj);
   }
+  useEffect(() => {
+    dispatch(allTheSpots());
+  }, [dispatch]);
   return !user || !userTruth ? (
     <div
     // style={{ maxHeight: "1vh", maxWidth: "1vw" }}
