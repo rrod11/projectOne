@@ -7,15 +7,15 @@ const LandingPage = () => {
   const dispatch = useDispatch();
   const spots = useSelector((state) => state.spots);
   const spotArr = Object.values(spots);
-  console.log("🚀 ~ file: index.js:10 ~ LandingPage ~ SpotArr:", spotArr);
-  console.log("🚀 ~ file: index.js:9 ~ LandingPage ~ spots:", spots);
   useEffect(() => {
     dispatch(allTheSpots());
-  }, [dispatch, spots, spotArr.length]);
-
-  return spotArr[0] == null ? null : (
+  }, [dispatch]);
+  if (!spotArr.length) return null;
+  console.log("🚀 ~ file: index.js:10 ~ LandingPage ~ SpotArr:", spotArr);
+  return (
+    // return spotArr.length < 1 ? null : (
     <div className="LPImages">
-      {spotArr?.map(
+      {spotArr.map(
         ({ id, name, city, state, previewImage, avgRating, price }) => (
           <>
             <div key={id} className="imageDiv">

@@ -10,14 +10,19 @@ const CurrentUserSpots = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.session.user);
   console.log("🚀 ~ file: index.js:11 ~ CurrentUserSpots ~ user:", user);
-  const spots = useSelector((state) => state.spots);
+  const spotObj = useSelector((state) => state.spots);
+  console.log("🚀 ~ file: index.js:14 ~ CurrentUserSpots ~ spotObj:", spotObj);
   const { spotId } = useParams();
   useEffect(() => {
     dispatch(allTheSpots());
   }, [dispatch]);
 
-  const userSpots = Object.values(spots)?.filter(
-    (spot) => spot?.ownerId === user.id
+  const spotArr = Object.values(spotObj);
+  console.log("🚀 ~ file: index.js:21 ~ CurrentUserSpots ~ spotArr:", spotArr);
+  const userSpots = spotArr?.filter((spot) => spot?.ownerId == user.id);
+  console.log(
+    "🚀 ~ file: index.js:23 ~ CurrentUserSpots ~ userSpots:",
+    userSpots
   );
   const deleteSpotButton = (spotId) => {
     return (
@@ -29,7 +34,7 @@ const CurrentUserSpots = () => {
     );
   };
 
-  return spots == null ? null : (
+  return userSpots == null ? null : (
     <>
       <h1>MANAGE SPOTS</h1>
       {userSpots.length > 0 ? (

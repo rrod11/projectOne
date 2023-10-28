@@ -18,10 +18,10 @@ const currentUserSpots = (payload) => {
     payload,
   };
 };
-const getSpot = (spotId) => {
+const getSpot = (spot) => {
   return {
     type: GET_SPOT,
-    spotId,
+    spot,
   };
 };
 const createSpot = (payload) => {
@@ -151,23 +151,20 @@ export const deleteASpot = (spotId) => async (dispatch) => {
     return errors;
   }
 };
-const initialState = { spots: null };
+const initialState = {};
 const spotReducer = (state = initialState, action) => {
   let newState;
   switch (action.type) {
-    case ALL_SPOTS:
-      {
-        const spotData = {};
-        action.payload.Spots.forEach((spot) => {
-          spotData[spot.id] = spot;
-        });
-        return spotData;
-      }
-
-      // newState = { ...action.payload };
-      return newState;
+    case ALL_SPOTS: {
+      const spotData = {};
+      action.payload.Spots.forEach((spot) => {
+        spotData[spot.id] = spot;
+      });
+      return spotData;
+    }
     case GET_SPOT:
-      newState = { ...action.spotId };
+      newState = {};
+      newState[action.spot.id] = action.spot;
       return newState;
     case CREATE_SPOT:
       newState = { ...state, [action.payload.id]: action.payload };

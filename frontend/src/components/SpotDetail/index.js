@@ -6,7 +6,9 @@ import ReviewDetail from "../Reviews";
 
 const SpotDetail = () => {
   const { spotId } = useParams();
-  const spot = useSelector((state) => state.spots);
+  const spotObj = useSelector((state) => state.spots);
+  const spot = spotObj[spotId];
+  console.log("🚀 ~ file: index.js:11 ~ SpotDetail ~ spot:", spot);
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
   const reviewsObj = useSelector((state) => state.reviews);
