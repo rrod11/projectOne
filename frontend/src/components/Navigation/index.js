@@ -61,8 +61,8 @@ function Navigation({ isLoaded }) {
   }
   return (
     <div className="navBar">
-      <NavLink
-        to="/"
+      <a
+        href="/"
         className="iconImg"
         style={{
           fontSize: "20px",
@@ -70,6 +70,7 @@ function Navigation({ isLoaded }) {
           flexDirection: "row",
           textAlign: "center",
           alignItems: "center",
+          textDecoration: "none",
         }}
       >
         <img
@@ -78,12 +79,26 @@ function Navigation({ isLoaded }) {
       https://png.pngtree.com/png-clipart/20230425/original/pngtree-3d-location-icon-clipart-in-transparent-background-png-image_9095284.png"
           onClick={redirection}
         />
-        <span style={{ fontSize: "30px" }}>Renter Depot</span>
-      </NavLink>
+        <span
+          style={{ fontSize: "25px", textDecoration: "none", color: "red" }}
+        >
+          Renter Depot
+        </span>
+      </a>
       <div className="header-right">
         {sessionUser ? (
           <div>
-            <NavLink to="/spots/new">Create A New Spot</NavLink>
+            <a
+              href="/spots/new"
+              style={{
+                fontSize: "20px",
+                textDecoration: "none",
+                cursor: "pointer",
+                color: "red",
+              }}
+            >
+              Create A New Spot
+            </a>
           </div>
         ) : null}
         {isLoaded && (

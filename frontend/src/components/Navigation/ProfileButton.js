@@ -38,7 +38,7 @@
 //       <button onClick={openMenu}>
 //         <i className="fas fa-user-circle" />
 //       </button>
-//       <ul className={ulClassName} ref={ulRef}>
+//       <ul className="dropdown" className={ulClassName} ref={ulRef}>
 //         <li>{user.username}</li>
 //         <li>
 //           {user.firstName} {user.lastName}
@@ -47,7 +47,7 @@
 //         <li>
 //           <button onClick={logout}>Log Out</button>
 //         </li>
-//       </ul>
+//       </ul className="dropdown">
 //     </>
 //   );
 // }
@@ -100,28 +100,38 @@ function ProfileButton({ user }) {
 
   return (
     <>
-      <button onClick={openMenu}>
-        <i class="fa-solid fa-bars" style={{ fontSize: "15px" }}></i>
-        <i className="fas fa-user-circle" style={{ fontSize: "15px" }}></i>
+      <button style={{}} onClick={openMenu}>
+        <i class="fa-solid fa-bars" style={{ fontSize: "20px" }}></i>
+        <i className="fas fa-user-circle" style={{ fontSize: "22px" }}></i>
       </button>
 
-      <ul className={ulClassName} ref={ulRef}>
+      <ul className="dropdown" className={ulClassName} ref={ulRef}>
         {user ? (
-          <>
-            <li>{user.username}</li>
+          <ul className="dropdown">
+            {/* <li>{user.username}</li> */}
             <li>Hello, {user.firstName}</li>
-            <li>{user.email}</li>
+            <li style={{ borderBottom: "1px solid black" }}>{user.email}</li>
             <li>
-              <NavLink to="/current">
-                <button>Manage Spots</button>
-              </NavLink>
+              <a to="/current">
+                <button
+                  style={{
+                    height: "40px",
+                    width: "80px",
+                    border: "0px solid transparent",
+                    backgroundColor: "transparent",
+                    width: "100%",
+                  }}
+                >
+                  Manage Spots
+                </button>
+              </a>
             </li>
             <li>
               <button onClick={logout}>Log Out</button>
             </li>
-          </>
+          </ul>
         ) : (
-          <>
+          <ul className="dropdown">
             <li>
               <OpenModalButton
                 buttonText="Log In"
@@ -136,7 +146,7 @@ function ProfileButton({ user }) {
                 modalComponent={<SignupFormModal />}
               />
             </li>
-          </>
+          </ul>
         )}
       </ul>
     </>
@@ -190,7 +200,7 @@ export default ProfileButton;
 //       <button onClick={openMenu}>
 //         <i className="fas fa-user-circle" />
 //       </button>
-//       <ul className={ulClassName} ref={ulRef}>
+//       <ul className="dropdown" className={ulClassName} ref={ulRef}>
 //         {user ? (
 //           <>
 //             <li>{user.username}</li>
@@ -216,7 +226,7 @@ export default ProfileButton;
 //             />
 //           </>
 //         )}
-//       </ul>
+//       </ul className="dropdown">
 //     </>
 //   );
 // }

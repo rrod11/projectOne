@@ -9,8 +9,12 @@
   display: none;
 }
 button {
-  height: 30px;
-  width: 50px;
+  height: 40px;
+  width: 80px;
+  margin: 0 10px;
+  padding: 0 10px;
+  border: 1px solid red;
+  border-radius: 25px;
   display: flex;
   flex-wrap: nowrap;
   flex-direction: row;
@@ -56,8 +60,32 @@ ul > li {
 }
 .profileButton {
   cursor: pointer;
+  /* margin: 0 10px; */
+  display: flex;
+  /* flex-direction: row;
+  height: 100%;
+  width: auto; */
+}
+.header-right {
   display: flex;
   flex-direction: row;
-  height: 100%;
-  width: auto;
+  align-items: center;
+  margin: 0px 10px;
+}
+
+.dropdown {
+  background-color: #fff;
+  border: 1px solid #656565;
+  font-family: "Times New Roman", Times, serif;
+  font-weight: 500;
+  list-style-type: none;
+  min-width: 150px;
+  padding: 0;
+  position: absolute;
+  right: 10px;
+  top: 70px;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  z-index: 10;
 }
