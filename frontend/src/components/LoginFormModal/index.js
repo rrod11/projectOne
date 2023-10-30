@@ -44,7 +44,7 @@ function LoginFormModal() {
           className="login-form"
           onSubmit={handleSubmit}
         >
-          <spam>Username or Email</spam>
+          <span>Username or Email</span>
           <input
             type="text"
             value={credential}
@@ -72,11 +72,13 @@ function LoginFormModal() {
               backgroundColor: "red",
               boxShadow: "3px 3px 2px #d3d3d3",
               padding: " 10px 5px",
+              width: "100%",
+              marginTop: "5px",
             }}
           >
             Log In
           </button>
-
+          <span className="lineCutter"></span>
           <button
             style={{
               backgroundColor: "#fff",

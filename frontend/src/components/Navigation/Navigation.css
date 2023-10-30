@@ -115,10 +115,10 @@ ul > li {
   padding: 0;
   position: absolute;
   right: 10px;
-  top: 30px;
-
-  width: fit-content;
-  z-index: 10;
+  top: 1px;
+  /* height: 100px; */
+  width: 200px;
+  z-index: 1;
 }
 .dropdownLi {
   width: 100%;

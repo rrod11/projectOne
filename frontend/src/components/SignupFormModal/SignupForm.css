@@ -1,3 +1,12 @@
 .errors {
   color: red;
 }
+.login {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  font-family: "Times New Roman", Times, serif;
+  justify-content: center;
+  padding: 25px;
+  width: 250px;
+}

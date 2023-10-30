@@ -123,8 +123,16 @@ const ReviewDetail = ({ spotId, spot, user }) => {
         ) : null}
         {reviewGrid}
       </div>
-
-      {user && showReviewButton()}
+      <div
+        style={{
+          backgroundColor: "grey",
+          width: "15%",
+          boxShadow: "5px 2px 2px black",
+          height: "20px",
+        }}
+      >
+        {user && showReviewButton()}
+      </div>
       {reviewsGuide}
     </div>
   );
