@@ -32,127 +32,143 @@ const CurrentUserSpots = () => {
   };
 
   return userSpots == null ? null : (
-    <>
-      <h1>MANAGE SPOTS</h1>
-      {userSpots.length > 0 ? (
-        <div className="LPImages">
-          {userSpots?.map(
-            ({ id, name, city, state, previewImage, avgRating, price }) => (
-              <>
-                <div key={id} className="imageDiv">
-                  <NavLink to={`/spots/${id}`} key={id}>
-                    <div className="tooltip" title={name}>
-                      <img
-                        src={previewImage}
-                        className="actualImages"
-                        alt="id in case"
-                      />
-                      <p className="tooltiptext">{name}</p>
-                    </div>
-                  </NavLink>
-                  <div className="houseInfo">
-                    <div>
-                      <p>
-                        {city}, {state}
-                      </p>
-                      <p>
-                        <span style={{ fontWeight: "bold" }}>${price}</span>
-                        /night
-                      </p>
-                    </div>
-                    <div className="ratingInfo">
+    //     <>
+    //       <h1>MANAGE SPOTS</h1>
+    //       {userSpots.length > 0 ? (
+    //         <div className="LPImages">
+    //           {userSpots?.map(
+    //             ({ id, name, city, state, previewImage, avgRating, price }) => (
+    //               <>
+    //                 <div key={id} className="imageDiv">
+    //                   <NavLink to={`/spots/${id}`} key={id}>
+    //                     <div className="tooltip" title={name}>
+    //                       <img
+    //                         src={previewImage}
+    //                         className="actualImages"
+    //                         alt="id in case"
+    //                       />
+    //                       <p className="tooltiptext">{name}</p>
+    //                     </div>
+    //                   </NavLink>
+    //                   <div className="houseInfo">
+    //                     <div>
+    //                       <p>
+    //                         {city}, {state}
+    //                       </p>
+    //                       <p>
+    //                         <span style={{ fontWeight: "bold" }}>${price}</span>
+    //                         /night
+    //                       </p>
+    //                     </div>
+    //                     <div className="ratingInfo">
+    //                       <i className="fa-solid fa-star"></i>
+    //                       {avgRating ? (
+    //                         <p>{parseFloat(`${avgRating}`).toFixed(2)}</p>
+    //                       ) : (
+    //                         <p>New</p>
+    //                       )}
+    //                     </div>
+    //                   </div>
+    //                   <div
+    //                     style={{
+    //                       display: "flex",
+    //                       flexDirection: "row",
+    //                       justifyContent: "flex-start",
+    //                       width: "100%",
+    //                     }}
+    //                   >
+    //                     <NavLink to={`/spots/${id}/edit`}>
+    //                       <button
+    //                         style={{ marginRight: "10px", backgroundColor: "grey" }}
+    //                       >
+    //                         Update
+    //                       </button>
+    //                     </NavLink>
+    //                     <div style={{ width: "15%", backgroundColor: "red" }}>
+    //                       {deleteSpotButton(id)}
+    //                     </div>
+    //                   </div>
+    //                 </div>
+    //               </>
+    //             )
+    //           )}
+    //         </div>
+    //       ) : (
+    //         <h2>
+    //           <NavLink to="/spots/new">
+    //             <button>Create a New Spot</button>
+    //           </NavLink>
+    //         </h2>
+    //       )}
+    //     </>
+    //   );
+    // };
+    // userSpots == null ? (
+    //   <h2>
+    //     <NavLink to="/spots/new">
+    //       <button>Create a New Spot</button>
+    //     </NavLink>
+    //   </h2>
+    // ) : (
+    <div className="spot-container">
+      {userSpots.map(
+        ({ id, name, city, state, previewImage, avgRating, price }) => (
+          <div className="individual-spot">
+            <a
+              href={`/spots/${id}`}
+              key={id}
+              style={{ textDecoration: "none", color: "black" }}
+            >
+              <div key={id} className="spot-tile">
+                <img
+                  src={previewImage}
+                  className="spot-image"
+                  alt="id in case"
+                />
+                <div className="houseInfo">
+                  <div className="spot-tile-details">
+                    <p>
+                      {city}, {state}
+                    </p>
+                    <p className="spot-tile-rating">
                       <i className="fa-solid fa-star"></i>
                       {avgRating ? (
                         <p>{parseFloat(`${avgRating}`).toFixed(2)}</p>
                       ) : (
                         <p>New</p>
                       )}
-                    </div>
+                    </p>
                   </div>
-                  <div
-                    style={{
-                      display: "flex",
-                      flexDirection: "row",
-                      justifyContent: "flex-start",
-                      width: "100%",
-                    }}
-                  >
-                    <NavLink to={`/spots/${id}/edit`}>
-                      <button
-                        style={{ marginRight: "10px", backgroundColor: "grey" }}
-                      >
-                        Update
-                      </button>
-                    </NavLink>
-                    <div style={{ width: "15%", backgroundColor: "red" }}>
-                      {deleteSpotButton(id)}
-                    </div>
+                  <div className="spot-tile-price">
+                    <p style={{ margin: "5px 0" }}>
+                      <span style={{ fontWeight: "bold" }}>${price}</span>
+                      {` /night`}
+                    </p>
                   </div>
                 </div>
-              </>
-            )
-          )}
-        </div>
-      ) : (
-        <h2>
-          <NavLink to="/spots/new">
-            <button>Create a New Spot</button>
-          </NavLink>
-        </h2>
+                <div style={{ display: "flex", flexDirection: "row" }}>
+                  <NavLink to={`/spots/${id}/edit`}>
+                    <button
+                      style={{
+                        marginRight: "10px",
+                        backgroundColor: "grey",
+                        cursor: " pointer",
+                      }}
+                    >
+                      Update
+                    </button>
+                  </NavLink>
+                  <div style={{ width: "15%", backgroundColor: "red" }}>
+                    {deleteSpotButton(id)}
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+        )
       )}
-    </>
+    </div>
   );
 };
-//   userSpots == null ? (
-//     <h2>
-//       <NavLink to="/spots/new">
-//         <button>Create a New Spot</button>
-//       </NavLink>
-//     </h2>
-//   ) : (
-//     <div className="spot-container">
-//       {userSpots.map(
-//         ({ id, name, city, state, previewImage, avgRating, price }) => (
-//           <div className="individual-spot">
-//             <a
-//               href={`/spots/${id}`}
-//               key={id}
-//               style={{ textDecoration: "none", color: "black" }}
-//             >
-//               <div key={id} className="spot-tile">
-//                 <img
-//                   src={previewImage}
-//                   className="spot-image"
-//                   alt="id in case"
-//                 />
-//                 <div className="houseInfo">
-//                   <div className="spot-tile-details">
-//                     <p>
-//                       {city}, {state}
-//                     </p>
-//                     <p className="spot-tile-rating">
-//                       <i className="fa-solid fa-star"></i>
-//                       {avgRating ? (
-//                         <p>{parseFloat(`${avgRating}`).toFixed(2)}</p>
-//                       ) : (
-//                         <p>New</p>
-//                       )}
-//                     </p>
-//                   </div>
-//                   <div className="spot-tile-price">
-//                     <p style={{ margin: "5px 0" }}>
-//                       <span style={{ fontWeight: "bold" }}>${price}</span>
-//                       {` /night`}
-//                     </p>
-//                   </div>
-//                 </div>
-//               </div>
-//             </a>
-//           </div>
-//         )
-//       )}
-//     </div>
-//   );
-// };
 
 export default CurrentUserSpots;
