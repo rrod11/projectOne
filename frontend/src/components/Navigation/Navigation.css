@@ -25,9 +25,7 @@
   height: 40px;
   width: 80px;
   position: relative;
-  top: 5px;
-  margin: 0 10px;
-  padding: 0 10px;
+  top: 1px;
   border: 1px solid transparent;
   background-color: rgb(81, 81, 81);
   color: white;
@@ -38,6 +36,7 @@
   justify-content: space-around;
   align-items: center;
   cursor: pointer;
+  box-shadow: 5px 3px 3px black;
 }
 .iconImg {
   height: 100%;

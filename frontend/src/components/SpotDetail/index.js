@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useParams } from "react-router-dom/cjs/react-router-dom.min";
 import { oneSpot } from "../../store/spots";
 import ReviewDetail from "../Reviews";
+import "./index.css";
 
 const SpotDetail = () => {
   const { spotId } = useParams();
@@ -17,9 +18,9 @@ const SpotDetail = () => {
   useEffect(() => {
     dispatch(oneSpot(spotId));
   }, [dispatch, spotId, reviewsArr.length]);
-  if (!spot.Owner) return null;
+  // if (!spot.Owner) return null;
 
-  if (spot?.SpotImages.length < 5) {
+  if (spot?.SpotImages?.length < 5) {
     for (let i = spot.SpotImages.length; i < 5; i++) {
       const img = {
         id: i,
@@ -29,7 +30,7 @@ const SpotDetail = () => {
     }
   }
   let reviews;
-  if (reviewsArr.length > 1) {
+  if (reviewsArr?.length > 1) {
     reviews = <span>{`${reviewsArr.length} Reviews`}</span>;
   } else if (reviewsArr.length == 1) {
     reviews = <span>{`${reviewsArr.length} Review`}</span>;
@@ -40,18 +41,22 @@ const SpotDetail = () => {
     alert("Feature coming soon");
   }
 
-  return !spot?.Owner ? null : (
-    <>
-      <h1>{spot.name}</h1>
-      <h2>
-        {spot.city} {spot.state}, {spot.country}
-      </h2>
+  if (!spot?.Owner) return null;
+  return (
+    <div className="spot-details">
+      <div className="spot-detail-header">
+        <h1>{spot.name}</h1>
+        <h4>
+          {spot.city} {spot.state}, {spot.country}
+        </h4>
+      </div>
 
-      {spot?.SpotImages?.map(({ id, url }) => (
-        <div className="spot-detail-images">
+      <div className="spot-detail-pictures">
+        {spot?.SpotImages?.map(({ id, url }) => (
           <img src={url} key={id} alt={`${id} visual`}></img>
-        </div>
-      ))}
+        ))}
+      </div>
+
       <h4>
         Hosted by {spot.Owner.firstName} {spot.Owner.lastName}
       </h4>
@@ -100,7 +105,7 @@ const SpotDetail = () => {
       </div>
 
       <ReviewDetail spotId={spotId} spot={spot} user={sessionUser} />
-    </>
+    </div>
   );
 };
 
