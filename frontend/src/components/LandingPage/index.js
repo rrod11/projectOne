@@ -34,9 +34,9 @@ const LandingPage = () => {
                   <p>
                     {city}, {state}
                   </p>
-                  <p>
+                  <p style={{ margin: "5px 0" }}>
                     <span style={{ fontWeight: "bold" }}>${price}</span>
-                    /night
+                    {` /night`}
                   </p>
                 </div>
                 <div className="ratingInfo">

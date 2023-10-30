@@ -100,38 +100,61 @@ function ProfileButton({ user }) {
 
   return (
     <>
-      <button style={{}} onClick={openMenu}>
+      <button className="navButton" style={{}} onClick={openMenu}>
         <i class="fa-solid fa-bars" style={{ fontSize: "20px" }}></i>
         <i className="fas fa-user-circle" style={{ fontSize: "22px" }}></i>
       </button>
 
-      <ul className="dropdown" className={ulClassName} ref={ulRef}>
+      <ul className={`${ulClassName} dropdown`} ref={ulRef}>
         {user ? (
-          <ul className="dropdown">
+          <ul style={{ width: "100%", margin: "10px" }}>
             {/* <li>{user.username}</li> */}
             <li>Hello, {user.firstName}</li>
-            <li style={{ borderBottom: "1px solid black" }}>{user.email}</li>
-            <li>
-              <a to="/current">
-                <button
-                  style={{
-                    height: "40px",
-                    width: "80px",
-                    border: "0px solid transparent",
-                    backgroundColor: "transparent",
-                    width: "100%",
-                  }}
-                >
-                  Manage Spots
-                </button>
+            <li style={{ margin: "10px" }}>{user.email}</li>
+            <li
+              style={{
+                height: "40px",
+                borderTop: "1px solid black",
+                borderBottom: "1px solid black",
+                width: "100%",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                overflow: "auto",
+              }}
+            >
+              <a
+                href="/current"
+                style={{
+                  textDecoration: "none",
+
+                  color: "black",
+                }}
+              >
+                {/* <button> */}
+                Manage Spots
+                {/* </button> */}
               </a>
             </li>
-            <li>
-              <button onClick={logout}>Log Out</button>
+            <li
+              style={{
+                height: "50px",
+                topBorder: "1px solid black",
+                bottomBorder: "1px solid black",
+                width: "100%",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                overflow: "auto",
+              }}
+            >
+              <button className="logoutButton" onClick={logout}>
+                Log Out
+              </button>
             </li>
           </ul>
         ) : (
-          <ul className="dropdown">
+          <ul>
             <li>
               <OpenModalButton
                 buttonText="Log In"
