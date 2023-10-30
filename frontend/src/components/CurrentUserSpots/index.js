@@ -20,10 +20,7 @@ const CurrentUserSpots = () => {
   const spotArr = Object.values(spotObj);
   console.log("🚀 ~ file: index.js:21 ~ CurrentUserSpots ~ spotArr:", spotArr);
   const userSpots = spotArr?.filter((spot) => spot?.ownerId == user.id);
-  console.log(
-    "🚀 ~ file: index.js:23 ~ CurrentUserSpots ~ userSpots:",
-    userSpots
-  );
+
   const deleteSpotButton = (spotId) => {
     return (
       <OpenModalButton
@@ -106,5 +103,56 @@ const CurrentUserSpots = () => {
     </>
   );
 };
+//   userSpots == null ? (
+//     <h2>
+//       <NavLink to="/spots/new">
+//         <button>Create a New Spot</button>
+//       </NavLink>
+//     </h2>
+//   ) : (
+//     <div className="spot-container">
+//       {userSpots.map(
+//         ({ id, name, city, state, previewImage, avgRating, price }) => (
+//           <div className="individual-spot">
+//             <a
+//               href={`/spots/${id}`}
+//               key={id}
+//               style={{ textDecoration: "none", color: "black" }}
+//             >
+//               <div key={id} className="spot-tile">
+//                 <img
+//                   src={previewImage}
+//                   className="spot-image"
+//                   alt="id in case"
+//                 />
+//                 <div className="houseInfo">
+//                   <div className="spot-tile-details">
+//                     <p>
+//                       {city}, {state}
+//                     </p>
+//                     <p className="spot-tile-rating">
+//                       <i className="fa-solid fa-star"></i>
+//                       {avgRating ? (
+//                         <p>{parseFloat(`${avgRating}`).toFixed(2)}</p>
+//                       ) : (
+//                         <p>New</p>
+//                       )}
+//                     </p>
+//                   </div>
+//                   <div className="spot-tile-price">
+//                     <p style={{ margin: "5px 0" }}>
+//                       <span style={{ fontWeight: "bold" }}>${price}</span>
+//                       {` /night`}
+//                     </p>
+//                   </div>
+//                 </div>
+//               </div>
+//             </a>
+//           </div>
+//         )
+//       )}
+//     </div>
+//   );
+// };
 
 export default CurrentUserSpots;

@@ -1,13 +1,10 @@
-.LPImages {
-  /* display: grid;
-  grid-template-columns: repeat(3, minmax(200px, 1fr)); */
+/* .LPImages {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   align-items: flex-start;
   justify-content: space-between;
   margin: 20px 0;
-  /* max-width: 1200px; */
 }
 .imageDiv {
   display: flex;
@@ -33,11 +30,10 @@
 }
 .tooltip {
   position: relative;
-  /* display: block; */
+
   cursor: pointer;
 }
 
-/* Tooltip text */
 .tooltip > .tooltiptext {
   visibility: hidden;
   width: 120px;
@@ -47,18 +43,58 @@
   padding: 5px 0;
   border-radius: 6px;
 
-  /* Position the tooltip text - see examples below! */
   position: absolute;
   z-index: 1;
 }
 
-/* Show the tooltip text when you mouse over the tooltip container */
 .tooltip:hover > .tooltiptext {
   position: absolute;
   visibility: visible;
-  /* left: `${x}`; */
-  /* opacity: 1; */
 }
 NavLink {
   text-decoration: none;
+} */
+.spot-container {
+  display: flex;
+  flex-flow: wrap;
+  margin: auto;
+  max-width: 1200px;
+}
+.individual-spot {
+  display: flex;
+  height: 310px;
+}
+.spot-tile {
+  display: flex;
+  flex-direction: column;
+  height: 300px;
+  width: 275px;
+  padding: 5px;
+  cursor: pointer;
+}
+.spot-image {
+  border-radius: 15px;
+  max-height: 90%;
+  min-height: 90%;
+  width: 100%;
+}
+.houseInfo {
+  display: flex;
+  flex-direction: column;
+  height: 50px;
+}
+.spot-tile-details {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  font-family: "Times New Roman", Times, serif;
+  font-size: 15px;
+  height: 100%;
+  justify-content: space-between;
+  margin-bottom: 0;
+}
+.spot-tile-rating {
+  align-items: center;
+  display: flex;
+  gap: 5px;
 }
