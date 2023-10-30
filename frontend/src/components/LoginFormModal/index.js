@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import * as sessionActions from "../../store/session";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
-import "./LoginForm.css";
+import "./form.css";
 
 function LoginFormModal() {
   const dispatch = useDispatch();
@@ -31,46 +31,69 @@ function LoginFormModal() {
     setPassword("password");
   }
   return (
-    <>
-      <h1>Log In</h1>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Username or Email
+    <div className="form-container">
+      <div className="login">
+        <h1>Log In</h1>
+        <form
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+          className="login-form"
+          onSubmit={handleSubmit}
+        >
+          <spam>Username or Email</spam>
           <input
             type="text"
             value={credential}
             onChange={(e) => setCredential(e.target.value)}
             required
           />
-        </label>
 
-        <label>
-          Password
+          <span>Password</span>
           <input
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-        </label>
 
-        {errors.message && (
-          <p className="errors">The provided credentials were invalid </p>
-        )}
+          {errors.message && (
+            <p className="errors">The provided credentials were invalid </p>
+          )}
 
-        <button
-          type="submit"
-          disabled={credential.length < 4 || password.length < 6}
-          className="loginButton"
-        >
-          Log In
-        </button>
+          <button
+            type="submit"
+            disabled={credential.length < 4 || password.length < 6}
+            className="loginButton"
+            style={{
+              backgroundColor: "red",
+              boxShadow: "3px 3px 2px #d3d3d3",
+              padding: " 10px 5px",
+            }}
+          >
+            Log In
+          </button>
 
-        <button type="submit" onClick={DemoUser} className="demoButton">
-          Log In as Demo User
-        </button>
-      </form>
-    </>
+          <button
+            style={{
+              backgroundColor: "#fff",
+              border: "none",
+              color: "#8a8a8a",
+              cursor: "pointer",
+              textDecoration: "underline",
+            }}
+            type="submit"
+            onClick={DemoUser}
+            className="demoButton"
+          >
+            Demo User
+          </button>
+        </form>
+      </div>
+    </div>
   );
 }
 

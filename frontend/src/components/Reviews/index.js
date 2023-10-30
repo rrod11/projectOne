@@ -46,7 +46,7 @@ const ReviewDetail = ({ spotId, spot, user }) => {
     );
   } else {
     reviewsGuide = sortedReviews?.map((review) => {
-      const user = sessionUser.id == review.userId;
+      const user = sessionUser?.id == review?.userId;
       return (
         <div className="usersReviews">
           <h4
