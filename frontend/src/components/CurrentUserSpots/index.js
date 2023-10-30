@@ -87,7 +87,9 @@ const CurrentUserSpots = () => {
                         Update
                       </button>
                     </NavLink>
-                    {deleteSpotButton(id)}
+                    <div style={{ width: "15%", backgroundColor: "red" }}>
+                      {deleteSpotButton(id)}
+                    </div>
                   </div>
                 </div>
               </>
