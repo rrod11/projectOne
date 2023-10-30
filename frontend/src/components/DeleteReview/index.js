@@ -28,21 +28,13 @@ function DeleteAReviewModal({ reviewId }) {
           width: "250px",
         }}
       >
-        <h1>Confirm Delete</h1>
+        <h2>Confirm Delete</h2>
         <p>Are you sure you want to remove this review?</p>
         <div>
-          <button
-            className="delete-button"
-            style={{ backgroundColor: "red", color: "white", width: "50%" }}
-            onClick={beginDelete}
-          >
+          <button className="delete-button" onClick={beginDelete}>
             Yes(Delete Review)
           </button>
-          <button
-            className="update-button"
-            style={{ backgroundColor: "grey", color: "white", width: "50%" }}
-            onClick={closeScreen}
-          >
+          <button className="update-button" onClick={closeScreen}>
             No(Keep Review)
           </button>
         </div>

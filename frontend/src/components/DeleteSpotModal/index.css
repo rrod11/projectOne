@@ -3,12 +3,14 @@
   color: "white";
   border-radius: 10px;
   width: 50%;
+  height: 100%;
 }
 .update-button {
   background-color: grey;
   color: "white";
   border-radius: 10px;
   width: 50%;
+  height: 100%;
 }
 button:hover {
   background-color: black;

@@ -7,8 +7,8 @@
   flex-direction: column;
   font-family: "Times New Roman", Times, serif;
   justify-content: center;
-  padding: 25px;
-  width: 250px;
+  padding: 20px;
+  width: 300px;
 }
 form {
   display: flex;

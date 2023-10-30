@@ -113,57 +113,81 @@ const CurrentUserSpots = () => {
     <div className="spot-container">
       {userSpots.map(
         ({ id, name, city, state, previewImage, avgRating, price }) => (
-          <div className="individual-spot">
-            <a
-              href={`/spots/${id}`}
-              key={id}
-              style={{ textDecoration: "none", color: "black" }}
+          <div>
+            <div className="individual-spot">
+              <a
+                href={`/spots/${id}`}
+                key={id}
+                style={{ textDecoration: "none", color: "black" }}
+              >
+                <div key={id} className="spot-tile">
+                  <img
+                    src={previewImage}
+                    className="spot-image"
+                    alt="id in case"
+                  />
+                  <div className="houseInfo">
+                    <div className="spot-tile-details">
+                      <p>
+                        {city}, {state}
+                      </p>
+                      <p className="spot-tile-rating">
+                        <i className="fa-solid fa-star"></i>
+                        {avgRating ? (
+                          <p>{parseFloat(`${avgRating}`).toFixed(2)}</p>
+                        ) : (
+                          <p>New</p>
+                        )}
+                      </p>
+                    </div>
+                    <div className="spot-tile-price">
+                      <p style={{ margin: "5px 0" }}>
+                        <span style={{ fontWeight: "bold" }}>${price}</span>
+                        {` /night`}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                height: "40px",
+                width: "60%",
+              }}
             >
-              <div key={id} className="spot-tile">
-                <img
-                  src={previewImage}
-                  className="spot-image"
-                  alt="id in case"
-                />
-                <div className="houseInfo">
-                  <div className="spot-tile-details">
-                    <p>
-                      {city}, {state}
-                    </p>
-                    <p className="spot-tile-rating">
-                      <i className="fa-solid fa-star"></i>
-                      {avgRating ? (
-                        <p>{parseFloat(`${avgRating}`).toFixed(2)}</p>
-                      ) : (
-                        <p>New</p>
-                      )}
-                    </p>
-                  </div>
-                  <div className="spot-tile-price">
-                    <p style={{ margin: "5px 0" }}>
-                      <span style={{ fontWeight: "bold" }}>${price}</span>
-                      {` /night`}
-                    </p>
-                  </div>
-                </div>
-                <div style={{ display: "flex", flexDirection: "row" }}>
-                  <NavLink to={`/spots/${id}/edit`}>
-                    <button
-                      style={{
-                        marginRight: "10px",
-                        backgroundColor: "grey",
-                        cursor: " pointer",
-                      }}
-                    >
-                      Update
-                    </button>
-                  </NavLink>
-                  <div style={{ width: "15%", backgroundColor: "red" }}>
-                    <NavLink to="/current">{deleteSpotButton(id)}</NavLink>
-                  </div>
-                </div>
+              <NavLink
+                to={`/spots/${id}/edit`}
+                style={{ width: "50%" }}
+                className="navLinker"
+              >
+                <button
+                  style={{
+                    marginRight: "10px",
+                    backgroundColor: "grey",
+                    cursor: " pointer",
+                    height: "100%",
+                    width: "100%",
+                  }}
+                >
+                  Update
+                </button>
+              </NavLink>
+              <div
+                style={{
+                  width: "50%",
+                  backgroundColor: "red",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+                className="navLinker"
+              >
+                <NavLink to="/current">{deleteSpotButton(id)}</NavLink>
               </div>
-            </a>
+            </div>
           </div>
         )
       )}
