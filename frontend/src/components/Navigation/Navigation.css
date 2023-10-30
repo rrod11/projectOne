@@ -105,3 +105,21 @@ ul > li {
   width: fit-content;
   z-index: 10;
 }
+.dropdownTwo {
+  background-color: white;
+  border: 1px solid grey;
+  font-family: "Times New Roman", Times, serif;
+  font-weight: 500;
+  list-style-type: none;
+  min-width: 150px;
+  padding: 0;
+  position: absolute;
+  right: 10px;
+  top: 30px;
+
+  width: fit-content;
+  z-index: 10;
+}
+.dropdownLi {
+  width: 100%;
+}

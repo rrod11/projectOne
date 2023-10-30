@@ -154,17 +154,19 @@ function ProfileButton({ user }) {
             </li>
           </ul>
         ) : (
-          <ul>
-            <li>
+          <ul className="dropdownTwo">
+            <li className="dropdownLi">
               <OpenModalButton
                 buttonText="Log In"
+                className="dropdownLi"
                 onButtonClick={closeMenu}
                 modalComponent={<LoginFormModal />}
               />
             </li>
-            <li>
+            <li className="dropdownLi">
               <OpenModalButton
                 buttonText="Sign Up"
+                className="dropdownLi"
                 onButtonClick={closeMenu}
                 modalComponent={<SignupFormModal />}
               />
