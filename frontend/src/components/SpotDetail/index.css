@@ -61,6 +61,7 @@
 .spot-detail-details {
   display: flex;
   justify-content: space-between;
+  margin: 20px 0;
 }
 .spot-info {
   display: flex;
@@ -74,7 +75,14 @@
   border-radius: 15px;
   display: flex;
   flex-direction: column;
-  height: 80px;
-  padding: 5px 20px 35px;
+  justify-content: space-between;
+  height: 100px;
+  padding: 20px 20px 20px;
   width: 350px;
+}
+.detail-reviews-slab {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  flex-wrap: wrap;
 }

@@ -59,63 +59,58 @@ const SpotDetail = () => {
 
       <div className="spot-detail-details">
         <div className="spot-info">
-          <h4>
+          <h2>
             Hosted by {spot.Owner.firstName} {spot.Owner.lastName}
-          </h4>
-          <p>{spot.description}</p>
+          </h2>
+          <p style={{ fontSize: "20px", overflowWrap: "break-word" }}>
+            {spot.description}
+          </p>
         </div>
-        <div
-          className="detail-review-block"
-          style={{
-            width: "100%",
-
-            display: "flex",
-            justifyContent: "space-between",
-          }}
-        >
+        <div className="detail-review-block">
           <div className="detail-reviews-slab">
             <span>${spot.price}/night</span>
-            <span>
+            <p style={{ display: "flex", alignItems: "center" }}>
               <i className="fa-solid fa-star"></i>
               {spot.avgRating ? (
                 <span>{parseFloat(`${spot.avgRating}`).toFixed(2)}</span>
               ) : (
                 <span>New</span>
               )}
-            </span>
-            {reviewsArr.length > 0 ? (
-              <i class="fa-solid fa-circle  fa-2xs" style={{ zoom: ".25" }}></i>
-            ) : null}
-            {reviews}
-          </div>
-          <div className="reservation">
-            <button
-              style={{
-                backgroundColor: "red",
-                maxWidth: "100%",
-                width: "300px",
-              }}
-              onClick={comingSoon}
-            >
-              Reserve
-            </button>
+              {reviewsArr.length > 0 ? (
+                <i
+                  class="fa-solid fa-circle  fa-2xs"
+                  style={{ zoom: ".25", margin: "0 30px" }}
+                ></i>
+              ) : null}
+              {reviews}
+            </p>
+            <div className="reservation">
+              <button
+                style={{
+                  backgroundColor: "red",
+                  maxWidth: "100%",
+                  width: "300px",
+                  height: "40px",
+                }}
+                onClick={comingSoon}
+              >
+                Reserve
+              </button>
+            </div>
           </div>
         </div>
       </div>
-      {/* <div
-            className="callout"
-            style={{
-              border: "2px solid black",
-              maxWidth: "400px",
-              width: "fit-content",
-              padding: "30px",
-              display: "flex",
-              alignItems: "center",
-              flexDirection: "column",
-            }}
-          > */}
-      {/* </div> */}
 
+      <div style={{ display: "flex" }}>
+        <span
+          style={{
+            borderBottom: "4px solid black",
+            width: "100%",
+            margin: "7px 0px 0px",
+            borderRadius: "10px",
+          }}
+        ></span>
+      </div>
       <ReviewDetail spotId={spotId} spot={spot} user={sessionUser} />
     </div>
   );

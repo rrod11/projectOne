@@ -1,0 +1,20 @@
+.review-box {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+}
+.review-header {
+  align-items: center;
+  display: flex;
+  font-family: "Times New Roman", Times, serif;
+  font-size: 30px;
+
+  /* font-weight: 500;
+  margin-top: 10px; */
+}
+.usersReviews {
+  display: block;
+}
+.green {
+  background-color: blue;
+}

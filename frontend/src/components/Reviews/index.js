@@ -5,6 +5,7 @@ import { allTheReviews } from "../../store/reviews";
 import { NavLink, useParams } from "react-router-dom/cjs/react-router-dom.min";
 import PostAReviewFormModal from "../PostaReviewModal";
 import DeleteAReviewModal from "../DeleteReview";
+import "./index.css";
 
 const ReviewDetail = ({ spotId, spot, user }) => {
   const dispatch = useDispatch();
@@ -47,12 +48,24 @@ const ReviewDetail = ({ spotId, spot, user }) => {
     reviewsGuide = sortedReviews?.map((review) => {
       const user = sessionUser.id == review.userId;
       return (
-        <div>
-          <h4>
+        <div className="usersReviews">
+          <h4
+            style={{ fontSize: "18px", fontWeight: "800", marginTop: "10px" }}
+          >
             {review?.User.firstName} {review?.User.lastName}
           </h4>
-          <h5>{dateSetter(review.createdAt)}</h5>
-          <p>{review.review}</p>
+          <h5 style={{ color: "grey", fontSize: "15px", fontWeight: "500" }}>
+            {dateSetter(review.createdAt)}
+          </h5>
+          <p
+            style={{
+              margin: "0px 0px 10px",
+              fontSize: "20px",
+              fontFamily: "Times New Roman",
+            }}
+          >
+            {review.review}
+          </p>
           {user ? deleteReviewButton(review.id) : null}
         </div>
       );
@@ -62,7 +75,7 @@ const ReviewDetail = ({ spotId, spot, user }) => {
     return (
       <OpenModalButton
         buttonText="Delete"
-        style={{ backgroundColor: "red", maxWidth: "100%", width: "300px" }}
+        style={{ backgroundColor: "red", maxWidth: "30%", width: "300px" }}
         modalComponent={
           <DeleteAReviewModal reviewId={reviewId} itemText="Delete" />
         }
@@ -82,7 +95,7 @@ const ReviewDetail = ({ spotId, spot, user }) => {
       return (
         <OpenModalButton
           buttonText="Post a Review"
-         className='green'
+          className="green"
           modalComponent={
             <PostAReviewFormModal spotId={spotId} itemText="Post A Review" />
           }
@@ -92,20 +105,28 @@ const ReviewDetail = ({ spotId, spot, user }) => {
   };
 
   return (
-    <>
-      <span>
-        <i className="fa-solid fa-star"></i>
-        {spot.avgRating ? (
-          <span>{parseFloat(`${spot.avgRating}`).toFixed(2)}</span>
-        ) : (
-          <span>New</span>
-        )}
-      </span>
-      {user && showReviewButton()}
+    <div className="review-box">
+      <div className="review-header">
+        <span>
+          <i className="fa-solid fa-star"></i>
+          {spot.avgRating ? (
+            <span>{parseFloat(`${spot.avgRating}`).toFixed(2)}</span>
+          ) : (
+            <span>New</span>
+          )}
+        </span>
+        {sortedReviews.length > 0 ? (
+          <i
+            class="fa-solid fa-circle  fa-2xs"
+            style={{ zoom: ".25", margin: "0 30px" }}
+          ></i>
+        ) : null}
+        {reviewGrid}
+      </div>
 
-      {reviewGrid}
+      {user && showReviewButton()}
       {reviewsGuide}
-    </>
+    </div>
   );
 };
 

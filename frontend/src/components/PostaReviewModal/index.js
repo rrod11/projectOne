@@ -39,10 +39,12 @@ function PostAReviewFormModal({ spotId }) {
   };
 
   return (
-    <>
+    <div
+      style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+    >
       <h1>How was your stay?</h1>
       <form onSubmit={handleSubmit}>
-        <label>
+        <label style={{ width: "80%" }}>
           <textarea
             rows="10"
             cols="45"
@@ -53,106 +55,111 @@ function PostAReviewFormModal({ spotId }) {
           />
         </label>
         {errors.reviewText && <p className="errors">{errors.reviewText}</p>}
-        <label>
-          <div class="rating" style={{ display: "flex", flexDirection: "row" }}>
+        <div style={{ display: "flex", justifyContent: "space-around" }}>
+          <label>
             <div
-              onMouseEnter={() => {
-                if (!disabled) setActiveRating(1);
-              }}
-              onMouseLeave={() => {
-                if (!disabled) setActiveRating(stars);
-              }}
-              onClick={() => {
-                if (!disabled) setStars(1);
-              }}
+              class="rating"
+              style={{ display: "flex", flexDirection: "row" }}
             >
-              <i
-                className={
-                  activeRating >= 1 || stars >= 1
-                    ? "fa-solid fa-star"
-                    : "fa-regular fa-star"
-                }
-              ></i>
+              <div
+                onMouseEnter={() => {
+                  if (!disabled) setActiveRating(1);
+                }}
+                onMouseLeave={() => {
+                  if (!disabled) setActiveRating(stars);
+                }}
+                onClick={() => {
+                  if (!disabled) setStars(1);
+                }}
+              >
+                <i
+                  className={
+                    activeRating >= 1 || stars >= 1
+                      ? "fa-solid fa-star"
+                      : "fa-regular fa-star"
+                  }
+                ></i>
+              </div>
+              <div
+                onMouseEnter={() => {
+                  if (!disabled) setActiveRating(2);
+                }}
+                onMouseLeave={() => {
+                  if (!disabled) setActiveRating(stars);
+                }}
+                onClick={() => {
+                  if (!disabled) setStars(2);
+                }}
+              >
+                <i
+                  className={
+                    activeRating >= 2 || stars >= 2
+                      ? "fa-solid fa-star"
+                      : "fa-regular fa-star"
+                  }
+                ></i>
+              </div>
+              <div
+                onMouseEnter={() => {
+                  if (!disabled) setActiveRating(3);
+                }}
+                onMouseLeave={() => {
+                  if (!disabled) setActiveRating(stars);
+                }}
+                onClick={() => {
+                  if (!disabled) setStars(3);
+                }}
+              >
+                <i
+                  className={
+                    activeRating >= 3 || stars >= 3
+                      ? "fa-solid fa-star"
+                      : "fa-regular fa-star"
+                  }
+                ></i>
+              </div>
+              <div
+                onMouseEnter={() => {
+                  if (!disabled) setActiveRating(4);
+                }}
+                onMouseLeave={() => {
+                  if (!disabled) setActiveRating(stars);
+                }}
+                onClick={() => {
+                  if (!disabled) setStars(4);
+                }}
+              >
+                <i
+                  className={
+                    activeRating >= 4 || stars >= 4
+                      ? "fa-solid fa-star"
+                      : "fa-regular fa-star"
+                  }
+                ></i>
+              </div>
+              <div
+                onMouseEnter={() => {
+                  if (!disabled) setActiveRating(5);
+                }}
+                onMouseLeave={() => {
+                  if (!disabled) setActiveRating(stars);
+                }}
+                onClick={() => {
+                  if (!disabled) setStars(5);
+                }}
+              >
+                <i
+                  className={
+                    activeRating >= 5 || stars >= 5
+                      ? "fa-solid fa-star"
+                      : "fa-regular fa-star"
+                  }
+                ></i>
+              </div>
+              <span>stars</span>
             </div>
-            <div
-              onMouseEnter={() => {
-                if (!disabled) setActiveRating(2);
-              }}
-              onMouseLeave={() => {
-                if (!disabled) setActiveRating(stars);
-              }}
-              onClick={() => {
-                if (!disabled) setStars(2);
-              }}
-            >
-              <i
-                className={
-                  activeRating >= 2 || stars >= 2
-                    ? "fa-solid fa-star"
-                    : "fa-regular fa-star"
-                }
-              ></i>
-            </div>
-            <div
-              onMouseEnter={() => {
-                if (!disabled) setActiveRating(3);
-              }}
-              onMouseLeave={() => {
-                if (!disabled) setActiveRating(stars);
-              }}
-              onClick={() => {
-                if (!disabled) setStars(3);
-              }}
-            >
-              <i
-                className={
-                  activeRating >= 3 || stars >= 3
-                    ? "fa-solid fa-star"
-                    : "fa-regular fa-star"
-                }
-              ></i>
-            </div>
-            <div
-              onMouseEnter={() => {
-                if (!disabled) setActiveRating(4);
-              }}
-              onMouseLeave={() => {
-                if (!disabled) setActiveRating(stars);
-              }}
-              onClick={() => {
-                if (!disabled) setStars(4);
-              }}
-            >
-              <i
-                className={
-                  activeRating >= 4 || stars >= 4
-                    ? "fa-solid fa-star"
-                    : "fa-regular fa-star"
-                }
-              ></i>
-            </div>
-            <div
-              onMouseEnter={() => {
-                if (!disabled) setActiveRating(5);
-              }}
-              onMouseLeave={() => {
-                if (!disabled) setActiveRating(stars);
-              }}
-              onClick={() => {
-                if (!disabled) setStars(5);
-              }}
-            >
-              <i
-                className={
-                  activeRating >= 5 || stars >= 5
-                    ? "fa-solid fa-star"
-                    : "fa-regular fa-star"
-                }
-              ></i>
-            </div>
-            <span>stars</span>
-          </div>
-        </label>
+          </label>
+        </div>
         {errors.stars && <p className="errors">{errors.stars}</p>}
         <button
           type="submit"
@@ -163,7 +170,7 @@ function PostAReviewFormModal({ spotId }) {
           Submit Your Review
         </button>
       </form>
-    </>
+    </div>
   );
 }
 

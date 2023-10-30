@@ -113,54 +113,123 @@ function UpdateASpot({ formType = "Update A Spot" }) {
     // style={{ maxHeight: "1vh", maxWidth: "1vw" }}
     >
       <h1>Real Recognize Real and You looking REAL unfamiliar</h1>
-      <p>
-        ░░░░██████████████████████████████████████████████░░░░░░░░░░
-        ░░██░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░██░░░░░░░░
-        ██░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░██░░░░░░
-        ██░░░░██████░░░░██████░░██░░░░░░██░░██████░░░░██░░░░██░░░░░░
-        ██░░░░██░░░░██░░██░░██░░██░░░░░░██░░██░░░░██░░██░░░░██░░░░░░
-        ██░░░░████████░░██████░░██░░██░░██░░████████░░██░░░░██░░░░░░
-        ██░░░░██░░██░░░░██░░██░░██░░██░░██░░██░░██░░░░░░░░░░██░░░░░░
-        ██░░░░██░░░░██░░██░░██░░░░██░░██░░░░██░░░░██░░██░░░░██░░░░░░
-        ██░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░██░░░░░░
-        ░░██░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░██░░░░░░░░
-        ░░░░██████████████████░░░░░░██████████████████████░░░░░░░░░░
-        ░░░░░░░░░░░░░░░░░░░░░░██░░░░██░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
-        ░░░░░░░░░░░░░░░░░░░░░░░░██░░██░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
-        ░░░░░░░░░░░░░░░░░░░░░░░░░░████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
-        ░░░░░░░░░░░░░░░░░░░░░░░░░░░░██░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
-        ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
-        ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
-        ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
-        ░░░░░░░░░░░░░░░░░░░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░░░░░░░░░░░░░░░░░░░░░
-        ░░░░░░░░░░░░░░░░▓▓▒▒▒▒▓▓▒▒▒▒▒▒██░░▒▒▒▒▒▒░░░░░░░░░░░░░░░░░░░░
-        ░░░░░░░░░░░░░░░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒████▒▒▒▒▒▒░░░░░░░░░░░░░░░░░░░░
-        ░░░░░░░░░░░░░░░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░░░░░░░░░░░░░░░░░
-        ░░░░░░░░░░░░░░░░░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░░░░░░░░░░░░░░░░░
-        ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▒▒▒▒▒▒▒▒▒▒▒▒░░░░░░░░░░▒▒▒▒░░
-        ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▒▒▒▒▒▒▒▒▒▒▒▒░░░░░░░░▒▒▒▒▒▒░░
-        ░░░░░░░░░░░░░░░░░░░░░░░░░░▒▒░░░░░░▒▒▒▒▒▒▒▒▒▒░░░░░░▒▒▒▒▒▒░░▒▒
-        ░░░░░░░░░░░░░░░░░░░░░░░░░░▒▒░░░░░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░░░
-        ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░░░░░
-        ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░░░░░░░
-        ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░░░░░░░
-        ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▒▒▒▒▒▒▒▒▒▒░░░░░░░░░░
-        ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▒▒▒▒▒▒░░▒▒▒▒▒▒░░░░░░░░░░░░░░
-        ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▒▒▒▒░░░░▒▒▒▒░░░░░░░░░░░░░░
-        ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▒▒░░░░░░▒▒░░░░░░░░░░░░░░
-        ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▒▒▒▒░░░░▒▒▒▒░░░░░░░░░░░░░░
+      <p style={{ display: "flex", flexDirection: "column" }}>
+        <span>
+          ░░░░██████████████████████████████████████████████░░░░░░░░░░
+        </span>
+        <span>
+          ░░██░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░██░░░░░░░░
+        </span>
+        <span>
+          ██░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░██░░░░░░
+        </span>
+        <span>
+          ██░░░░██████░░░░██████░░██░░░░░░██░░██████░░░░██░░░░██░░░░░░
+        </span>
+        <span>
+          ██░░░░██░░░░██░░██░░██░░██░░░░░░██░░██░░░░██░░██░░░░██░░░░░░
+        </span>
+        <span>
+          ██░░░░████████░░██████░░██░░██░░██░░████████░░██░░░░██░░░░░░
+        </span>
+        <span>
+          ██░░░░██░░██░░░░██░░██░░██░░██░░██░░██░░██░░░░░░░░░░██░░░░░░
+        </span>
+        <span>
+          ██░░░░██░░░░██░░██░░██░░░░██░░██░░░░██░░░░██░░██░░░░██░░░░░░
+        </span>
+        <span>
+          ██░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░██░░░░░░
+        </span>
+        <span>
+          ░░██░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░██░░░░░░░░
+        </span>
+        <span>
+          ░░░░██████████████████░░░░░░██████████████████████░░░░░░░░░░
+        </span>
+        <span>
+          ░░░░░░░░░░░░░░░░░░░░░░██░░░░██░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+        </span>
+        <span>
+          ░░░░░░░░░░░░░░░░░░░░░░░░██░░██░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+        </span>
+        <span>
+          ░░░░░░░░░░░░░░░░░░░░░░░░░░████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+        </span>
+        <span>
+          ░░░░░░░░░░░░░░░░░░░░░░░░░░░░██░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+        </span>
+        <span>
+          ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+        </span>
+        <span>░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░</span>
+        <span>
+          ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+        </span>
+        <span>
+          ░░░░░░░░░░░░░░░░░░░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░░░░░░░░░░░░░░░░░░░░░
+        </span>
+        <span>
+          ░░░░░░░░░░░░░░░░▓▓▒▒▒▒▓▓▒▒▒▒▒▒██░░▒▒▒▒▒▒░░░░░░░░░░░░░░░░░░░░
+        </span>
+        <span>
+          ░░░░░░░░░░░░░░░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒████▒▒▒▒▒▒░░░░░░░░░░░░░░░░░░░░
+        </span>
+        <span>
+          ░░░░░░░░░░░░░░░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░░░░░░░░░░░░░░░░░
+        </span>
+        <span>
+          ░░░░░░░░░░░░░░░░░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░░░░░░░░░░░░░░░░░
+        </span>
+        <span>
+          ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▒▒▒▒▒▒▒▒▒▒▒▒░░░░░░░░░░▒▒▒▒░░
+        </span>
+        <span>
+          ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▒▒▒▒▒▒▒▒▒▒▒▒░░░░░░░░▒▒▒▒▒▒░░
+        </span>
+        <span>
+          ░░░░░░░░░░░░░░░░░░░░░░░░░░▒▒░░░░░░▒▒▒▒▒▒▒▒▒▒░░░░░░▒▒▒▒▒▒░░▒▒
+        </span>
+        <span>
+          ░░░░░░░░░░░░░░░░░░░░░░░░░░▒▒░░░░░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░░░
+        </span>
+        <span>
+          ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░░░░░
+        </span>
+        <span>
+          ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░░░░░░░
+        </span>
+        <span>
+          ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░░░░░░░
+        </span>
+        <span>
+          ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▒▒▒▒▒▒▒▒▒▒░░░░░░░░░░
+        </span>
+        <span>
+          ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▒▒▒▒▒▒░░▒▒▒▒▒▒░░░░░░░░░░░░░░
+        </span>
+        <span>
+          ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▒▒▒▒░░░░▒▒▒▒░░░░░░░░░░░░░░
+        </span>
+        <span>
+          ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▒▒░░░░░░▒▒░░░░░░░░░░░░░░
+        </span>
+        <span>
+          ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▒▒▒▒░░░░▒▒▒▒░░░░░░░░░░░░░░
+        </span>
       </p>
     </div>
   ) : (
-    <>
-      <h1>Update Your Spot</h1>
-      <form onSubmit={handleSubmit}>
-        <h2>Where's your place located</h2>
-        <p>
-          Guests will only get your exact address once they booked a reservation
-        </p>
-        <label>
-          Country
+    <div className="createForm">
+      <div className="create-a-spot">
+        <form className="createSpot" onSubmit={handleSubmit}>
+          <h1>Create a New Spot</h1>
+          <h3 style={{ margin: "10px 0" }}>Where's your place located</h3>
+          <p style={{ marginBottom: "20px" }}>
+            Guests will only get your exact address once they booked a
+            reservation
+          </p>
+          <label>Country</label>
           <input
             type="text"
             placeholder="Country"
@@ -168,11 +237,9 @@ function UpdateASpot({ formType = "Update A Spot" }) {
             onChange={(e) => setCountry(e.target.value)}
             required
           />
-        </label>
-        {errors.country && <p className="errors">{errors.country}</p>}
+          {errors.country && <p className="errors">{errors.country}</p>}
 
-        <label>
-          Street Address
+          <label>Street Address</label>
           <input
             type="text"
             placeholder="Address"
@@ -180,11 +247,9 @@ function UpdateASpot({ formType = "Update A Spot" }) {
             onChange={(e) => setAddress(e.target.value)}
             required
           />
-        </label>
-        {errors.address && <p className="errors">{errors.address}</p>}
+          {errors.address && <p className="errors">{errors.address}</p>}
 
-        <label>
-          City
+          <label>City</label>
           <input
             type="text"
             placeholder="City"
@@ -192,10 +257,8 @@ function UpdateASpot({ formType = "Update A Spot" }) {
             onChange={(e) => setCity(e.target.value)}
             required
           />
-        </label>
-        {errors.city && <p className="errors">{errors.city}</p>}
-        <label>
-          State
+          {errors.city && <p className="errors">{errors.city}</p>}
+          <label>State</label>
           <input
             type="text"
             placeholder="STATE"
@@ -203,132 +266,140 @@ function UpdateASpot({ formType = "Update A Spot" }) {
             onChange={(e) => setState(e.target.value)}
             required
           />
-        </label>
-        {errors.state && <p className="errors">{errors.state}</p>}
+          {errors.state && <p className="errors">{errors.state}</p>}
 
-        <label>
-          Latitude
+          <label>Latitude</label>
           <input
-            type="text"
+            type="number"
             placeholder="Latitude"
             value={latitude}
             onChange={(e) => setLatitude(e.target.value)}
           />
-        </label>
-        {errors.latitude && <p className="errors">{errors.latitude}</p>}
+          {errors.latitude && <p className="errors">{errors.latitude}</p>}
 
-        <label>
-          Longitude
+          <label>Longitude</label>
           <input
-            type="text"
+            type="number"
             placeholder="Longitude"
             value={longitude}
             onChange={(e) => setLongitude(e.target.value)}
           />
-        </label>
-        {errors.longitude && <p className="errors">{errors.longitude}</p>}
-        <h2>Describe your place to guests</h2>
-        <p>
-          Mention the best features of your space, any special amenities like
-          fast wifi or parking, and what you love about the neighborhood
-        </p>
-        <label>
-          <textarea
-            type="textarea"
-            placeholder="Please write at least 30 characters"
-            cols="40"
-            rows="10"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            required
-          />
-        </label>
-        {errors.description && <p className="errors">{errors.description}</p>}
-        <h2>Create a title for your spot</h2>
-        <p>
-          Catch guests' attention with a spot title that highlights what makes
-          your place special
-        </p>
-        <label>
-          <input
-            type="text"
-            placeholder="Name of your spot"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            required
-          />
-        </label>
-        {errors.name && <p className="errors">{errors.name}</p>}
-        <h2>Set a base price for your spot</h2>
-        <p>
-          Competitive pricing can help your listing stand out and rank higher in
-          search results
-        </p>
-        <label>
-          $
-          <input
-            type="text"
-            placeholder="Price per night (USD)"
-            value={price}
-            onChange={(e) => setPrice(e.target.value)}
-            required
-          />
-        </label>
-        {errors.price && <p className="errors">{errors.price}</p>}
-        <h2>Liven up your spot with photos</h2>
-        <p>Submit a link to at least one photo to publish your spot</p>
-        <label>
-          <input
-            type="text"
-            placeholder="Preview Image URL"
-            value={image1}
-            onChange={(e) => setImage1(e.target.value)}
-            required
-          />
-        </label>
-        {errors.image1 && <p className="errors">{errors.image1}</p>}
-        <label>
-          <input
-            type="text"
-            placeholder="Image URL"
-            value={image2}
-            onChange={(e) => setImage2(e.target.value)}
-          />
-        </label>
-        <label>
-          <input
-            type="text"
-            placeholder="Image URL"
-            value={image3}
-            onChange={(e) => setImage3(e.target.value)}
-          />
-        </label>
-        <label>
-          <input
-            type="text"
-            placeholder="Image URL"
-            value={image4}
-            onChange={(e) => setImage4(e.target.value)}
-          />
-        </label>
-        <label>
-          <input
-            type="text"
-            placeholder="Image URL"
-            value={image5}
-            onChange={(e) => setImage5(e.target.value)}
-          />
-        </label>
+          {errors.longitude && <p className="errors">{errors.longitude}</p>}
+          <span className="lineCutter"></span>
+          <h3>Describe your place to guests</h3>
+          <p style={{ margin: "10px 0" }}>
+            Mention the best features of your space, any special amenities like
+            fast wifi or parking, and what you love about the neighborhood
+          </p>
+          <label>
+            <textarea
+              type="textarea"
+              placeholder="Please write at least 30 characters"
+              cols="40"
+              rows="10"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              required
+            />
+          </label>
+          {errors.description && <p className="errors">{errors.description}</p>}
+          <span className="lineCutter"></span>
+          <h3>Create a title for your spot</h3>
+          <p>
+            Catch guests' attention with a spot title that highlights what makes
+            your place special
+          </p>
+          <label>
+            <input
+              type="text"
+              placeholder="Name of your spot"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              required
+            />
+          </label>
+          {errors.name && <p className="errors">{errors.name}</p>}
+          <span className="lineCutter"></span>
+          <h3>Set a base price for your spot</h3>
+          <p>
+            Competitive pricing can help your listing stand out and rank higher
+            in search results
+          </p>
+          <label>
+            $
+            <input
+              type="number"
+              placeholder="Price per night (USD)"
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}
+              required
+            />
+          </label>
+          {errors.price && <p className="errors">{errors.price}</p>}
+          <span className="lineCutter"></span>
+          <h3>Liven up your spot with photos</h3>
+          <p>Submit a link to at least one photo to publish your spot</p>
+          <label>
+            <input
+              type="text"
+              placeholder="Preview Image URL"
+              value={image1}
+              onChange={(e) => setImage1(e.target.value)}
+              required
+            />
+          </label>
+          {errors.image1 && <p className="errors">{errors.image1}</p>}
+          <label>
+            <input
+              type="text"
+              placeholder="Image URL"
+              value={image2}
+              onChange={(e) => setImage2(e.target.value)}
+            />
+          </label>
+          <label>
+            <input
+              type="text"
+              placeholder="Image URL"
+              value={image3}
+              onChange={(e) => setImage3(e.target.value)}
+            />
+          </label>
+          <label>
+            <input
+              type="text"
+              placeholder="Image URL"
+              value={image4}
+              onChange={(e) => setImage4(e.target.value)}
+            />
+          </label>
+          <label>
+            <input
+              type="text"
+              placeholder="Image URL"
+              value={image5}
+              onChange={(e) => setImage5(e.target.value)}
+            />
+          </label>
+          <span className="lineCutter"></span>
 
-        <button
-          type="submit"
-          onClick={checkCredentials}
-          className="loginButton"
-        >
-          Update Spot
-        </button>
-      </form>
-    </>
+          <button
+            type="submit"
+            onClick={checkCredentials}
+            className="loginButton"
+            style={{
+              alignSelf: "center",
+              backgroundColor: "red",
+              color: "white",
+              padding: "10px 0",
+              width: "100px",
+            }}
+          >
+            Create Spot
+          </button>
+        </form>
+      </div>
+    </div>
   );
 }
 
