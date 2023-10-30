@@ -8,14 +8,12 @@ import DeleteAReviewModal from "../DeleteReview";
 import "./index.css";
 
 const ReviewDetail = ({ spotId, spot, user }) => {
+  console.log("🚀 ~ file: index.js:11 ~ ReviewDetail ~ spot:", spot);
   const dispatch = useDispatch();
   const reviews = useSelector((state) => state.reviews);
   console.log("🚀 ~ file: index.js:11 ~ ReviewDetail ~ reviews:", reviews);
   const sessionUser = useSelector((state) => state.session.user);
-  console.log(
-    "🚀 ~ file: index.js:14 ~ ReviewDetail ~ sessionUser:",
-    sessionUser
-  );
+
   const dateSetter = (date) => {
     const dateParts = Date(date).split(" ");
     return `${dateParts[1]} ${dateParts[2]} ${dateParts[3]} ${dateParts[4]}`;
@@ -37,6 +35,13 @@ const ReviewDetail = ({ spotId, spot, user }) => {
     reviewGrid = null;
   }
   let reviewsGuide;
+  const currentUser = sortedReviews?.find(
+    (review) => sessionUser?.id == review?.userId
+  );
+  console.log(
+    "🚀 ~ file: index.js:40 ~ ReviewDetail ~ currentUser:",
+    currentUser
+  );
 
   if (!reviews || !sortedReviews[0]) {
     reviewsGuide = (
@@ -66,7 +71,12 @@ const ReviewDetail = ({ spotId, spot, user }) => {
           >
             {review.review}
           </p>
-          {user ? deleteReviewButton(review.id) : null}
+
+          {user ? (
+            <div style={{ width: "20%", backgroundColor: "red" }}>
+              {deleteReviewButton(review.id)}
+            </div>
+          ) : null}
         </div>
       );
     });
@@ -123,16 +133,20 @@ const ReviewDetail = ({ spotId, spot, user }) => {
         ) : null}
         {reviewGrid}
       </div>
-      <div
-        style={{
-          backgroundColor: "grey",
-          width: "15%",
-          boxShadow: "5px 2px 2px black",
-          height: "20px",
-        }}
-      >
-        {user && showReviewButton()}
-      </div>
+
+      {user && !currentUser && spot.ownerId != user.id ? (
+        <div
+          style={{
+            backgroundColor: "grey",
+            width: "15%",
+            boxShadow: "5px 2px 2px black",
+            height: "20px",
+          }}
+        >
+          {showReviewButton()}
+        </div>
+      ) : null}
+
       {reviewsGuide}
     </div>
   );
